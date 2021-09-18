@@ -119,7 +119,7 @@ function createEventFileWithRandomEntries()
 
         fclose($eventFile);
 
-        echo '<script>alert("New event file generated.")</script>';
+        echo '<script>alert("New event file has been generated.")</script>';
     }
 
     
