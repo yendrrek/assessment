@@ -37,6 +37,7 @@ the ‘status’ field changed
 4. Allow combinations of (1), (2) and (3). For example, all UPDATED events where status
 changed between 2018-04-10 12:00:00.000 and 2018-04-10 12:00:11.500
 
+
 ## MY APPROACH
 
 ### HOW TO RUN THE SYSTEM
