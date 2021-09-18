@@ -1,11 +1,11 @@
 <?php
 session_start();
 
+include 'php-functions/csrf-token.php';
 include 'php-functions/form-validation.php';
 include 'php-functions/create-event-file.php';
 include 'php-functions/get-event-file.php';
 include 'php-functions/all-timestamps.php';
-include 'php-functions/csrf-token.php';
 ?>
 
 <!DOCTYPE html>
