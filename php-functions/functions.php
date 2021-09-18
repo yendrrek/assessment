@@ -50,7 +50,7 @@ function showEventsByFieldsUpdated()
 
     foreach(getEventFile() as $event) {
 
-        if (!empty($_POST['btnFieldsUpdated']) && !empty($_POST['fieldsUpdated'])) {
+        if (!empty($_POST['btnFieldsUpdated']) && !empty($_POST['fieldsUpdated']) ) {
 
             if ($_POST['fieldsUpdated'] === 'Fields updated') {
 
@@ -67,7 +67,7 @@ function showEventsByFieldsUpdated()
 
     foreach(showEventsByType() as $event) {
 
-        if (!empty($_POST['combinedQuery']) && !empty($_POST['fieldsUpdated'])) {
+        if (!empty($_POST['combinedQuery']) && !empty($_POST['fieldsUpdated']) && validateSearchForm() === true) {
 
             if (in_array($_POST['fieldsUpdated'], $fieldsUpdated)) {
 
@@ -99,7 +99,7 @@ function showEventsByRangeOfTimestamps()
     $eventsByRangeOfTimestamps = [];
     $invalidRangeOfTimestampsMsg = '\'From\' cannot be greater than \'To\', you silly sausage!';
 
-    if (!empty($_POST['fromTimestamp']) && !empty($_POST['toTimestamp'])) {
+    if (!empty($_POST['fromTimestamp']) && !empty($_POST['toTimestamp']) && validateSearchForm() === true) {
 
         $from = $_POST['fromTimestamp'];
         $to = $_POST['toTimestamp'];
@@ -166,7 +166,7 @@ showEventsByRangeOfTimestamps();
 
 function showCombinedResult()
 {
-    if (!empty($_POST['combinedQuery'])) {
+    if (!empty($_POST['combinedQuery']) && validateSearchForm() === true) {
 
         showEventsByType();
 
