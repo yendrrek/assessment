@@ -43,14 +43,14 @@ changed between 2018-04-10 12:00:00.000 and 2018-04-10 12:00:11.500
 
 ### HOW TO RUN THE SYSTEM
 
-Go to a dedicated subdomain http://assessment.rosiepiontek.com/index.php  
+Go to a dedicated subdomain at http://assessment.rosiepiontek.com/index.php  
 and check the project on a live server.
 
 #### If you wish to run it locally:
 
 You will need Apache and PHP 7.1
 
-Code was tested on PHP 7.2 in live environment and there were issues.
+Code was tested with PHP 7.2 in live environment and there were issues.
 
 Project is located in 'localhost/assessment'.
 
