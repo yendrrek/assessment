@@ -2,7 +2,7 @@
 function showEventsByType()
 {
     $eventsByType = [];
-    $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED']; // Manual?
+    $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED'];
 
     foreach(getEventFile() as $event) {
 
@@ -50,7 +50,7 @@ function showEventsByFieldsUpdated()
 
     foreach(getEventFile() as $event) {
 
-        if (!empty($_POST['btnFieldsUpdated']) && !empty($_POST['fieldsUpdated']) ) {
+        if (!empty($_POST['btnFieldsUpdated']) && !empty($_POST['fieldsUpdated']) && validateSearchForm() === true) {
 
             if ($_POST['fieldsUpdated'] === 'Fields updated') {
 
@@ -67,7 +67,7 @@ function showEventsByFieldsUpdated()
 
     foreach(showEventsByType() as $event) {
 
-        if (!empty($_POST['combinedQuery']) && !empty($_POST['fieldsUpdated']) && validateSearchForm() === true) {
+        if (!empty($_POST['combinedQuery']) && !empty($_POST['fieldsUpdated'])) {
 
             if (in_array($_POST['fieldsUpdated'], $fieldsUpdated)) {
 
@@ -171,8 +171,6 @@ function showCombinedResult()
         showEventsByType();
 
         showEventsByFieldsUpdated();
-
-        //showEventsByRangeOfTimestamps();
 
         if (!empty(showEventsByRangeOfTimestamps())) {
 
