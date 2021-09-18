@@ -15,7 +15,7 @@ include 'php-functions/csrf-token.php';
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
-    <title>Junior Developer Assessment</title>
+    <title>Searching system</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="body">
