@@ -46,6 +46,12 @@ changed between 2018-04-10 12:00:00.000 and 2018-04-10 12:00:11.500
 Go to a dedicated subdomain at http://assessment.rosiepiontek.com/index.php  
 and check the project on a live server.
 
+####  WARNING ####
+
+The layout of the site most probably breaks on devices with screens  
+smaller than 15" and using other browser than Chrome.  
+Responsiveness will be improved later.
+
 #### If you wish to run it locally:
 
 You will need Apache and PHP 7.1
