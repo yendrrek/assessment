@@ -88,8 +88,7 @@ All the parts of each event mentioned in 'Requirement' above are randomly genera
 
 ## FUTURE IMPROVEMENTS
 
-[ ] Responsiveness of the site. It was tested only on a 15" laptop with Chrome.  
-Surely breaks on other devices and browsers.
+[ ] Responsiveness of the layout.
 
 When generating random entries in the 'event-file.txt',  
 [ ] make 'INSERT' event not containing any fields updated but only 'null'.  
