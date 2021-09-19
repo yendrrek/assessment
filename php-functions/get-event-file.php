@@ -1,4 +1,5 @@
 <?php
+// Make the input 'event-file.txt' available for processing.
 function getEventFile() 
 {
     $eventFile = [];
@@ -13,7 +14,4 @@ function getEventFile()
 
         return $eventFile;
     }
-
 }
-
-getEventFile();

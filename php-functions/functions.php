@@ -1,11 +1,17 @@
 <?php
 function showEventsByType()
 {
-    $eventsByType = [];
-    $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED'];
+    $eventsByType = $arrayWithEvents = [];
+    $typesOfEvents = [
+        'INSERTED',
+        'UPDATED',
+        'DELETED'
+    ];
 
+    // 'getEventFile()' returns the input 'event-file.txt'. 
     foreach(getEventFile() as $event) {
 
+        // Show events by their types only.
         if (!empty($_POST['btnEventType']) && !empty($_POST['eventType']) && validateSearchForm() === true) {
 
             if ($_POST['eventType'] === 'Event type') {
@@ -15,10 +21,12 @@ function showEventsByType()
                 break;
 
             } elseif (strpos($event, $_POST['eventType']) !== false) {
-
+                
+                // Print result on the screen.
                 echo $event . '<br><br>';
             }
-
+        
+        // Perform combined searching.    
         } elseif (!empty($_POST['combinedQuery']) && !empty($_POST['eventType'])) {
 
             if (in_array($_POST['eventType'], $typesOfEvents)) {
@@ -39,17 +47,20 @@ function showEventsByType()
             }
         }
     }
-
+    
+    // When performing combined searching the returned array with types of events
+    // is later filtered by the next function 'showEventsByFieldsUpdated()' 
     return $eventsByType;
 }
 
 function showEventsByFieldsUpdated()
 {
     $eventsByFieldsUpdated = [];
-    $fieldsUpdated = ['status', 'companyUrl', 'hoursPerDay', 'overtimeRate'];
+    $fieldsUpdated = ['status', 'companyUrl', 'hoursPerDay', 'overtimeRate', 'null'];
 
     foreach(getEventFile() as $event) {
 
+        // Show events by fields updated only.
         if (!empty($_POST['btnFieldsUpdated']) && !empty($_POST['fieldsUpdated']) && validateSearchForm() === true) {
 
             if ($_POST['fieldsUpdated'] === 'Fields updated') {
@@ -64,7 +75,9 @@ function showEventsByFieldsUpdated()
             }
         }
     }
+    
 
+    // Result of search returned earlier, and filtered further when performing combined searching.  
     foreach(showEventsByType() as $event) {
 
         if (!empty($_POST['combinedQuery']) && !empty($_POST['fieldsUpdated'])) {
@@ -84,11 +97,10 @@ function showEventsByFieldsUpdated()
             } else {
 
                 array_push($eventsByFieldsUpdated, $event);
-
             }
         }
     }
-
+    // Array filtered later by the next function 'showEventsByRangeOfTimestamps()'.
     return $eventsByFieldsUpdated;
 }
 
@@ -104,11 +116,12 @@ function showEventsByRangeOfTimestamps()
         $from = $_POST['fromTimestamp'];
         $to = $_POST['toTimestamp'];
 
+        // Search events by a range of timestamps only.
         if (!empty($_POST['btnTimestamps'])) {
 
             foreach(getEventFile() as $event) {
 
-                // Timestamps are extracted from the events and formated.
+                // Timestamps are extracted from the events and formatted.
                 $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
 
                 if ($from === 'From timestamp' || $to === 'To timestamp') {
@@ -177,11 +190,13 @@ function showCombinedResult()
             if (is_string(showEventsByRangeOfTimestamps())) {
 
                 if (strpos(showEventsByRangeOfTimestamps(), 'sausage') !== false) {
-
+                    
+                    // Show error if invalid range of timestamps has been chosen.
                     echo showEventsByRangeOfTimestamps();
 
                 } elseif (strpos(showEventsByRangeOfTimestamps(), 'timestamp') !== false) {
-
+                    
+                    // Show error if no range of timestamps has been chosen.
                     echo showEventsByRangeOfTimestamps();
                 }
 
