@@ -54,7 +54,7 @@ Responsiveness will be improved later.
 
 #### If you wish to run it locally:
 
-You will need Apache and PHP 7.1
+You will need Apache 2.4.27 and PHP 7.1
 
 Code was tested with PHP 7.2 in live environment and there were issues.
 
