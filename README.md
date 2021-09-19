@@ -90,8 +90,8 @@ All the parts of each event mentioned in 'Requirement' above are randomly genera
 
 [ ] Responsiveness of the layout.
 
-When generating random entries in the 'event-file.txt',  
-[ ] make 'INSERT' event not containing any fields updated but only 'null'.  
+When generating random entries in the 'event-file.txt':  
+[ ] make 'INSERT' event not containing any fields updated but only 'null';  
 
 [ ] make 'UPDATE' event not containing any 'null' but only fields updated.
 
