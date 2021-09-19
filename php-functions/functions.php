@@ -75,7 +75,6 @@ function showEventsByFieldsUpdated()
             }
         }
     }
-    
 
     // Result of search returned earlier, and filtered further when performing combined searching.  
     foreach(showEventsByType() as $event) {
