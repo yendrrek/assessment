@@ -107,7 +107,7 @@ include 'php-functions/all-timestamps.php';
         <div class="result-container">
 
             <?php
-            include 'php-functions/functions.php'; 
+            include 'php-functions/search-queries.php'; 
             ?>
 
         </div>
