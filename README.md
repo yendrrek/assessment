@@ -78,5 +78,17 @@ CustomLog "{$path}/apache/logs/access.log" combined
 ### TESTING THE SYSTEM
 
 Click 'Generate event file' button to randomly create a file on your server with event entries.  
-All the parts of each event mentioned in 'Requriment' above are randomly generated.
+All the parts of each event mentioned in 'Requirement' above are randomly generated.
+
+## FUTURE IMPROVEMENTS
+
+[ ] Responsiveness of the site. It was tested only on a 15" laptop with Chrome.  
+Surely breaks on other devices and browsers.
+
+When generating random entries in the 'event-file.txt',  
+[ ] make 'INSERT' event not containing any fields updated but only 'null'.  
+
+[ ] make 'UPDATE' event not containing any 'null' but only fields updated.
+
+[ ] Use Ajax for showing search results for smoother user experience.
 
