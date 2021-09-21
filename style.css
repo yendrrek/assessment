@@ -45,7 +45,8 @@
   margin: auto;
   overflow: auto;
   padding: 15px 0 0 15px;
-  width: 61%;
+  text-align: left;
+  width: 65%;
 }
 
 .form {
