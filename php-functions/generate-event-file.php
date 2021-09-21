@@ -119,7 +119,8 @@ function createRandomEvents()
 function createEventFileWithRandomEntries()
 {
 
-    if (!empty($_POST['generateEventFile']) && validateSearchForm() === true) {
+    if (filter_var(!empty($_POST['generateEventFile']), FILTER_SANITIZE_STRING) &&
+        validateSearchForm() === true) {
 
         $eventFile = fopen('../assessment/event-file.txt', 'w') or die("Unable to open file!");
 

@@ -12,7 +12,9 @@ function showEventsByType()
     foreach(getEventFile() as $event) {
 
         // Show events by their types only.
-        if (!empty($_POST['btnEventType']) && !empty($_POST['eventType']) && validateSearchForm() === true) {
+        if (filter_var(!empty($_POST['btnEventType']), FILTER_SANITIZE_STRING) &&
+            filter_var(!empty($_POST['eventType']), FILTER_SANITIZE_STRING) &&
+            validateSearchForm() === true) {
 
             if ($_POST['eventType'] === 'Event type') {
 
@@ -61,7 +63,9 @@ function showEventsByFieldsUpdated()
     foreach(getEventFile() as $event) {
 
         // Show events by fields updated only.
-        if (!empty($_POST['btnFieldsUpdated']) && !empty($_POST['fieldsUpdated']) && validateSearchForm() === true) {
+        if (filter_var(!empty($_POST['btnFieldsUpdated']), FILTER_SANITIZE_STRING) &&
+            filter_var(!empty($_POST['fieldsUpdated']), FILTER_SANITIZE_STRING) &&
+            validateSearchForm() === true) {
 
             if ($_POST['fieldsUpdated'] === 'Fields updated') {
 
@@ -79,7 +83,8 @@ function showEventsByFieldsUpdated()
     // Result of search returned earlier, and filtered further when performing combined searching.  
     foreach(showEventsByType() as $event) {
 
-        if (!empty($_POST['combinedQuery']) && !empty($_POST['fieldsUpdated'])) {
+        if (!empty($_POST['combinedQuery']) &&
+            !empty($_POST['fieldsUpdated'])) {
 
             if (in_array($_POST['fieldsUpdated'], $fieldsUpdated)) {
 
@@ -110,13 +115,15 @@ function showEventsByRangeOfTimestamps()
     $eventsByRangeOfTimestamps = [];
     $invalidRangeOfTimestampsMsg = '\'From\' cannot be greater than \'To\', you silly sausage!';
 
-    if (!empty($_POST['fromTimestamp']) && !empty($_POST['toTimestamp']) && validateSearchForm() === true) {
+    if (filter_var(!empty($_POST['fromTimestamp']), FILTER_SANITIZE_STRING) &&
+        filter_var(!empty($_POST['toTimestamp']), FILTER_SANITIZE_STRING) &&
+            validateSearchForm() === true) {
 
         $from = $_POST['fromTimestamp'];
         $to = $_POST['toTimestamp'];
 
         // Search events by a range of timestamps only.
-        if (!empty($_POST['btnTimestamps'])) {
+        if (filter_var(!empty($_POST['btnTimestamps']), FILTER_SANITIZE_STRING)) {
 
             foreach(getEventFile() as $event) {
 
@@ -178,7 +185,8 @@ showEventsByRangeOfTimestamps();
 
 function showCombinedResult()
 {
-    if (!empty($_POST['combinedQuery']) && validateSearchForm() === true) {
+    if (filter_var(!empty($_POST['combinedQuery']), FILTER_SANITIZE_STRING) &&
+        validateSearchForm() === true) {
 
         showEventsByType();
 

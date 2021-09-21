@@ -3,7 +3,7 @@
 // If they do not match, form is not submitted.  
 function validateSearchForm()
 {
-    if (!empty($_POST['tokenCsrf'])) {
+    if (filter_var(!empty($_POST['tokenCsrf']), FILTER_SANITIZE_STRING)) {
 
         if (hash_equals($_SESSION['tokenCsrf'], $_POST['tokenCsrf'])) {
 
