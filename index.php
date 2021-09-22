@@ -22,38 +22,36 @@ include 'php-functions/all-timestamps.php';
 
 <body class="body">
 
-    <div class="container">
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-        <form class="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        <div class="search-options-wrapper">    
 
-            <div class="event-type-and-fields-updated-container">
+            <label class="select" for="event-type-selection">Select:</label>
+            <select class="select-box" name="eventType">
+                <option value="Event type">Event type</option>
+                <option value="INSERTED">INSERTED</option>
+                <option value="UPDATED">UPDATED</option>
+                <option value="DELETED">DELETED</option>
+            </select>
 
-                <label class="select" for="event-type-selection">Select:</label>
-                <select class="select-box" name="eventType" id="">
-                    <option value="Event type">Event type</option>
-                    <option value="INSERTED">INSERTED</option>
-                    <option value="UPDATED">UPDATED</option>
-                    <option value="DELETED">DELETED</option>
-                </select>
+            <button class="btn-single-query" id="btn-event-type" type="submit"
+                    name="btnEventType" value="btnEventType">Search</button>
 
-                <button class="btn-single-query" id="btn-event-type" type="submit" name="btnEventType" value="btnEventType">Search</button>
+            <label class="select" for="fields-updated-selection">Select:</label>
+            <select class="select-box" name="fieldsUpdated">
+                <option value="Fields updated">Fields updated</option>
+                <option value="status">status</option>
+                <option value="companyUrl">companyUrl</option>
+                <option value="hoursPerDay">hoursPerDay</option>
+                <option value="overtimeRate">overtimeRate</option>
+                <option value="null">not updated</option>
+            </select>
 
-                <label class="select select-fields-updated" for="fields-updated-selection">Select:</label>
-                <select class="select-box" name="fieldsUpdated" id="">
-                    <option value="Fields updated">Fields updated</option>
-                    <option value="status">status</option>
-                    <option value="companyUrl">companyUrl</option>
-                    <option value="hoursPerDay">hoursPerDay</option>
-                    <option value="overtimeRate">overtimeRate</option>
-                    <option value="null">not updated</option>
-                </select>
-
-                <button class="btn-single-query" id="btn-fields-updated" type="submit" name="btnFieldsUpdated" value="btnFieldsUpdated">Search</button>
-
-            </div>
+            <button class="btn-single-query" id="btn-fields-updated" type="submit"
+                    name="btnFieldsUpdated" value="btnFieldsUpdated">Search</button>
 
             <label class="select" for="from-timestamp">Select:</label>
-            <select class="select-box" name="fromTimestamp" id="">
+            <select class="select-box" name="fromTimestamp">
                 <option value="From timestamp">From timestamp</option>
 
                 <?php
@@ -69,7 +67,7 @@ include 'php-functions/all-timestamps.php';
             </select>
 
             <label class="select select-to-timestamp" for="to-timestamp">Select:</label>
-            <select class="select-box" name="toTimestamp" id="">
+            <select class="select-box" name="toTimestamp">
                 <option value="To timestamp">To timestamp</option>
                 
                 <?php
@@ -84,34 +82,41 @@ include 'php-functions/all-timestamps.php';
 
             </select>
 
-            <button class="btn-single-query" id="btn-timestamps-range" type="submit" name="btnTimestamps" value="btnTimestamps">Search</button>
-
-            <button class="btn-combined-query" type="submit" name="combinedQuery" value="combinedQuery">Search combination</button>
-
-            <input type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
-
-        </form>
-
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
-            <button class="btn-generate" type="submit" name="generateEventFile" value="generateEventFile">Generate event file</button>
-
-            <input type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
-
-        </form>
-
-        <span class="result-header">Result:</span>
-
-        <div class="result-container">
-
-            <?php
-            include 'php-functions/search-queries.php'; 
-            ?>
+            <button class="btn-single-query" id="btn-timestamps-range" type="submit"
+                    name="btnTimestamps" value="btnTimestamps">Search</button>
 
         </div>
-        
-    </div>
 
+        <div class="combined-and-generate-btns-container">
+
+            <button class="btn-combined-query" type="submit"
+            name="combinedQuery" value="combinedQuery">Search combination</button>
+
+            <input type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
+
+    </form>
+
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+
+            <button class="btn-generate" type="submit"
+                    name="generateEventFile" value="generateEventFile">Generate new event file</button>
+
+            <input type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
+
+        </div>
+
+    </form>
+
+    <span class="result-header">Result:</span>
+
+    <div class="result-container">
+
+    <?php
+    include 'php-functions/search-queries.php'; 
+    ?>
+
+    </div>
+        
     <script src="main.js"></script>
 
 </body>
