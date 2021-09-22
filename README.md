@@ -60,6 +60,8 @@ Code was tested with PHP 7.2 in live environment and there were issues.
 
 Project is located in 'localhost/assessment'.
 
+In the root directory, create an empty file called 'event-file.txt' and generate random entries.
+
 In my httpd.conf I created a virtual host:
 
 ```
