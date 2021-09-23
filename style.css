@@ -23,17 +23,15 @@
   font-family: europa, sans-serif;
 }
 
-.search-options-wrapper {
+.search-options-container {
   display: flex;
-  margin: 2em 0;
-  width:  98%;
+  justify-content: center;
+  margin: 1.5em auto;
+  width:  90%;
 }
 
-.select {
-  align-self: center;
-  color: #2d1c44;
-  font-weight: bold;
-  margin: 0 6px 0 24px;
+.select-and-btn-wrapper {
+  margin-right: 1.5em;
 }
 
 .select-to-timestamp {
@@ -55,10 +53,19 @@
   outline:  none;
 }
 
-.btn-single-query,
-.btn-combined-query,
-.btn-generate,
-.btn-test {
+.select-box_event-type {
+  max-width: 100px;
+}
+
+.select-box_fields-updated {
+  max-width: 130px;
+}
+
+.select-box_timestamps {
+  max-width: 186px;
+}
+
+.btn {
   background: #f5f5f5;
   border: 2px solid #2d1c44;
   border-radius: 0.625rem;
@@ -68,8 +75,8 @@
   flex: 1 1 auto;
   font-size:  1em;
   font-weight: bold;
-  margin-left: 0.6em;
   padding: 6px;
+  max-width: 80px;
 }
 
 .combined-and-generate-btns-container {
@@ -77,14 +84,20 @@
   justify-content: center;
 }
 
-.btn-combined-query {
-  flex: 0 0 15%;
+.btn_combined-query-and-generate {
+  flex: 0 0 auto;
   flex-direction: row;
+  max-width: 200px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-.btn-generate {
-  flex:  0 0 15%;
-  flex-direction: row;
+.btn-combined-position {
+  margin-right: 0.75em;
+}
+
+.btn-generate-position {
+  margin-left: 0.75em;
 }
 
 .result-container {

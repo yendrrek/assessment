@@ -24,72 +24,80 @@ include 'php-functions/all-timestamps.php';
 
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-        <div class="search-options-wrapper">    
+        <div class="search-options-container">
 
-            <label class="select" for="event-type-selection">Select:</label>
-            <select class="select-box" name="eventType">
-                <option value="Event type">Event type</option>
-                <option value="INSERTED">INSERTED</option>
-                <option value="UPDATED">UPDATED</option>
-                <option value="DELETED">DELETED</option>
-            </select>
+            <div class="select-and-btn-wrapper">
 
-            <button class="btn-single-query" id="btn-event-type" type="submit"
-                    name="btnEventType" value="btnEventType">Search</button>
+                <select class="select-box select-box_event-type" name="eventType">
+                    <option value="Event type">Event type</option>
+                    <option value="INSERTED">INSERTED</option>
+                    <option value="UPDATED">UPDATED</option>
+                    <option value="DELETED">DELETED</option>
+                </select>
 
-            <label class="select" for="fields-updated-selection">Select:</label>
-            <select class="select-box" name="fieldsUpdated">
-                <option value="Fields updated">Fields updated</option>
-                <option value="status">status</option>
-                <option value="companyUrl">companyUrl</option>
-                <option value="hoursPerDay">hoursPerDay</option>
-                <option value="overtimeRate">overtimeRate</option>
-                <option value="null">not updated</option>
-            </select>
+                <button class="btn" id="btn-event-type" type="submit"
+                        name="btnEventType" value="btnEventType">Search</button>
 
-            <button class="btn-single-query" id="btn-fields-updated" type="submit"
-                    name="btnFieldsUpdated" value="btnFieldsUpdated">Search</button>
+            </div>
 
-            <label class="select" for="from-timestamp">Select:</label>
-            <select class="select-box" name="fromTimestamp">
-                <option value="From timestamp">From timestamp</option>
+            <div class="select-and-btn-wrapper">
 
-                <?php
-                foreach(getAllTimestampsInAscendingOrder() as $timestamp):
-                ?>
+                <select class="select-box select-box_fields-updated" name="fieldsUpdated">
+                    <option value="Fields updated">Fields updated</option>
+                    <option value="status">status</option>
+                    <option value="companyUrl">companyUrl</option>
+                    <option value="hoursPerDay">hoursPerDay</option>
+                    <option value="overtimeRate">overtimeRate</option>
+                    <option value="null">not updated</option>
+                </select>
 
-                <option value="<?php echo $timestamp; ?>"><?php echo $timestamp; ?></option>
+                <button class="btn" id="btn-fields-updated" type="submit"
+                        name="btnFieldsUpdated" value="btnFieldsUpdated">Search</button>
 
-                <?php
-                endforeach;
-                ?>
+            </div>
 
-            </select>
+            <div class="select-and-btn-wrapper">
 
-            <label class="select select-to-timestamp" for="to-timestamp">Select:</label>
-            <select class="select-box" name="toTimestamp">
-                <option value="To timestamp">To timestamp</option>
-                
-                <?php
-                foreach(getAllTimestampsInAscendingOrder() as $timestamp):
-                ?>
+                <select class="select-box select-box_timestamps" name="fromTimestamp">
+                    <option value="From timestamp">From timestamp</option>
 
-                <option value="<?php echo $timestamp; ?>"><?php echo $timestamp; ?></option>
+                    <?php
+                    foreach(getAllTimestampsInAscendingOrder() as $timestamp):
+                    ?>
 
-                <?php
-                endforeach; 
-                ?>
+                    <option value="<?php echo $timestamp; ?>"><?php echo $timestamp; ?></option>
 
-            </select>
+                    <?php
+                    endforeach;
+                    ?>
 
-            <button class="btn-single-query" id="btn-timestamps-range" type="submit"
-                    name="btnTimestamps" value="btnTimestamps">Search</button>
+                </select>
+
+                <select class="select-box select-box_timestamps" name="toTimestamp">
+                    <option value="To timestamp">To timestamp</option>
+
+                    <?php
+                    foreach(getAllTimestampsInAscendingOrder() as $timestamp):
+                    ?>
+
+                    <option value="<?php echo $timestamp; ?>"><?php echo $timestamp; ?></option>
+
+                    <?php
+                    endforeach;
+                    ?>
+
+                </select>
+
+                <button class="btn" id="btn-timestamps-range" type="submit"
+                        name="btnTimestamps" value="btnTimestamps">Search</button>
+
+            </div>
 
         </div>
 
         <div class="combined-and-generate-btns-container">
 
-            <button class="btn-combined-query" type="submit"
+            <button class="btn btn_combined-query-and-generate btn-combined-position" type="submit"
             name="combinedQuery" value="combinedQuery">Search combination</button>
 
             <input type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
@@ -98,8 +106,8 @@ include 'php-functions/all-timestamps.php';
 
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-            <button class="btn-generate" type="submit"
-                    name="generateEventFile" value="generateEventFile">Generate new event file</button>
+            <button class="btn btn_combined-query-and-generate btn-generate-position" type="submit"
+                    name="generateEventFile" value="generateEventFile">Generate event file</button>
 
             <input type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
 
