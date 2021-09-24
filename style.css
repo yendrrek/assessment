@@ -60,10 +60,10 @@
 }
 
 .combined-and-generate-btns-container {
+  column-gap: 24px;
   display: flex;
-  justify-content: space-between;
   margin: auto;
-  width: 26.4%;
+  width: 353px;
 }
 
 .btn_combined-query-and-generate {
