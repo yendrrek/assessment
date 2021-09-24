@@ -112,11 +112,11 @@ include 'php-functions/all-timestamps.php';
 
     </form>
 
-    <div class="result-wrapper">
+    <div class="result-container">
 
         <span class="result-header">Result:</span>
 
-        <div class="result-container">
+        <div class="result-content">
 
         <?php
         include 'php-functions/search-queries.php';
