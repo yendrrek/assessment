@@ -30,7 +30,6 @@ include 'php-functions/all-timestamps.php';
                 so they can be treated as one element by flexbox. -->
 
             <div>
-
                 <select class="select-box" name="eventType">
                     <option value="Event type">Event type</option>
                     <option value="INSERTED">INSERTED</option>
@@ -40,11 +39,9 @@ include 'php-functions/all-timestamps.php';
 
                 <button class="btn" id="btn-event-type" type="submit"
                         name="btnEventType" value="btnEventType">Search</button>
-
             </div>
 
             <div>
-
                 <select class="select-box" name="fieldsUpdated">
                     <option value="Fields updated">Fields updated</option>
                     <option value="status">status</option>
@@ -56,11 +53,9 @@ include 'php-functions/all-timestamps.php';
 
                 <button class="btn" id="btn-fields-updated" type="submit"
                         name="btnFieldsUpdated" value="btnFieldsUpdated">Search</button>
-
             </div>
 
             <div>
-
                 <select class="select-box" name="fromTimestamp">
                     <option value="From timestamp">From timestamp</option>
 
@@ -93,7 +88,6 @@ include 'php-functions/all-timestamps.php';
 
                 <button class="btn" id="btn-timestamps-range" type="submit"
                         name="btnTimestamps" value="btnTimestamps">Search</button>
-
             </div>
 
         </div>
