@@ -99,3 +99,6 @@ When generating random entries in the 'event-file.txt':
 
 [ ] Use Ajax for showing search results for smoother user experience.
 
+[ ] Custom pop-up lightbox notifying that a new event file has been generated.  
+For now ``alert()`` is being used.
+
