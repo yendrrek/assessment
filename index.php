@@ -26,6 +26,9 @@ include 'php-functions/all-timestamps.php';
 
         <div class="search-options-container">
 
+            <!-- All drop-down menus with respective search buttons are wrapped in a <div>,
+                so they can be treated as one element by flexbox. -->
+
             <div>
 
                 <select class="select-box select-box_event-type" name="eventType">
@@ -97,7 +100,7 @@ include 'php-functions/all-timestamps.php';
 
         <div class="combined-and-generate-btns-container">
 
-            <button class="btn btn_combined-query-and-generate btn-combined-position" type="submit"
+            <button class="btn btn_combined-query-and-generate" type="submit"
             name="combinedQuery" value="combinedQuery">Search combination</button>
 
             <input type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
@@ -106,7 +109,7 @@ include 'php-functions/all-timestamps.php';
 
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
-            <button class="btn btn_combined-query-and-generate btn-generate-position" type="submit"
+            <button class="btn btn_combined-query-and-generate" type="submit"
                     name="generateEventFile" value="generateEventFile">Generate event file</button>
 
             <input type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
