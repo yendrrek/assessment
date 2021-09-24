@@ -24,10 +24,10 @@
 }
 
 .search-options-container {
+  column-gap: 24px;
   display: flex;
-  justify-content: space-between;
   margin: 1.5em auto;
-  width:  65%;
+  width:  881px;
 }
 
 .select-box {
@@ -43,18 +43,6 @@
   font-weight:  bold;
   height:  27px;
   outline:  none;
-}
-
-.select-box_event-type {
-  max-width: 100px;
-}
-
-.select-box_fields-updated {
-  max-width: 130px;
-}
-
-.select-box_timestamps {
-  max-width: 186px;
 }
 
 .btn {

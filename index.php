@@ -31,7 +31,7 @@ include 'php-functions/all-timestamps.php';
 
             <div>
 
-                <select class="select-box select-box_event-type" name="eventType">
+                <select class="select-box" name="eventType">
                     <option value="Event type">Event type</option>
                     <option value="INSERTED">INSERTED</option>
                     <option value="UPDATED">UPDATED</option>
@@ -45,7 +45,7 @@ include 'php-functions/all-timestamps.php';
 
             <div>
 
-                <select class="select-box select-box_fields-updated" name="fieldsUpdated">
+                <select class="select-box" name="fieldsUpdated">
                     <option value="Fields updated">Fields updated</option>
                     <option value="status">status</option>
                     <option value="companyUrl">companyUrl</option>
@@ -61,7 +61,7 @@ include 'php-functions/all-timestamps.php';
 
             <div>
 
-                <select class="select-box select-box_timestamps" name="fromTimestamp">
+                <select class="select-box" name="fromTimestamp">
                     <option value="From timestamp">From timestamp</option>
 
                     <?php
