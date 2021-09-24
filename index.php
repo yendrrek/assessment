@@ -26,7 +26,7 @@ include 'php-functions/all-timestamps.php';
 
         <div class="search-options-container">
 
-            <div class="select-and-btn-wrapper">
+            <div>
 
                 <select class="select-box select-box_event-type" name="eventType">
                     <option value="Event type">Event type</option>
@@ -40,7 +40,7 @@ include 'php-functions/all-timestamps.php';
 
             </div>
 
-            <div class="select-and-btn-wrapper">
+            <div>
 
                 <select class="select-box select-box_fields-updated" name="fieldsUpdated">
                     <option value="Fields updated">Fields updated</option>
@@ -56,7 +56,7 @@ include 'php-functions/all-timestamps.php';
 
             </div>
 
-            <div class="select-and-btn-wrapper">
+            <div>
 
                 <select class="select-box select-box_timestamps" name="fromTimestamp">
                     <option value="From timestamp">From timestamp</option>
@@ -115,13 +115,17 @@ include 'php-functions/all-timestamps.php';
 
     </form>
 
-    <span class="result-header">Result:</span>
+    <div class="result-wrapper">
 
-    <div class="result-container">
+        <span class="result-header">Result:</span>
 
-    <?php
-    include 'php-functions/search-queries.php'; 
-    ?>
+        <div class="result-container">
+
+        <?php
+        include 'php-functions/search-queries.php';
+        ?>
+
+        </div>
 
     </div>
         

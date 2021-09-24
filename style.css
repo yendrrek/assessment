@@ -25,17 +25,9 @@
 
 .search-options-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin: 1.5em auto;
-  width:  90%;
-}
-
-.select-and-btn-wrapper {
-  margin-right: 1.5em;
-}
-
-.select-to-timestamp {
-  margin-left: 0.6em;
+  width:  65%;
 }
 
 .select-box {
@@ -100,6 +92,11 @@
   margin-left: 0.75em;
 }
 
+.result-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .result-container {
   background: hsl(0, 0%, 96%);
   border:  3px solid #d30059;
@@ -110,16 +107,16 @@
   font-weight: bold;
   height: 425px;
   margin: auto;
+  max-width: 818px;
   overflow: auto;
   padding: 15px 0 0 15px;
-  text-align: left;
   width: 65%;
 }
 
 .result-header {
   color: #2d1c44;
-  display:  block;
   font-weight: bold;
   margin: 12px auto 10px auto;
+  max-width: 818px;
   width: 65%;
 }
