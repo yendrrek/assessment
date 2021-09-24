@@ -72,12 +72,12 @@
   max-width: 200px;
 }
 
-.result-wrapper {
+.result-container {
   display: flex;
   flex-direction: column;
 }
 
-.result-container {
+.result-content {
   background: hsl(0, 0%, 96%);
   border:  3px solid #d30059;
   border-radius: 0.625rem;
