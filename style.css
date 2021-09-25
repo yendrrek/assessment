@@ -24,7 +24,7 @@
 }
 
 .search-options-container {
-  column-gap: 24px;
+  gap: 24px;
   display: flex;
   margin: 1.5em auto;
   width:  881px;
@@ -45,6 +45,10 @@
   outline:  none;
 }
 
+.select-box_fields-updated-margin-left {
+  margin-left: 19px; /* Equls to 'gap: 24', which has effect on other elements. */
+}
+
 .btn {
   background: #f5f5f5;
   border: 2px solid #2d1c44;
@@ -60,6 +64,7 @@
 }
 
 .combined-and-generate-btns-container {
+  align-items: center;
   column-gap: 24px;
   display: flex;
   margin: auto;
@@ -99,3 +104,20 @@
   margin: 12px auto 10px auto;
   width: 818px;
 }
+
+@media only screen and (max-width: 56.19em) {  /* 899px */
+  .search-options-container {
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .result-content {
+    font-size: 0.9em;
+  }
+}
+
+/*@media only screen and (max-width: 53.69em) {
+  .result-content {
+    width: 95.2278%;
+  }
+}*/
