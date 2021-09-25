@@ -64,7 +64,6 @@
 }
 
 .combined-and-generate-btns-container {
-  align-items: center;
   column-gap: 24px;
   display: flex;
   margin: auto;
@@ -72,7 +71,6 @@
 }
 
 .btn_combined-query-and-generate {
-  flex: 0 0 auto;
   flex-direction: row;
   max-width: 200px;
 }
