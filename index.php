@@ -28,7 +28,6 @@ include 'php-functions/all-timestamps.php';
 
             <!-- All drop-down menus with respective search buttons are wrapped in a <div>,
                 so they can be treated as one element by flexbox. -->
-
             <div>
                 <select class="select-box" name="eventType">
                     <option value="Event type">Event type</option>
@@ -39,10 +38,8 @@ include 'php-functions/all-timestamps.php';
 
                 <button class="btn" id="btn-event-type" type="submit"
                         name="btnEventType" value="btnEventType">Search</button>
-            </div>
 
-            <div>
-                <select class="select-box" name="fieldsUpdated">
+                <select class="select-box select-box_fields-updated-margin-left" name="fieldsUpdated">
                     <option value="Fields updated">Fields updated</option>
                     <option value="status">status</option>
                     <option value="companyUrl">companyUrl</option>
