@@ -110,6 +110,7 @@
     align-items: center;
     flex-direction: column;
     gap: 20px;
+    width: 464px;
   }
   .result-content {
     font-size: 0.9em;
@@ -118,6 +119,10 @@
 
 /*@media only screen and (max-width: 53.69em) {
   .result-content {
+    width: 95.2278%; /* Equal to 818px */
+    padding: 7px 0 0 7px;
+  }
+  .result-header {
     width: 95.2278%;
   }
 }*/
