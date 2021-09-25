@@ -87,17 +87,15 @@
   font-weight: bold;
   height: 425px;
   margin: auto;
-  max-width: 818px;
   overflow: auto;
   padding: 15px 0 0 15px;
   resize: vertical;
-  width: 65%;
+  width: 818px;
 }
 
 .result-header {
   color: #2d1c44;
   font-weight: bold;
   margin: 12px auto 10px auto;
-  max-width: 818px;
-  width: 65%;
+  width: 818px;
 }
