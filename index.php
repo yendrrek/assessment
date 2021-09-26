@@ -69,7 +69,7 @@ include 'php-functions/all-timestamps.php';
 
                 </select>
 
-                <select class="select-box select-box_timestamps" name="toTimestamp">
+                <select class="select-box" name="toTimestamp">
                     <option value="To timestamp">To timestamp</option>
 
                     <?php
