@@ -57,7 +57,7 @@
   color: #2d1c44;
   cursor:  pointer;
   flex: 1 1 auto;
-  font-size:  1em;
+  font-size: 1em;
   font-weight: bold;
   padding: 6px;
   max-width: 80px;
@@ -82,6 +82,14 @@
   flex-direction: column;
 }
 
+.result-header {
+  color: #2d1c44;
+  font-size: 0.97em;
+  font-weight: bold;
+  margin: 12px auto 10px auto;
+  width: 818px;
+}
+
 .result-content {
   background: hsl(0, 0%, 96%);
   border:  3px solid #d30059;
@@ -98,26 +106,20 @@
   width: 818px;
 }
 
-.result-header {
-  color: #2d1c44;
-  font-weight: bold;
-  margin: 12px auto 10px auto;
-  width: 818px;
-}
-
-@media only screen and (max-width: 56.19em) {  /* 899px */
+@media only screen and (max-width: 56.188em) {  /* 899px */
   .search-options-container {
     align-items: center;
     flex-direction: column;
     gap: 20px;
     width: 100%; /* Equals to 464px */
   }
+  .result-header,
   .result-content {
     font-size: 0.9em;
   }
 }
 
-@media only screen and (max-width: 53.69em) {  /* 859px */
+@media only screen and (max-width: 53.688em) {  /* 859px */
   .result-content {
     width: 95.2278%; /* Equal to 818px */
     padding: 7px 0 0 7px;
@@ -127,27 +129,31 @@
   }
 }
 
-@media only screen and (max-width: 48.19em) { /* 771px */
-  .result-content {
-    font-size: 0.8em;
-  }
-}
-
-@media only screen and (max-width: 42.5em) {  /* 680px */
-  .result-content {
-    font-size: 0.7em;
-
-  }
-}
-
-@media only screen and (max-width: 37.25em) { /* 596px */
+@media only screen and (max-width: 28.938em) { /* 463px */
+  .result-header,
   .result-content {
     font-size: 0.6em;
   }
+  .select-box {
+    font-size: 0.6em;
+    height: 22px;
+  }
+  .btn {
+    font-size: 0.7em;
+    padding: 4px;
+  }
 }
 
-@media only screen and (max-width: 32.25em) { /* 516px */
-  .result-content {
-    font-size: 0.5em;
+@media only screen and (max-width: 22.063em) { /* 353px */
+  .combined-and-generate-btns-container {
+    width: 100%;
+  }
+  .select-box {
+    font-size:  0.5em;
+    height: 20px;
+  }
+  .btn {
+    font-size: 0.6em;
+    padding: 2px;
   }
 }
