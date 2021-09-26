@@ -16,6 +16,7 @@ include 'php-functions/all-timestamps.php';
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
+    <meta name="robots" content="noindex">
     <title>Searching system</title>
     <link rel="stylesheet" href="style.css">
 </head>
