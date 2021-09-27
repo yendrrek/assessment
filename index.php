@@ -19,11 +19,13 @@ include 'php-functions/all-timestamps.php';
     <meta name="robots" content="noindex">
     <title>Searching system</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body class="body">
 
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form id="search-options" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
         <div class="search-options-container">
 
