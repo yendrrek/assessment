@@ -37,7 +37,7 @@ include 'php-functions/all-timestamps.php';
                     <option value="DELETED">DELETED</option>
                 </select>
 
-                <button class="btn" id="btn-event-type" type="submit"
+                <button class="btn" type="submit"
                         name="btnEventType" value="btnEventType">Search</button>
 
                 <select class="select-box select-box_fields-updated-margin-left" name="fieldsUpdated">
@@ -49,7 +49,7 @@ include 'php-functions/all-timestamps.php';
                     <option value="null">not updated</option>
                 </select>
 
-                <button class="btn" id="btn-fields-updated" type="submit"
+                <button class="btn" type="submit"
                         name="btnFieldsUpdated" value="btnFieldsUpdated">Search</button>
             </div>
 
@@ -84,7 +84,7 @@ include 'php-functions/all-timestamps.php';
 
                 </select>
 
-                <button class="btn" id="btn-timestamps-range" type="submit"
+                <button class="btn" type="submit"
                         name="btnTimestamps" value="btnTimestamps">Search</button>
             </div>
 
