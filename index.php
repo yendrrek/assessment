@@ -25,7 +25,7 @@ include 'php-functions/all-timestamps.php';
 
 <body class="body">
 
-    <form id="search-options" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form id="form-search-options" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
         <div class="search-options-container">
 
@@ -95,18 +95,18 @@ include 'php-functions/all-timestamps.php';
         <div class="combined-and-generate-btns-container">
 
             <button class="btn btn_combined-query-and-generate" type="submit"
-                    name="generateEventFile" value="generateEventFile">Generate event file</button>
+            name="combinedQuery" value="combinedQuery">Search combination</button>
 
-            <input type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
+            <input id="token-search-options" type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
 
     </form>
 
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <form id="form-generate-event-file" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 
             <button class="btn btn_combined-query-and-generate" type="submit"
-            name="combinedQuery" value="combinedQuery">Search combination</button>
+                    name="generateEventFile" value="generateEventFile">Generate event file</button>
 
-            <input type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
+            <input id="token-generate-event-file" type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
 
         </div>
 
@@ -117,6 +117,8 @@ include 'php-functions/all-timestamps.php';
         <span class="result-header">Result:</span>
 
         <div class="result-content">
+
+            <div class="event-file-generated-info">New event file has been generated.</div>
 
         <?php
         include 'php-functions/search-queries.php';
