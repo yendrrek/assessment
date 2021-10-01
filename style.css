@@ -21,6 +21,7 @@
 .body {
   background: hsl(0, 0%, 99%);
   font-family: europa, sans-serif;
+  overflow-x: hidden;
 }
 
 .search-options-container {
@@ -117,16 +118,16 @@
   height: 50px;
   justify-content: center;
   left: 50%;
-  margin: -25px 0 0 -170px;
+  margin: 25px 0 0 -170px;
   padding-top: 0.8em;
-  position: fixed;
-  top: 50%;
+  position: absolute;
+  top: 174px;
   transform: translate(9999px, 0);
   width: 340px;
 }
 
 .event-file-generated-info_visible {
-  animation: on 0.5s ease-out;
+  animation: on 0.1s ease-out;
   transform: translate(0, 0);
 }
 
@@ -158,11 +159,17 @@
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    width: 100%; /* Equals to 464px */
+    width: 100%; /* Equal to 464px */
   }
   .result-header,
   .result-content {
     font-size: 0.9em;
+  }
+  .event-file-generated-info {
+    margin-left: -160px;
+    padding-top: 0.9em;
+    top: 224px;
+    width: 320px;
   }
 }
 
@@ -189,6 +196,14 @@
     font-size: 0.7em;
     padding: 4px;
   }
+  .event-file-generated-info {
+    font-size: 1.7em;
+    height: 50px;
+    margin: -25px 0 0 -170px;
+    padding-top: 1em;
+    top: 236px;
+    width: 340px;
+  }
 }
 
 @media only screen and (max-width: 22.063em) { /* 353px */
@@ -202,5 +217,10 @@
   .btn {
     font-size: 0.6em;
     padding: 2px;
+  }
+  .event-file-generated-info {
+    margin-left: -160px;
+    top: 224px;
+    width: 320px;
   }
 }
