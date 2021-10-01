@@ -92,13 +92,8 @@ All the parts of each event mentioned in 'Requirement' above are randomly genera
 
 [x] Responsiveness of the layout.
 
-When generating random entries in the 'event-file.txt':  
+[x] Use Ajax for showing search results, and when generating random entries in 'event-file.txt':
+
 [ ] make 'INSERT' event not containing any fields updated but only 'null';  
 
 [ ] make 'UPDATE' event not containing any 'null' but only fields updated.
-
-[ ] Use Ajax for showing search results for smoother user experience.
-
-[ ] Custom pop-up lightbox notifying that a new event file has been generated.  
-For now ``alert()`` is being used.
-
