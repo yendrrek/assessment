@@ -92,9 +92,9 @@ All the parts of each event mentioned in 'Requirement' above are randomly genera
 
 [x] Responsiveness of the layout.
 
-[x] Use Ajax for showing search results, and when generating random entries in 'event-file.txt':
+[x] Use Ajax for showing search results, and when generating random entries in 'event-file.txt'.
 
-[x] make 'INSERT' event not contain any [fields updated] but only 'null';
+[x] make 'INSERT' event not contain any [fields updated] but only 'null'.
 
 [ ] make 'UPDATE' event not contain any 'null' but only [fields updated].
 
