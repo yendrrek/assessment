@@ -33,7 +33,7 @@ the following functions:
 2. Get all events where a specific field has been updated. For example all events where
 the ‘status’ field changed
 
-3. Get all events between two timestamps.
+3. Get all events between two timestamps
 
 4. Allow combinations of (1), (2) and (3). For example, all UPDATED events where status  
 changed between 2018-04-10 12:00:00.000 and 2018-04-10 12:00:11.500
@@ -81,7 +81,7 @@ CustomLog "{$path}/apache/logs/access.log" combined
 </VirtualHost>
 
 ```
-'www' is localhost
+'www' is localhost.
 
 Don't forget to make Apache listen to the new port:
 ```
