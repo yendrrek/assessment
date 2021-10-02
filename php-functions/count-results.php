@@ -75,7 +75,7 @@ function showTotalNumberOfFoundEventsByFieldsUpdated()
 
 showTotalNumberOfFoundEventsByFieldsUpdated();
 
-/*function showTotalNumberOfFoundEventsBetweenTimestamps()
+function showTotalNumberOfFoundEventsBetweenTimestamps()
 {
 
     $eventsByRangeOfTimestamps = [];
@@ -88,8 +88,32 @@ showTotalNumberOfFoundEventsByFieldsUpdated();
             filter_var(!empty($_POST['toTimestamp']), FILTER_SANITIZE_STRING) &&
             validateSearchForm() === true) {
 
+            $from = $_POST['fromTimestamp'];
+            $to = $_POST['toTimestamp'];
 
+            // Timestamps are extracted from the events and formatted.
+            $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
+
+            if ($timestamp >= $from && $timestamp <= $to) {
+
+                array_push($eventsByRangeOfTimestamps, $event);
+
+                $qtyOfEventsByRangeOfTimestamps = count($eventsByRangeOfTimestamps);
+            }
         }
-
     }
-}*/
+
+    $infoAboutqtyOfEventsByRangeOfTimestamps =
+      "{$qtyOfEventsByRangeOfTimestamps} events found between {$from} and {$to}";
+
+    if ($qtyOfEventsByRangeOfTimestamps < 1) {
+
+        $infoAboutqtyOfEventsByRangeOfTimestamps = null;
+
+    } else {
+
+        echo $infoAboutqtyOfEventsByRangeOfTimestamps;
+    }
+}
+
+showTotalNumberOfFoundEventsBetweenTimestamps();
