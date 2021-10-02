@@ -1,5 +1,5 @@
 <?php
-function showNumberOfEventsByType()
+function showTotalNumberOfEventsByType()
 {
     $eventsByType = [];
     $qtyOfEventsByTypeFound = 0;
@@ -18,7 +18,7 @@ function showNumberOfEventsByType()
 
     $qtyOfEventsByTypeFound = count($eventsByType);
 
-    $infoAboutQtyOfEventsByTypeFound = "{$qtyOfEventsByTypeFound} {$_POST['eventType']} events found.";
+    $infoAboutQtyOfEventsByTypeFound = "{$qtyOfEventsByTypeFound} {$_POST['eventType']} events found";
 
     if ($qtyOfEventsByTypeFound < 1) {
 
@@ -30,4 +30,4 @@ function showNumberOfEventsByType()
     }
 }
 
-showNumberOfEventsByType();
+showTotalNumberOfEventsByType();
