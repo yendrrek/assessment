@@ -106,7 +106,8 @@ function showTotalNumberOfFoundEventsBetweenTimestamps()
     $infoAboutqtyOfEventsByRangeOfTimestamps =
       "{$qtyOfEventsByRangeOfTimestamps} events found between {$from} and {$to}";
 
-    if ($qtyOfEventsByRangeOfTimestamps < 1) {
+    if ($qtyOfEventsByRangeOfTimestamps < 1 ||
+        $from === 'From timestamp' || $to === 'To timestamp') {
 
         $infoAboutqtyOfEventsByRangeOfTimestamps = null;
 
