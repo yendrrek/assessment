@@ -7,7 +7,8 @@ function showTotalNumberOfEventsByType()
 
     foreach(getEventFile() as $event) {
 
-        if (filter_var(!empty($_POST['eventType']), FILTER_SANITIZE_STRING)) {
+        if (filter_var(!empty($_POST['eventType']), FILTER_SANITIZE_STRING) &&
+            validateSearchForm() === true) {
 
             if (strpos($event, $_POST['eventType']) !== false) {
 
@@ -40,7 +41,8 @@ function showTotalNumberOfEventsByFieldsUpdated()
 
     foreach(getEventFile() as $event) {
 
-        if (filter_var(!empty($_POST['fieldsUpdated']), FILTER_SANITIZE_STRING)) {
+        if (filter_var(!empty($_POST['fieldsUpdated']), FILTER_SANITIZE_STRING) &&
+            validateSearchForm() === true) {
 
             if (strpos($event, $_POST['fieldsUpdated']) !== false) {
 
@@ -72,3 +74,11 @@ function showTotalNumberOfEventsByFieldsUpdated()
 }
 
 showTotalNumberOfEventsByFieldsUpdated();
+
+/*function showTotalNumberOfEventsBetweenTimestamps()
+{
+    foreach(getEventFile() as $event) {
+
+
+    }
+}*/
