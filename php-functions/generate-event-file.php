@@ -110,9 +110,18 @@ function createRandomEvents()
       createRandomTimeStamp()
     ];
 
+    $pattern = '/\[.*?\]/';
+
     $stringWithRandomEvents = implode(', ', $randomEvents);
 
-    return $stringWithRandomEvents . "\r\n";
+    if (strpos($stringWithRandomEvents, 'INSERTED') !== false) {
+
+        return preg_replace($pattern, 'null', $stringWithRandomEvents) . "\r\n";
+
+    } else {
+
+        return $stringWithRandomEvents . "\r\n";
+    }
 }
 
 // Update 'event-file.txt' with new entries.
@@ -132,6 +141,8 @@ function createEventFileWithRandomEntries()
 
         fclose($eventFile);
 
+        // For browsers with JavaScript disabled, otherwise there is a custom
+        // notification showing upon successful Ajax operation.
         echo '<script>alert("New event file has been generated.")</script>';
     }
 }

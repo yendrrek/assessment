@@ -94,8 +94,8 @@ All the parts of each event mentioned in 'Requirement' above are randomly genera
 
 [x] Use Ajax for showing search results, and when generating random entries in 'event-file.txt':
 
+[x] make 'INSERT' event not contain any [fields updated] but only 'null';
+
+[ ] make 'UPDATE' event not contain any 'null' but only [fields updated].
+
 [ ] Show results in chronological order.
-
-[ ] make 'INSERT' event not containing any fields updated but only 'null';  
-
-[ ] make 'UPDATE' event not containing any 'null' but only fields updated.
