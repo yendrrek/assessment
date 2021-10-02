@@ -114,7 +114,7 @@ include 'php-functions/all-timestamps.php';
 
     <div class="result-container">
 
-        <span class="result-header">Result:</span>
+        <span class="result-header">Result: <?php include 'php-functions/count-results.php'; ?></span>
 
         <div class="result-content">
 

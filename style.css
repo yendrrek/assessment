@@ -81,7 +81,7 @@
 .result-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 22px;
+  margin: 8px 0 22px 0;
 }
 
 .result-header {

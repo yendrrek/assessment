@@ -23,7 +23,7 @@ function showEventsByType()
                 break;
 
             } elseif (strpos($event, $_POST['eventType']) !== false) {
-                
+
                 // Print result on the screen.
                 echo $event . '<br><br>';
             }
@@ -49,7 +49,7 @@ function showEventsByType()
             }
         }
     }
-    
+
     // When performing combined searching the returned array with types of events
     // is later filtered by the next function 'showEventsByFieldsUpdated()' 
     return $eventsByType;

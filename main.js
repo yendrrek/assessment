@@ -103,6 +103,7 @@ dontResubmitFormWhenPageReloaded();
         tokenCsrf: tokenCsrf
       },
       success(response) {
+        $('.result-header').replaceWith($('.result-header', response));
         $('.result-content').replaceWith($('.result-content', response));
       }
     })
