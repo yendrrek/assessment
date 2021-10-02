@@ -1,9 +1,9 @@
 <?php
-function showTotalNumberOfEventsByType()
+function showTotalNumberOfFoundEventsByType()
 {
     $eventsByType = [];
-    $qtyOfEventsByTypeFound = 0;
-    $infoAboutQtyOfEventsByTypeFound = '';
+    $qtyOfEventsByType = 0;
+    $infoAboutqtyOfEventsByType = '';
 
     foreach(getEventFile() as $event) {
 
@@ -17,27 +17,27 @@ function showTotalNumberOfEventsByType()
         }
     }
 
-    $qtyOfEventsByTypeFound = count($eventsByType);
+    $qtyOfEventsByType = count($eventsByType);
 
-    $infoAboutQtyOfEventsByTypeFound = "{$qtyOfEventsByTypeFound} {$_POST['eventType']} events found";
+    $infoAboutqtyOfEventsByType = "{$qtyOfEventsByType} {$_POST['eventType']} events found";
 
-    if ($qtyOfEventsByTypeFound < 1) {
+    if ($qtyOfEventsByType < 1) {
 
-        $infoAboutQtyOfEventsByTypeFound = null;
+        $infoAboutqtyOfEventsByType = null;
 
     } else {
 
-        echo $infoAboutQtyOfEventsByTypeFound;
+        echo $infoAboutqtyOfEventsByType;
     }
 }
 
-showTotalNumberOfEventsByType();
+showTotalNumberOfFoundEventsByType();
 
-function showTotalNumberOfEventsByFieldsUpdated()
+function showTotalNumberOfFoundEventsByFieldsUpdated()
 {
     $eventsByFieldsUpdated = [];
-    $qtyOfEventsByFieldsUpdatedFound = 0;
-    $infoAboutQtyOfEventsByFieldsUpdatedFound = $infoAboutQtyOfEventsFoundWithNoFieldsUpdated = '';
+    $qtyOfEventsByFieldsUpdated = 0;
+    $infoAboutqtyOfEventsByFieldsUpdated = $infoAboutQtyOfEventsWithNoFieldsUpdated = '';
 
     foreach(getEventFile() as $event) {
 
@@ -51,34 +51,45 @@ function showTotalNumberOfEventsByFieldsUpdated()
         }
     }
 
-    $qtyOfEventsByFieldsUpdatedFound = count($eventsByFieldsUpdated);
+    $qtyOfEventsByFieldsUpdated = count($eventsByFieldsUpdated);
 
-    $infoAboutQtyOfEventsByFieldsUpdatedFound =
-      "{$qtyOfEventsByFieldsUpdatedFound} events found with updated field '{$_POST['fieldsUpdated']}'";
+    $infoAboutqtyOfEventsByFieldsUpdated =
+      "{$qtyOfEventsByFieldsUpdated} events found with updated field '{$_POST['fieldsUpdated']}'";
 
-    $infoAboutQtyOfEventsFoundWithNoFieldsUpdated =
-      "{$qtyOfEventsByFieldsUpdatedFound} events found with no fields updated";
+    $infoAboutQtyOfEventsWithNoFieldsUpdated =
+      "{$qtyOfEventsByFieldsUpdated} events found with no fields updated";
 
-    if ($qtyOfEventsByFieldsUpdatedFound < 1) {
+    if ($qtyOfEventsByFieldsUpdated < 1) {
 
-        $infoAboutQtyOfEventsByFieldsUpdatedFound = null;
+        $infoAboutqtyOfEventsByFieldsUpdated = null;
 
     } elseif ($_POST['fieldsUpdated'] === 'null') {
 
-        echo $infoAboutQtyOfEventsFoundWithNoFieldsUpdated;
+        echo $infoAboutQtyOfEventsWithNoFieldsUpdated;
 
     } else {
 
-        echo $infoAboutQtyOfEventsByFieldsUpdatedFound;
+        echo $infoAboutqtyOfEventsByFieldsUpdated;
     }
 }
 
-showTotalNumberOfEventsByFieldsUpdated();
+showTotalNumberOfFoundEventsByFieldsUpdated();
 
-/*function showTotalNumberOfEventsBetweenTimestamps()
+/*function showTotalNumberOfFoundEventsBetweenTimestamps()
 {
+
+    $eventsByRangeOfTimestamps = [];
+    $qtyOfEventsByRangeOfTimestamps = 0;
+    $infoAboutqtyOfEventsByRangeOfTimestamps = '';
+
     foreach(getEventFile() as $event) {
 
+        if (filter_var(!empty($_POST['fromTimestamp']), FILTER_SANITIZE_STRING) &&
+            filter_var(!empty($_POST['toTimestamp']), FILTER_SANITIZE_STRING) &&
+            validateSearchForm() === true) {
+
+
+        }
 
     }
 }*/
