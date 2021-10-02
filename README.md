@@ -83,6 +83,11 @@ CustomLog "{$path}/apache/logs/access.log" combined
 ```
 'www' is localhost
 
+Don't forget to make Apache listen to the new port:
+```
+Listen 8082
+```
+
 ### TESTING THE SYSTEM
 
 Click 'Generate event file' button to randomly create a file on your server with event entries.  
