@@ -62,10 +62,6 @@ Project is located in 'localhost/assessment'.
 
 In the root directory, create an empty file called 'event-file.txt' and generate random entries.
 
-##### Important note regarding the live version:
-At the moment there can by only one event file, so anyone can create a random event file at any time on any device,
-which will overwrite previously generated event file for everyone.
-
 In my httpd.conf I created a virtual host:
 
 ```
@@ -96,6 +92,10 @@ Listen 8082
 
 Click 'Generate event file' button to randomly create a file on your server with event entries.  
 All the parts of each event mentioned in 'Requirement' above are randomly generated.
+
+##### Important note regarding the live version:
+At the moment there can by only one event file, so anyone can create a random event file at any time on any device,
+which will overwrite previously generated event file for everyone.
 
 ## FUTURE IMPROVEMENTS
 
