@@ -62,6 +62,10 @@ Project is located in 'localhost/assessment'.
 
 In the root directory, create an empty file called 'event-file.txt' and generate random entries.
 
+##### Important note regarding the live version:
+At the moment there can by only one event file, so anyone can create a random event file at any time on any device,
+which will overwrite previously generated event file for everyone.
+
 In my httpd.conf I created a virtual host:
 
 ```
@@ -102,5 +106,8 @@ All the parts of each event mentioned in 'Requirement' above are randomly genera
 [x] Make 'INSERT' event not contain any [fields updated] but only 'null'.
 
 [x] Make 'UPDATE' event not contain any 'null' but only [fields updated].
+
+[ ] Let users generate their own random file, to avoid situation when a user
+overwrites other user's event-file.
 
 [ ] Show results in chronological order.
