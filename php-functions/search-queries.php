@@ -57,6 +57,8 @@ function showEventsByType()
     return $eventsByType;
 }
 
+showEventsByType();
+
 function showEventsByFieldsUpdated()
 {
     $eventsByFieldsUpdated = [];
