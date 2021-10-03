@@ -11,41 +11,43 @@ function showEventsByType()
     // 'getEventFile()' returns the input 'event-file.txt'. 
     foreach(getEventFile() as $event) {
 
-        // Show events by their types only.
-        if (filter_var(!empty($_POST['btnEventType']), FILTER_SANITIZE_STRING) &&
-            filter_var(!empty($_POST['eventType']), FILTER_SANITIZE_STRING) &&
-            validateSearchForm() === true) {
+        if (filter_var(!empty($_POST['eventType']), FILTER_SANITIZE_STRING)) {
 
-            if ($_POST['eventType'] === 'Event type') {
+            // Show events by their types only.
+            if (filter_var(!empty($_POST['btnEventType']), FILTER_SANITIZE_STRING) &&
+                validateSearchForm() === true) {
 
-                echo 'No \'Event type\' selected.';
+                if ($_POST['eventType'] === 'Event type') {
 
-                break;
+                    echo 'No \'Event type\' selected.';
 
-            } elseif (strpos($event, $_POST['eventType']) !== false) {
+                    break;
 
-                // Print result on the screen.
-                echo $event . '<br><br>';
-            }
-        
-        // Perform combined searching.    
-        } elseif (!empty($_POST['combinedQuery']) && !empty($_POST['eventType'])) {
+                } elseif (strpos($event, $_POST['eventType']) !== false) {
 
-            if (in_array($_POST['eventType'], $typesOfEvents)) {
-
-                foreach ($typesOfEvents as $types) {
-
-                    if (strpos($event, $_POST['eventType']) !== false) {
-
-                        array_push($eventsByType, $event);
-
-                        break; 
-                    }
+                    // Print result on the screen.
+                    echo $event . '<br><br>';
                 }
 
-            } else {
+            // Perform combined searching.
+            } elseif (!empty($_POST['combinedQuery'])) {
 
-                array_push($eventsByType, $event);
+                if (in_array($_POST['eventType'], $typesOfEvents)) {
+
+                    foreach ($typesOfEvents as $types) {
+
+                        if (strpos($event, $_POST['eventType']) !== false) {
+
+                            array_push($eventsByType, $event);
+
+                            break;
+                        }
+                    }
+
+                } else {
+
+                    array_push($eventsByType, $event);
+                }
             }
         }
     }
@@ -60,47 +62,48 @@ function showEventsByFieldsUpdated()
     $eventsByFieldsUpdated = [];
     $fieldsUpdated = ['status', 'companyUrl', 'hoursPerDay', 'overtimeRate', 'null'];
 
-    foreach(getEventFile() as $event) {
+    if (filter_var(!empty($_POST['fieldsUpdated']), FILTER_SANITIZE_STRING)) {
 
-        // Show events by fields updated only.
-        if (filter_var(!empty($_POST['btnFieldsUpdated']), FILTER_SANITIZE_STRING) &&
-            filter_var(!empty($_POST['fieldsUpdated']), FILTER_SANITIZE_STRING) &&
-            validateSearchForm() === true) {
+        foreach(getEventFile() as $event) {
 
-            if ($_POST['fieldsUpdated'] === 'Fields updated') {
+            // Show events by fields updated only.
+            if (filter_var(!empty($_POST['btnFieldsUpdated']), FILTER_SANITIZE_STRING) &&
+                validateSearchForm() === true) {
 
-                echo 'No \'Fields updated\' selected.';
+                if ($_POST['fieldsUpdated'] === 'Fields updated') {
 
-                break;
+                    echo 'No \'Fields updated\' selected.';
 
-            } elseif (strpos($event, $_POST['fieldsUpdated']) !== false) {
+                    break;
 
-                echo $event . '<br><br>';
+                } elseif (strpos($event, $_POST['fieldsUpdated']) !== false) {
+
+                    echo $event . '<br><br>';
+                }
             }
         }
-    }
 
-    // Result of search returned earlier, and filtered further when performing combined searching.  
-    foreach(showEventsByType() as $event) {
+        // Result of search returned earlier, and filtered further when performing combined searching.
+        foreach(showEventsByType() as $event) {
 
-        if (!empty($_POST['combinedQuery']) &&
-            !empty($_POST['fieldsUpdated'])) {
+            if (!empty($_POST['combinedQuery'])) {
 
-            if (in_array($_POST['fieldsUpdated'], $fieldsUpdated)) {
+                if (in_array($_POST['fieldsUpdated'], $fieldsUpdated)) {
 
-                foreach ($fieldsUpdated as $fields) {
+                    foreach ($fieldsUpdated as $fields) {
 
-                    if (strpos($event, $_POST['fieldsUpdated']) !== false) {
+                        if (strpos($event, $_POST['fieldsUpdated']) !== false) {
 
-                        array_push($eventsByFieldsUpdated, $event);
+                            array_push($eventsByFieldsUpdated, $event);
 
-                        break;
+                            break;
+                        }
                     }
+
+                } else {
+
+                    array_push($eventsByFieldsUpdated, $event);
                 }
-
-            } else {
-
-                array_push($eventsByFieldsUpdated, $event);
             }
         }
     }
