@@ -107,6 +107,8 @@ which will overwrite previously generated event file for everyone.
 
 [x] Make 'UPDATE' event not contain any 'null' but only [fields updated].
 
+[x] Show summary of the result above the red box.
+
 [ ] Add option for sending result by email as an attachment.
 
 [ ] Let users generate their own random file, to avoid situation when a user
