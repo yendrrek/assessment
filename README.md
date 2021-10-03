@@ -107,6 +107,8 @@ All the parts of each event mentioned in 'Requirement' above are randomly genera
 
 [x] Make 'UPDATE' event not contain any 'null' but only [fields updated].
 
+[ ] Add option for sending result by email as an attachment.
+
 [ ] Let users generate their own random file, to avoid situation when a user
 overwrites other user's event-file.
 
