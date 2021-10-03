@@ -107,7 +107,7 @@ which will overwrite previously generated event file for everyone.
 
 [x] Make 'UPDATE' event not contain any 'null' but only [fields updated].
 
-[x] Show summary of the result above the red box.
+[ ] Show summary of the result above the red box. (Work in progress, partially completed).
 
 [ ] Add option for sending result by email as an attachment.
 
