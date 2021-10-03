@@ -115,3 +115,5 @@ which will overwrite previously generated event file for everyone.
 overwrites other user's event-file.
 
 [ ] Show results in chronological order.
+
+[ ] Add icons to buttons.
