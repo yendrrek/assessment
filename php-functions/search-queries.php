@@ -1,12 +1,8 @@
 <?php
 function showEventsByType()
 {
-    $eventsByType = $arrayWithEvents = [];
-    $typesOfEvents = [
-        'INSERTED',
-        'UPDATED',
-        'DELETED'
-    ];
+    $eventsByType = [];
+    $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED'];
 
     // 'getEventFile()' returns the input 'event-file.txt'. 
     foreach(getEventFile() as $event) {
