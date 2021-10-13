@@ -6,6 +6,29 @@ include 'php-functions/form-validation.php';
 include 'php-functions/generate-event-file.php';
 include 'php-functions/get-event-file.php';
 include 'php-functions/all-timestamps.php';
+include 'php-functions/search-queries.php';
+
+$eventsByType = $eventsByFieldsUpdated = $eventsByRangeOfTimestamps = $eventsByCombinedSearch = [];
+$resultSummaryOfEventsByType = $resultSummaryOfEventsWithNoFieldsUpdated = $resultSummaryOfEventsByFieldsUpdated =
+    $resultSummaryOfOneEventByRangeOfTimestamps = $resultSummaryOfQtyOfEventsByRangeOfTimestamps =
+    $noEventTypeSelectedError = $noFieldsUpdatedSelectedError = $noTimestampRangeSelectedError =
+    $invalidRangeOfTimestampsError = '';
+
+$eventsByType = showEventsByType()[0];
+$eventsByFieldsUpdated = showEventsByFieldsUpdated()[0];
+$eventsByRangeOfTimestamps = showEventsByRangeOfTimestamps()[0];
+$eventsByCombinedSearch = showCombinedResult();
+
+$resultSummaryOfEventsByType = showEventsByType()[1];
+$resultSummaryOfEventsWithNoFieldsUpdated = showEventsByFieldsUpdated()[1];
+$resultSummaryOfEventsByFieldsUpdated = showEventsByFieldsUpdated()[2];
+$resultSummaryOfOneEventByRangeOfTimestamps = showEventsByRangeOfTimestamps()[1];
+$resultSummaryOfQtyOfEventsByRangeOfTimestamps = showEventsByRangeOfTimestamps()[2];
+
+$noEventTypeSelectedError = showEventsByType()[2];
+$noFieldsUpdatedSelectedError = showEventsByFieldsUpdated()[3];
+$noTimestampRangeSelectedError = showEventsByRangeOfTimestamps()[3];
+$invalidRangeOfTimestampsError = showEventsByRangeOfTimestamps()[4];
 ?>
 
 <!DOCTYPE html>
@@ -114,14 +137,71 @@ include 'php-functions/all-timestamps.php';
 
     <div class="result-container">
 
-        <span class="result-header">Result:</span>
+        <span class="result-header">Result:
+
+            <?php
+            echo $resultSummaryOfEventsByType;
+            echo $resultSummaryOfEventsWithNoFieldsUpdated;
+            echo $resultSummaryOfEventsByFieldsUpdated;
+            echo $resultSummaryOfOneEventByRangeOfTimestamps;
+            echo $resultSummaryOfQtyOfEventsByRangeOfTimestamps;
+            ?>
+
+        </span>
 
         <div class="result-content">
 
             <div class="event-file-generated-info">New event file has been generated.</div>
 
         <?php
-        include 'php-functions/search-queries.php';
+        if (!empty($eventsByType)) {
+
+            foreach ($eventsByType as $event) {
+
+                echo $event . '<br><br>';
+            }
+
+        } else {
+
+            echo $noEventTypeSelectedError;
+        }
+
+        if (!empty($eventsByFieldsUpdated)) {
+
+            foreach ($eventsByFieldsUpdated as $event) {
+
+                echo $event . '<br><br>';
+            }
+
+        } else {
+
+            echo $noFieldsUpdatedSelectedError;
+        }
+
+        if (!empty($eventsByRangeOfTimestamps)) {
+
+            foreach ($eventsByRangeOfTimestamps as $event) {
+
+                echo $event . '<br><br>';
+            }
+
+        } else {
+
+            echo $noTimestampRangeSelectedError;
+            echo $invalidRangeOfTimestampsError;
+        }
+
+        if (!empty($eventsByCombinedSearch) && !is_string($eventsByCombinedSearch)) {
+
+            foreach ($eventsByCombinedSearch as $event) {
+
+                echo $event . '<br><br>';
+            }
+
+        } else {
+
+            echo $eventsByCombinedSearch;
+        }
         ?>
 
         </div>
