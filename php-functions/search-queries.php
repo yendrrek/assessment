@@ -48,15 +48,18 @@ function showEventsByType()
                 } else {
 
                     array_push($eventsByTypeAccordingToCombinedSearch, $event);
-
-                    //$eventsByTypeAccordingToCombinedSearch = null;
                 }
             }
         }
     }
     // When performing combined searching the returned array '$eventsByType'
     // is later filtered by the next function 'showEventsByFieldsUpdated()' 
-    return [$eventsByType, $qtyOfEventsByTypeSummary, $noEventTypeSelectedError, $eventsByTypeAccordingToCombinedSearch];
+    return [
+        $eventsByType,
+        $qtyOfEventsByTypeSummary,
+        $noEventTypeSelectedError,
+        $eventsByTypeAccordingToCombinedSearch
+    ];
 }
 
 function showEventsByFieldsUpdated()
@@ -117,14 +120,11 @@ function showEventsByFieldsUpdated()
 
                         }
 
+                    }  else {
+
+                        array_push($eventsByFieldsUpdatedAccordingToCombinedSearch, $event);
                     }
                 }
-
-            } else {
-
-                array_push($eventsByFieldsUpdatedAccordingToCombinedSearch, $event);
-
-                //$eventsByFieldsUpdatedAccordingToCombinedSearch = null;
             }
         }
     }
@@ -193,8 +193,6 @@ function showEventsByRangeOfTimestamps()
 
         } elseif (!empty($_POST['combinedQuery'])) {
 
-            //var_dump(showEventsByFieldsUpdated()[4]);
-
             if (!empty(showEventsByFieldsUpdated()[4])) {
 
                 foreach(showEventsByFieldsUpdated()[4] as $event) {
@@ -208,11 +206,6 @@ function showEventsByRangeOfTimestamps()
                     } elseif ($timestamp >= $from && $timestamp <= $to) {
 
                         array_push($eventsByRangeOfTimestampsAccordingToCombinedSearch, $event);
-
-                            //if (empty($eventsByRangeOfTimestampsAccordingToCombinedSearch)) {
-
-
-                            //}
 
                     } elseif ($from > $to) {
 
@@ -239,8 +232,6 @@ function showCombinedResult()
 {
     $noOptionsSelectedForCombinedSearchError = '';
 
-    //var_dump(showEventsByType()[3]);
-
     if (filter_var(!empty($_POST['combinedQuery']), FILTER_SANITIZE_STRING) &&
         validateSearchForm() === true) {
 
@@ -260,17 +251,7 @@ function showCombinedResult()
 
             return $noEntriesAccordingToCombinedSearch;
 
-        } elseif (showEventsByType()[3] === null ||
-            showEventsByFieldsUpdated()[4] === null ||
-            showEventsByRangeOfTimestamps()[5] === null) {
-
-            $noOptionsSelectedForCombinedSearchError = 'Please select all options for combined searching.';
-
-            return $noOptionsSelectedForCombinedSearchError;
-
-        } elseif (!empty(showEventsByType()[3]) &&
-            empty(showEventsByFieldsUpdated()[4]) ||
-            showEventsByRangeOfTimestamps()[5] === null) {
+        } else {
 
             $noEntriesAccordingToCombinedSearch = 'No entries exist with chosen options.';
 
