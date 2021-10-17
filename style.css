@@ -96,6 +96,7 @@
   overflow: auto;
   padding: 15px 0 0 15px;
   resize: vertical;
+  scrollbar-color: #bda5d9 #ffcce0; /* Firefox. */
   width: 818px;
 }
 
