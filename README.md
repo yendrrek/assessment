@@ -107,6 +107,8 @@ which will overwrite previously generated event file for everyone.
 
 [x] Make 'UPDATE' event not contain any 'null' but only [fields updated].
 
+[ ] Make the CSS work in other browsers like in Chrome. The site breaks, for example, in Firefox.
+
 [ ] Show summary of the result above the red box. (Work in progress, partially completed).
 
 [ ] Add option for sending result by email as an attachment.
