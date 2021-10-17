@@ -84,7 +84,8 @@
   margin: 8px 0 22px 0;
 }
 
-.result-header {
+.result-header,
+.result-summary {
   color: #2d1c44;
   font-size: 0.97em;
   font-weight: bold;

@@ -139,13 +139,18 @@ $invalidRangeOfTimestampsError = showEventsByRangeOfTimestamps()[4];
 
         <span class="result-header">Result:
 
-            <?php
-            echo $resultSummaryOfEventsByType;
-            echo $resultSummaryOfEventsWithNoFieldsUpdated;
-            echo $resultSummaryOfEventsByFieldsUpdated;
-            echo $resultSummaryOfOneEventByRangeOfTimestamps;
-            echo $resultSummaryOfQtyOfEventsByRangeOfTimestamps;
-            ?>
+            <div class="result-summary">
+
+                <?php
+                echo $resultSummaryOfEventsByType;
+                echo $resultSummaryOfEventsWithNoFieldsUpdated;
+                echo $resultSummaryOfEventsByFieldsUpdated;
+                echo $resultSummaryOfOneEventByRangeOfTimestamps;
+                echo $resultSummaryOfQtyOfEventsByRangeOfTimestamps;
+                showResultSummaryForCombinedSearch();
+                ?>
+
+            </div>
 
         </span>
 
