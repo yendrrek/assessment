@@ -93,6 +93,10 @@
   width: 818px;
 }
 
+.result-summary {
+  width: 900px; /* Each result stays on one line. */
+}
+
 .result-content {
   background: hsl(0, 0%, 96%);
   border:  3px solid #d30059;
@@ -181,9 +185,11 @@
     width: 95.2278%; /* Equal to 818px */
     padding: 7px 0 0 7px;
   }
-  .result-header,
-  .result-summary {
+  .result-header {
     width: 95.2278%;
+  }
+  .result-summary {
+    width: 100%;
   }
 }
 
