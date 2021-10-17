@@ -11,13 +11,13 @@ include 'php-functions/search-queries.php';
 $eventsByType = $eventsByFieldsUpdated = $eventsByRangeOfTimestamps = $eventsByCombinedSearch = [];
 $resultSummaryOfEventsByType = $resultSummaryOfEventsWithNoFieldsUpdated = $resultSummaryOfEventsByFieldsUpdated =
     $resultSummaryOfOneEventByRangeOfTimestamps = $resultSummaryOfQtyOfEventsByRangeOfTimestamps =
-    $noEventTypeSelectedError = $noFieldsUpdatedSelectedError = $noTimestampRangeSelectedError =
-    $invalidRangeOfTimestampsError = '';
+    $resultSummaryOfEventsByCombinedSearch = $noEventTypeSelectedError = $noFieldsUpdatedSelectedError =
+    $noTimestampRangeSelectedError = $invalidRangeOfTimestampsError = '';
 
 $eventsByType = showEventsByType()[0];
 $eventsByFieldsUpdated = showEventsByFieldsUpdated()[0];
 $eventsByRangeOfTimestamps = showEventsByRangeOfTimestamps()[0];
-$eventsByCombinedSearch = showCombinedResult();
+$eventsByCombinedSearch = showEventsByRangeOfTimestamps()[5];
 
 $resultSummaryOfEventsByType = showEventsByType()[1];
 $resultSummaryOfEventsWithNoFieldsUpdated = showEventsByFieldsUpdated()[1];

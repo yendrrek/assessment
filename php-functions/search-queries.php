@@ -1,12 +1,14 @@
 <?php
-function showEventsByType()
+function showEventsByType(/*$eventType*/)
 {
-    $eventsByType = $eventsByTypeAccordingToCombinedSearch = [];
+    $eventsByType = $eventsByTypeAccordingToCombinedSearch = $typesOfEvents =[];
     $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED'];
-    $qtyOfEventsByType = 0;
-    $qtyOfEventsByTypeSummary = $noEventTypeSelectedError = '';
+    $qtyOfEventsByType = /*$qtyOfEventsByTypeAccordingToCombinedSearch =*/ 0;
+    $qtyOfEventsByTypeSummary = /*$qtyOfEventsByTypeSummaryAccordingToCombinedSearch =*/ $noEventTypeSelectedError = '';
 
     if (filter_var(!empty($_POST['eventType']), FILTER_SANITIZE_STRING)) {
+
+        /*$eventsByType = $_POST['eventType'];*/
 
         // 'getEventFile()' returns the input 'event-file.txt'.
         foreach(getEventFile() as $event) {
@@ -43,6 +45,17 @@ function showEventsByType()
                     if (strpos($event, $_POST['eventType']) !== false) {
 
                         array_push($eventsByTypeAccordingToCombinedSearch, $event);
+
+                        /*$qtyOfEventsByTypeAccordingToCombinedSearch = count($eventsByTypeAccordingToCombinedSearch);
+
+                        if ($qtyOfEventsByTypeAccordingToCombinedSearch < 1) {
+
+                            $qtyOfEventsByTypeSummaryAccordingToCombinedSearch = null;
+
+                        } else {
+
+                            $qtyOfEventsByTypeSummaryAccordingToCombinedSearch = "{$qtyOfEventsByTypeAccordingToCombinedSearch} {$_POST['eventType']} events found";
+                        }*/
                     }
 
                 } else {
@@ -58,18 +71,22 @@ function showEventsByType()
         $eventsByType,
         $qtyOfEventsByTypeSummary,
         $noEventTypeSelectedError,
-        $eventsByTypeAccordingToCombinedSearch
+        $eventsByTypeAccordingToCombinedSearch,
+        //$qtyOfEventsByTypeSummaryAccordingToCombinedSearch
     ];
 }
 
-function showEventsByFieldsUpdated()
+function showEventsByFieldsUpdated(/*$eventsByType*/)
 {
-    $eventsByFieldsUpdated = $eventsByFieldsUpdatedAccordingToCombinedSearch = [];
+    $eventsByFieldsUpdated = $eventsByFieldsUpdatedAccordingToCombinedSearch = $fieldsUpdated = [];
     $fieldsUpdated = ['status', 'companyUrl', 'hoursPerDay', 'overtimeRate', 'null'];
     $qtyOfEventsByFieldsUpdated = 0;
-    $qtyOfEventsWithNoFieldsUpdatedSummary = $qtyOfEventsByFieldsUpdatedSummary = $noFieldsUpdatedSelectedError = '';
+    $qtyOfEventsWithNoFieldsUpdatedSummary = $qtyOfEventsByFieldsUpdatedSummary = $noFieldsUpdatedSelectedError =
+    $fieldUpdated = '';
 
     if (filter_var(!empty($_POST['fieldsUpdated']), FILTER_SANITIZE_STRING)) {
+
+        $fieldUpdated = $_POST['fieldsUpdated'];
 
         // Show events by fields updated only.
         if (filter_var(!empty($_POST['btnFieldsUpdated']), FILTER_SANITIZE_STRING) &&
@@ -117,7 +134,6 @@ function showEventsByFieldsUpdated()
                         if (strpos($event, $_POST['fieldsUpdated']) !== false) {
 
                             array_push($eventsByFieldsUpdatedAccordingToCombinedSearch, $event);
-
                         }
 
                     }  else {
@@ -134,7 +150,8 @@ function showEventsByFieldsUpdated()
         $qtyOfEventsWithNoFieldsUpdatedSummary,
         $qtyOfEventsByFieldsUpdatedSummary,
         $noFieldsUpdatedSelectedError,
-        $eventsByFieldsUpdatedAccordingToCombinedSearch
+        $eventsByFieldsUpdatedAccordingToCombinedSearch,
+        $fieldUpdated
     ];
 }
 
@@ -207,6 +224,23 @@ function showEventsByRangeOfTimestamps()
 
                         array_push($eventsByRangeOfTimestampsAccordingToCombinedSearch, $event);
 
+                        /*$qtyOfEventsByRangeOfTimestamps = count($eventsByFieldsUpdatedAccordingToCombinedSearch);
+
+                        if ($qtyOfEventsByRangeOfTimestamps < 1 || $from === 'From timestamp' || $to === 'To timestamp') {
+
+                            $infoAboutQtyOfEventsByRangeOfTimestamps = null;
+
+                        } elseif ($qtyOfEventsByRangeOfTimestamps < 2) {
+
+                            $oneEventByRangeOfTimestampsSummary =
+                            "{$qtyOfEventsByRangeOfTimestamps} event found between {$from} and {$to}";
+
+                        } else {
+
+                            $qtyOfEventsByRangeOfTimestampsSummary =
+                            "{$qtyOfEventsByRangeOfTimestamps} events found between {$from} and {$to}";
+                        }*/
+
                     } elseif ($from > $to) {
 
                         $invalidRangeOfTimestampsError =
@@ -223,7 +257,9 @@ function showEventsByRangeOfTimestamps()
             $noTimestampRangeSelectedError,
             $invalidRangeOfTimestampsError,
             $eventsByRangeOfTimestampsAccordingToCombinedSearch,
-            $noEntriesAccordingToCombinedSearch
+            $noEntriesAccordingToCombinedSearch,
+            $from,
+            $to
         ];
     }
 }
@@ -235,7 +271,12 @@ function showCombinedResult()
     if (filter_var(!empty($_POST['combinedQuery']), FILTER_SANITIZE_STRING) &&
         validateSearchForm() === true) {
 
+       /* $infoAboutQtyOfEventsByRangeOfTimestampsAccordingToCombinedSearch =
+        " between {$from} and {$to}";*/
+
         if (!empty(showEventsByRangeOfTimestamps()[5])) {
+
+            //array_push($qtyOfEventsByRangeOfTimestamps, showEventsByRangeOfTimestamps()[5]);
 
             return showEventsByRangeOfTimestamps()[5];
 
@@ -257,5 +298,91 @@ function showCombinedResult()
 
             return $noEntriesAccordingToCombinedSearch;
         }
+    }
+}
+
+function showResultSummaryForCombinedSearch()
+{
+    $eventsByCombinedSearch = $typesOfEvents = $fieldsUpdated = $qtyOfIndividualOccuranceOfInsertedEvent =
+        $qtyOfIndividualOccuranceOfUpdatedEvent = $qtyOfIndividualOccuranceOfDeletedEvent = [];
+    $qtyOfEventsInserted = $qtyOfEventsUpdated = $qtyOfEventsDeleted = 0;
+    $qtyOfEventsInsertedMsg = $qtyOfEventsUpdatedMsg = '';
+
+    $eventsByCombinedSearch = showEventsByRangeOfTimestamps()[5];
+    $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED'];
+    $fieldUpdated = showEventsByFieldsUpdated()[5];
+    $from = showEventsByRangeOfTimestamps()[7];
+    $to = showEventsByRangeOfTimestamps()[8];
+
+    if (!empty($eventsByCombinedSearch)) {
+
+        foreach ($eventsByCombinedSearch as $event) {
+
+            if (strpos($event, 'INSERTED') !== false) {
+
+                array_push($qtyOfIndividualOccuranceOfInsertedEvent, substr_count($event, 'INSERTED'));
+
+            } elseif (strpos($event, 'UPDATED') !== false) {
+
+                array_push($qtyOfIndividualOccuranceOfUpdatedEvent, substr_count($event, 'UPDATED'));
+
+            } elseif (strpos($event, 'DELETED') !== false) {
+
+                array_push($qtyOfIndividualOccuranceOfDeletedEvent, substr_count($event, 'DELETED'));
+            }
+        }
+
+        $qtyOfEventsInserted = count($qtyOfIndividualOccuranceOfInsertedEvent);
+        $qtyOfEventsUpdated = count($qtyOfIndividualOccuranceOfUpdatedEvent);
+        $qtyOfEventsDeleted = count($qtyOfIndividualOccuranceOfDeletedEvent);
+
+        if ($qtyOfEventsInserted < 1) {
+
+            $qtyOfEventsInsertedMsg = null;
+
+        } elseif ($qtyOfEventsInserted < 2) {
+
+            $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED event found between {$from} and {$to}<br><br>";
+
+        } else {
+
+            $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED events found between {$from} and {$to}<br><br>";
+        }
+
+        if ($qtyOfEventsUpdated < 1) {
+
+            $qtyOfEventsUpdatedMsg = null;
+
+        } elseif ($qtyOfEventsUpdated < 2) {
+
+            if ($fieldUpdated === 'Fields updated') {
+
+                $qtyOfEventsUpdatedMsg = "{$qtyOfEventsUpdated} UPDATED event found between {$from} and {$to}<br><br>";
+
+            } else {
+
+                $qtyOfEventsUpdatedMsg =
+                    "{$qtyOfEventsUpdated} UPDATED event found with updated field '{$fieldUpdated}' between {$from}
+                    and {$to}<br><br>";
+            }
+
+        } else {
+
+            if ($fieldUpdated === 'Fields updated') {
+
+                $qtyOfEventsUpdatedMsg = "{$qtyOfEventsUpdated} UPDATED events found between {$from} and {$to}<br><br>";
+
+            } else {
+
+                $qtyOfEventsUpdatedMsg =
+                    "{$qtyOfEventsUpdated} UPDATED events found with updated field '{$fieldUpdated}' between {$from}
+                    and {$to}<br><br>";
+            }
+        }
+
+        if ()
+
+        echo $qtyOfEventsInsertedMsg;
+        echo $qtyOfEventsUpdatedMsg;
     }
 }
