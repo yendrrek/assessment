@@ -164,6 +164,7 @@
     width: 100%; /* Equal to 464px */
   }
   .result-header,
+  .result-summary,
   .result-content {
     font-size: 0.9em;
   }
@@ -180,13 +181,15 @@
     width: 95.2278%; /* Equal to 818px */
     padding: 7px 0 0 7px;
   }
-  .result-header {
+  .result-header,
+  .result-summary {
     width: 95.2278%;
   }
 }
 
 @media only screen and (max-width: 28.938em) { /* 463px */
   .result-header,
+  .result-summary,
   .result-content {
     font-size: 0.6em;
   }
