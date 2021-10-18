@@ -92,7 +92,7 @@
   font-size: 0.97em;
   font-weight: bold;
   height: 425px;
-  margin: auto;
+  margin: -12px auto auto auto; /* Minus value for margin-top as each line of the result summary contains a double <br> at the end, so the space between the last result summary line and the result-content box would be too big. */
   overflow: auto;
   padding: 15px 0 0 15px;
   resize: vertical;
