@@ -4,6 +4,20 @@
   margin: 0; 
 }
 
+/* Customised scrollbar for Chrome.  */
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffcce0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #bda5d9;
+  border-radius: 0.625rem; 
+}
+
 .body {
   background: hsl(0, 0%, 99%);
   font-family: europa, sans-serif;
@@ -98,20 +112,6 @@
   resize: vertical;
   scrollbar-color: #bda5d9 #ffcce0; /* Firefox. */
   width: 818px;
-}
-
-/* Scrollbar with custom style in the result box in Chrome. */
-.result-content::-webkit-scrollbar {
-  width: 14px;
-}
-
-.result-content::-webkit-scrollbar-track {
-  background: #ffcce0;
-}
-
-.result-content::-webkit-scrollbar-thumb {
-  background: #bda5d9;
-  border-radius: 0.625rem;
 }
 
 .event-file-generated-info {
