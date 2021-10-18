@@ -1,14 +1,12 @@
 <?php
-function showEventsByType(/*$eventType*/)
+function showEventsByType()
 {
     $eventsByType = $eventsByTypeAccordingToCombinedSearch = $typesOfEvents =[];
     $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED'];
-    $qtyOfEventsByType = /*$qtyOfEventsByTypeAccordingToCombinedSearch =*/ 0;
-    $qtyOfEventsByTypeSummary = /*$qtyOfEventsByTypeSummaryAccordingToCombinedSearch =*/ $noEventTypeSelectedError = '';
+    $qtyOfEventsByType = 0;
+    $qtyOfEventsByTypeSummary = $noEventTypeSelectedError = '';
 
     if (filter_var(!empty($_POST['eventType']), FILTER_SANITIZE_STRING)) {
-
-        /*$eventsByType = $_POST['eventType'];*/
 
         // 'getEventFile()' returns the input 'event-file.txt'.
         foreach(getEventFile() as $event) {
@@ -45,17 +43,6 @@ function showEventsByType(/*$eventType*/)
                     if (strpos($event, $_POST['eventType']) !== false) {
 
                         array_push($eventsByTypeAccordingToCombinedSearch, $event);
-
-                        /*$qtyOfEventsByTypeAccordingToCombinedSearch = count($eventsByTypeAccordingToCombinedSearch);
-
-                        if ($qtyOfEventsByTypeAccordingToCombinedSearch < 1) {
-
-                            $qtyOfEventsByTypeSummaryAccordingToCombinedSearch = null;
-
-                        } else {
-
-                            $qtyOfEventsByTypeSummaryAccordingToCombinedSearch = "{$qtyOfEventsByTypeAccordingToCombinedSearch} {$_POST['eventType']} events found";
-                        }*/
                     }
 
                 } else {
@@ -68,17 +55,17 @@ function showEventsByType(/*$eventType*/)
     // When performing combined searching the returned array '$eventsByType'
     // is later filtered by the next function 'showEventsByFieldsUpdated()' 
     return [
-        $eventsByType,
-        $qtyOfEventsByTypeSummary,
-        $noEventTypeSelectedError,
-        $eventsByTypeAccordingToCombinedSearch,
-        //$qtyOfEventsByTypeSummaryAccordingToCombinedSearch
+        $eventsByType,                          /* [0] */
+        $qtyOfEventsByTypeSummary,              /* [1] */
+        $noEventTypeSelectedError,              /* [2] */
+        $eventsByTypeAccordingToCombinedSearch  /* [3] */
     ];
 }
 
-function showEventsByFieldsUpdated(/*$eventsByType*/)
+function showEventsByFieldsUpdated()
 {
-    $eventsByFieldsUpdated = $eventsByFieldsUpdatedAccordingToCombinedSearch = $fieldsUpdated = [];
+    $eventsByFieldsUpdated = $eventsByFieldsUpdatedAccordingToCombinedSearch = $fieldsUpdated =
+        $eventsByTypeAccordingToCombinedSearch = [];
     $fieldsUpdated = ['status', 'companyUrl', 'hoursPerDay', 'overtimeRate', 'null'];
     $qtyOfEventsByFieldsUpdated = 0;
     $qtyOfEventsWithNoFieldsUpdatedSummary = $qtyOfEventsByFieldsUpdatedSummary = $noFieldsUpdatedSelectedError =
@@ -86,6 +73,7 @@ function showEventsByFieldsUpdated(/*$eventsByType*/)
 
     if (filter_var(!empty($_POST['fieldsUpdated']), FILTER_SANITIZE_STRING)) {
 
+        $eventsByTypeAccordingToCombinedSearch = showEventsByType()[3];
         $fieldUpdated = $_POST['fieldsUpdated'];
 
         // Show events by fields updated only.
@@ -124,10 +112,10 @@ function showEventsByFieldsUpdated(/*$eventsByType*/)
 
         if (!empty($_POST['combinedQuery'])) {
 
-            if (!empty(showEventsByType()[3])) {
+            if (!empty($eventsByTypeAccordingToCombinedSearch)) {
 
                 // Result of search returned earlier, and filtered further when performing combined searching.
-                foreach(showEventsByType()[3] as $event) {
+                foreach($eventsByTypeAccordingToCombinedSearch as $event) {
 
                     if (in_array($_POST['fieldsUpdated'], $fieldsUpdated)) {
 
@@ -146,19 +134,22 @@ function showEventsByFieldsUpdated(/*$eventsByType*/)
     }
     // Array '$eventsByFieldsUpdated' is filtered later by function 'showEventsByRangeOfTimestamps()'.
     return [
-        $eventsByFieldsUpdated,
-        $qtyOfEventsWithNoFieldsUpdatedSummary,
-        $qtyOfEventsByFieldsUpdatedSummary,
-        $noFieldsUpdatedSelectedError,
-        $eventsByFieldsUpdatedAccordingToCombinedSearch,
-        $fieldUpdated
+        $eventsByFieldsUpdated,                          /* [0] */
+        $qtyOfEventsWithNoFieldsUpdatedSummary,          /* [1] */
+        $qtyOfEventsByFieldsUpdatedSummary,              /* [2] */
+        $noFieldsUpdatedSelectedError,                   /* [3] */
+        $eventsByFieldsUpdatedAccordingToCombinedSearch, /* [4] */
+        $fieldUpdated                                    /* [5] */
     ];
 }
 
 function showEventsByRangeOfTimestamps()
 {
-    $eventsByRangeOfTimestamps = $eventsByRangeOfTimestampsAccordingToCombinedSearch = [];
-    $from = $to = $noTimestampRangeSelectedError = $invalidRangeOfTimestampsError = $oneEventByRangeOfTimestampsSummary = $qtyOfEventsByRangeOfTimestampsSummary = '';
+    $eventsByRangeOfTimestamps = $eventsByRangeOfTimestampsAccordingToCombinedSearch =
+        $eventsByFieldsUpdatedAccordingToCombinedSearch = [];
+    $from = $to = $noTimestampRangeSelectedError = $invalidRangeOfTimestampsError =
+        $oneEventByRangeOfTimestampsSummary = $qtyOfEventsByRangeOfTimestampsSummary =
+        $noEntriesAccordingToCombinedSearch = '';
     $qtyOfEventsByRangeOfTimestamps = 0;
 
     if (filter_var(!empty($_POST['fromTimestamp']), FILTER_SANITIZE_STRING) &&
@@ -167,6 +158,8 @@ function showEventsByRangeOfTimestamps()
 
         $from = $_POST['fromTimestamp'];
         $to = $_POST['toTimestamp'];
+
+        $eventsByFieldsUpdatedAccordingToCombinedSearch = showEventsByFieldsUpdated()[4];
 
         // Search events by a range of timestamps only.
         if (filter_var(!empty($_POST['btnTimestamps']), FILTER_SANITIZE_STRING)) {
@@ -210,9 +203,9 @@ function showEventsByRangeOfTimestamps()
 
         } elseif (!empty($_POST['combinedQuery'])) {
 
-            if (!empty(showEventsByFieldsUpdated()[4])) {
+            if (!empty($eventsByFieldsUpdatedAccordingToCombinedSearch)) {
 
-                foreach(showEventsByFieldsUpdated()[4] as $event) {
+                foreach($eventsByFieldsUpdatedAccordingToCombinedSearch as $event) {
 
                     $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
 
@@ -224,80 +217,30 @@ function showEventsByRangeOfTimestamps()
 
                         array_push($eventsByRangeOfTimestampsAccordingToCombinedSearch, $event);
 
-                        /*$qtyOfEventsByRangeOfTimestamps = count($eventsByFieldsUpdatedAccordingToCombinedSearch);
-
-                        if ($qtyOfEventsByRangeOfTimestamps < 1 || $from === 'From timestamp' || $to === 'To timestamp') {
-
-                            $infoAboutQtyOfEventsByRangeOfTimestamps = null;
-
-                        } elseif ($qtyOfEventsByRangeOfTimestamps < 2) {
-
-                            $oneEventByRangeOfTimestampsSummary =
-                            "{$qtyOfEventsByRangeOfTimestamps} event found between {$from} and {$to}";
-
-                        } else {
-
-                            $qtyOfEventsByRangeOfTimestampsSummary =
-                            "{$qtyOfEventsByRangeOfTimestamps} events found between {$from} and {$to}";
-                        }*/
-
                     } elseif ($from > $to) {
 
                         $invalidRangeOfTimestampsError =
                         '\'From\' cannot be greater than \'To\', you silly sausage!';
                     }
                 }
+
+            } else {
+
+                $noEntriesAccordingToCombinedSearch = 'No entries exist with chosen options.';
             }
         }
 
         return [
-            $eventsByRangeOfTimestamps,
-            $oneEventByRangeOfTimestampsSummary,
-            $qtyOfEventsByRangeOfTimestampsSummary,
-            $noTimestampRangeSelectedError,
-            $invalidRangeOfTimestampsError,
-            $eventsByRangeOfTimestampsAccordingToCombinedSearch,
-            $noEntriesAccordingToCombinedSearch,
-            $from,
-            $to
+            $eventsByRangeOfTimestamps,                           /* [0] */
+            $oneEventByRangeOfTimestampsSummary,                  /* [1] */
+            $qtyOfEventsByRangeOfTimestampsSummary,               /* [2] */
+            $noTimestampRangeSelectedError,                       /* [3] */
+            $invalidRangeOfTimestampsError,                       /* [4] */
+            $eventsByRangeOfTimestampsAccordingToCombinedSearch,  /* [5] */
+            $noEntriesAccordingToCombinedSearch,                  /* [6] */
+            $from,                                                /* [7] */
+            $to                                                   /* [8] */
         ];
-    }
-}
-
-function showCombinedResult()
-{
-    $noOptionsSelectedForCombinedSearchError = '';
-
-    if (filter_var(!empty($_POST['combinedQuery']), FILTER_SANITIZE_STRING) &&
-        validateSearchForm() === true) {
-
-       /* $infoAboutQtyOfEventsByRangeOfTimestampsAccordingToCombinedSearch =
-        " between {$from} and {$to}";*/
-
-        if (!empty(showEventsByRangeOfTimestamps()[5])) {
-
-            //array_push($qtyOfEventsByRangeOfTimestamps, showEventsByRangeOfTimestamps()[5]);
-
-            return showEventsByRangeOfTimestamps()[5];
-
-        } elseif (!empty(showEventsByRangeOfTimestamps()[3])) {
-
-            return $noTimestampRangeSelectedError;
-
-        } elseif (!empty(showEventsByRangeOfTimestamps()[4])) {
-
-            return $invalidRangeOfTimestampsError;
-
-        } elseif (!empty(showEventsByRangeOfTimestamps()[6])) {
-
-            return $noEntriesAccordingToCombinedSearch;
-
-        } else {
-
-            $noEntriesAccordingToCombinedSearch = 'No entries exist with chosen options.';
-
-            return $noEntriesAccordingToCombinedSearch;
-        }
     }
 }
 
@@ -306,7 +249,7 @@ function showResultSummaryForCombinedSearch()
     $eventsByCombinedSearch = $typesOfEvents = $fieldsUpdated = $qtyOfIndividualOccuranceOfInsertedEvent =
         $qtyOfIndividualOccuranceOfUpdatedEvent = $qtyOfIndividualOccuranceOfDeletedEvent = [];
     $qtyOfEventsInserted = $qtyOfEventsUpdated = $qtyOfEventsDeleted = 0;
-    $qtyOfEventsInsertedMsg = $qtyOfEventsUpdatedMsg = '';
+    $qtyOfEventsInsertedMsg = $qtyOfEventsUpdatedMsg = $qtyOfEventsDeletedMsg = '';
 
     $eventsByCombinedSearch = showEventsByRangeOfTimestamps()[5];
     $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED'];
@@ -380,9 +323,55 @@ function showResultSummaryForCombinedSearch()
             }
         }
 
-        if ()
+        if ($qtyOfEventsDeleted < 1) {
+
+            $qtyOfEventsDeletedMsg = null;
+
+        } elseif ($qtyOfEventsDeleted < 2) {
+
+            if ($fieldUpdated === 'Fields updated') {
+
+                $qtyOfEventsDeletedMsg = "{$qtyOfEventsDeleted} DELETED event found between {$from} and {$to}<br><br>";
+
+            } else {
+
+                if ($fieldUpdated === 'null') {
+
+                    $qtyOfEventsDeletedMsg =
+                        "{$qtyOfEventsDeleted} DELETED event found between {$from} and {$to}<br><br>";
+
+                } else {
+
+                    $qtyOfEventsDeletedMsg =
+                        "{$qtyOfEventsDeleted} DELETED event found with updated field '{$fieldUpdated}' between {$from}
+                        and {$to}<br><br>";
+                }
+            }
+
+        } else {
+
+            if ($fieldUpdated === 'Fields updated') {
+
+                $qtyOfEventsDeletedMsg = "{$qtyOfEventsDeleted} DELETED events found between {$from} and {$to}<br><br>";
+
+            } else {
+
+                if ($fieldUpdated === 'null') {
+
+                    $qtyOfEventsDeletedMsg =
+                        "{$qtyOfEventsDeleted} DELETED events found between {$from} and {$to}<br><br>";
+
+                } else {
+
+                    $qtyOfEventsDeletedMsg =
+                        "{$qtyOfEventsDeleted} DELETED events found with updated field '{$fieldUpdated}' between {$from}
+                        and {$to}<br><br>";
+                }
+            }
+        }
 
         echo $qtyOfEventsInsertedMsg;
         echo $qtyOfEventsUpdatedMsg;
+        echo $qtyOfEventsDeletedMsg;
     }
 }

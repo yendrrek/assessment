@@ -29,6 +29,7 @@ $noEventTypeSelectedError = showEventsByType()[2];
 $noFieldsUpdatedSelectedError = showEventsByFieldsUpdated()[3];
 $noTimestampRangeSelectedError = showEventsByRangeOfTimestamps()[3];
 $invalidRangeOfTimestampsError = showEventsByRangeOfTimestamps()[4];
+$noEntriesAccordingToCombinedSearch = showEventsByRangeOfTimestamps()[6];
 ?>
 
 <!DOCTYPE html>
@@ -118,7 +119,7 @@ $invalidRangeOfTimestampsError = showEventsByRangeOfTimestamps()[4];
         <div class="combined-and-generate-btns-container">
 
             <button class="btn btn_combined-query-and-generate" type="submit"
-            name="combinedQuery" value="combinedQuery">Search combination</button>
+                    name="combinedQuery" value="combinedQuery">Search combination</button>
 
             <input id="token-search-options" type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
 
@@ -129,7 +130,8 @@ $invalidRangeOfTimestampsError = showEventsByRangeOfTimestamps()[4];
             <button class="btn btn_combined-query-and-generate" type="submit"
                     name="generateEventFile" value="generateEventFile">Generate event file</button>
 
-            <input id="token-generate-event-file" type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
+            <input id="token-generate-event-file" type="hidden" name="tokenCsrf"
+                   value="<?php echo createCsrfToken(); ?>">
 
         </div>
 
@@ -196,7 +198,7 @@ $invalidRangeOfTimestampsError = showEventsByRangeOfTimestamps()[4];
             echo $invalidRangeOfTimestampsError;
         }
 
-        if (!empty($eventsByCombinedSearch) && !is_string($eventsByCombinedSearch)) {
+        if (!empty($eventsByCombinedSearch)) {
 
             foreach ($eventsByCombinedSearch as $event) {
 
@@ -205,7 +207,7 @@ $invalidRangeOfTimestampsError = showEventsByRangeOfTimestamps()[4];
 
         } else {
 
-            echo $eventsByCombinedSearch;
+            echo $noEntriesAccordingToCombinedSearch;
         }
         ?>
 
