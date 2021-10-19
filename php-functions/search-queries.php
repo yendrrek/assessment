@@ -295,17 +295,13 @@ function showResultSummaryForCombinedSearch()
         $qtyOfEventsUpdated = count($qtyOfIndividualOccuranceOfUpdatedEvent);
         $qtyOfEventsDeleted = count($qtyOfIndividualOccuranceOfDeletedEvent);
 
-        if ($qtyOfEventsInserted < 1) {
+        if ($qtyOfEventsInserted > 1) {
 
-            $qtyOfEventsInsertedMsg = null;
-
-        } elseif ($qtyOfEventsInserted < 2) {
-
-            $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED event found between {$from} and {$to}<br><br>";
+            $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED events found between {$from} and {$to}<br><br>";
 
         } else {
 
-            $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED events found between {$from} and {$to}<br><br>";
+            $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED event found between {$from} and {$to}<br><br>";
         }
 
         if ($qtyOfEventsUpdated < 1) {
