@@ -224,9 +224,25 @@ function showEventsByRangeOfTimestamps()
                     }
                 }
 
+                if (empty($eventsByRangeOfTimestampsAccordingToCombinedSearch) &&
+                    $fieldUpdated !== 'Fields updated' &&
+                    $from <= $to &&
+                    $from !== 'From timestamp' &&
+                    $to !== 'To timestamp') {
+
+                    $noEntriesAccordingToCombinedSearch = 'No entries exist with chosen options.';
+                }
+
             } else {
 
-                $noEntriesAccordingToCombinedSearch = 'No entries exist with chosen options.';
+                if ($from > $to) {
+
+                    $invalidRangeOfTimestampsError = '\'From\' cannot be greater than \'To\', you silly sausage!';
+
+                } else {
+
+                    $noEntriesAccordingToCombinedSearch = 'No entries exist with chosen options.';
+                }
             }
         }
 
