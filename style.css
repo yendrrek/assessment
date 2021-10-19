@@ -90,7 +90,7 @@
   font-size: 0.97em;
   font-weight: bold;
   margin: 12px auto 10px auto;
-  width: 818px;
+  width: 900px;
 }
 
 .result-summary {
@@ -111,7 +111,7 @@
   padding: 15px 0 0 15px;
   resize: vertical;
   scrollbar-color: #bda5d9 #ffcce0; /* Firefox. */
-  width: 818px;
+  width: 900px;
 }
 
 .event-file-generated-info {
