@@ -1,21 +1,25 @@
 <?php
 function showEventsByType()
 {
-    $eventsByType = $eventsByTypeAccordingToCombinedSearch = $typesOfEvents =[];
-    $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED'];
-    $qtyOfEventsByType = 0;
-    $qtyOfEventsByTypeSummary = $noEventTypeSelectedError = '';
+    $eventsByType = $eventsByTypeAccordingToCombinedSearch = $typesOfEvents = [];
 
-    if (filter_var(!empty($_POST['eventType']), FILTER_SANITIZE_STRING)) {
+    $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED'];
+
+    $qtyOfEventsByType = 0;
+
+    $qtyOfEventsByTypeSummary = $noEventTypeSelectedError = $eventByType = '';
+
+    if (!empty($_POST['eventType'])) {
+
+        $eventByType = filter_var($_POST['eventType'], FILTER_SANITIZE_STRING);
 
         // 'getEventFile()' returns the input 'event-file.txt'.
         foreach(getEventFile() as $event) {
 
             // Show events by their types only.
-            if (filter_var(!empty($_POST['btnEventType']), FILTER_SANITIZE_STRING) &&
-                validateSearchForm() === true) {
+            if (!empty($_POST['btnEventType']) && validateSearchForm() === true) {
 
-                if (strpos($event, $_POST['eventType']) !== false) {
+                if (strpos($event, $eventByType) !== false) {
 
                     array_push($eventsByType, $event);
 
@@ -27,7 +31,7 @@ function showEventsByType()
 
                     } else {
 
-                        $qtyOfEventsByTypeSummary = "{$qtyOfEventsByType} {$_POST['eventType']} events found";
+                        $qtyOfEventsByTypeSummary = "{$qtyOfEventsByType} {$eventByType} events found";
                     }
 
                 } else {
@@ -38,9 +42,9 @@ function showEventsByType()
             // Perform combined searching.
             } elseif (!empty($_POST['combinedQuery'])) {
 
-                if (in_array($_POST['eventType'], $typesOfEvents)) {
+                if (in_array($eventByType, $typesOfEvents)) {
 
-                    if (strpos($event, $_POST['eventType']) !== false) {
+                    if (strpos($event, $eventByType) !== false) {
 
                         array_push($eventsByTypeAccordingToCombinedSearch, $event);
                     }
@@ -65,24 +69,27 @@ function showEventsByType()
 function showEventsByFieldsUpdated()
 {
     $eventsByFieldsUpdated = $eventsByFieldsUpdatedAccordingToCombinedSearch = $fieldsUpdated =
-        $eventsByTypeAccordingToCombinedSearch = [];
+    $eventsByTypeAccordingToCombinedSearch = [];
+
     $fieldsUpdated = ['status', 'companyUrl', 'hoursPerDay', 'overtimeRate', 'null'];
+
     $qtyOfEventsByFieldsUpdated = 0;
+
     $qtyOfEventsWithNoFieldsUpdatedSummary = $qtyOfEventsByFieldsUpdatedSummary = $noFieldsUpdatedSelectedError =
     $fieldUpdated = '';
 
-    if (filter_var(!empty($_POST['fieldsUpdated']), FILTER_SANITIZE_STRING)) {
+    if (!empty($_POST['fieldsUpdated'])) {
+
+        $fieldUpdated = filter_var($_POST['fieldsUpdated'], FILTER_SANITIZE_STRING);
 
         $eventsByTypeAccordingToCombinedSearch = showEventsByType()[3];
-        $fieldUpdated = $_POST['fieldsUpdated'];
 
         // Show events by fields updated only.
-        if (filter_var(!empty($_POST['btnFieldsUpdated']), FILTER_SANITIZE_STRING) &&
-            validateSearchForm() === true) {
+        if (!empty($_POST['btnFieldsUpdated']) && validateSearchForm() === true) {
 
             foreach(getEventFile() as $event) {
 
-                if (strpos($event, $_POST['fieldsUpdated']) !== false) {
+                if (strpos($event, $fieldUpdated) !== false) {
 
                     array_push($eventsByFieldsUpdated, $event);
 
@@ -92,7 +99,7 @@ function showEventsByFieldsUpdated()
 
                         $infoAboutQtyOfEventsByFieldsUpdated = null;
 
-                    } elseif ($_POST['fieldsUpdated'] === 'null') {
+                    } elseif ($fieldUpdated === 'null') {
 
                         $qtyOfEventsWithNoFieldsUpdatedSummary =
                         "{$qtyOfEventsByFieldsUpdated} events found with no fields updated";
@@ -100,7 +107,7 @@ function showEventsByFieldsUpdated()
                     } else {
 
                         $qtyOfEventsByFieldsUpdatedSummary =
-                        "{$qtyOfEventsByFieldsUpdated} events found with updated field '{$_POST['fieldsUpdated']}'";
+                        "{$qtyOfEventsByFieldsUpdated} events found with updated field '{$fieldUpdated}'";
                     }
 
                 } else {
@@ -117,9 +124,9 @@ function showEventsByFieldsUpdated()
                 // Result of search returned earlier, and filtered further when performing combined searching.
                 foreach($eventsByTypeAccordingToCombinedSearch as $event) {
 
-                    if (in_array($_POST['fieldsUpdated'], $fieldsUpdated)) {
+                    if (in_array($fieldUpdated, $fieldsUpdated)) {
 
-                        if (strpos($event, $_POST['fieldsUpdated']) !== false) {
+                        if (strpos($event, $fieldUpdated) !== false) {
 
                             array_push($eventsByFieldsUpdatedAccordingToCombinedSearch, $event);
                         }
@@ -146,23 +153,26 @@ function showEventsByFieldsUpdated()
 function showEventsByRangeOfTimestamps()
 {
     $eventsByRangeOfTimestamps = $eventsByRangeOfTimestampsAccordingToCombinedSearch =
-        $eventsByFieldsUpdatedAccordingToCombinedSearch = [];
+    $eventsByFieldsUpdatedAccordingToCombinedSearch = [];
+
     $from = $to = $noTimestampRangeSelectedError = $invalidRangeOfTimestampsError =
-        $oneEventByRangeOfTimestampsSummary = $qtyOfEventsByRangeOfTimestampsSummary =
-        $noEntriesAccordingToCombinedSearch = '';
+    $oneEventByRangeOfTimestampsSummary = $qtyOfEventsByRangeOfTimestampsSummary = $noEntriesAccordingToCombinedSearch =
+    $fieldUpdated = '';
+
     $qtyOfEventsByRangeOfTimestamps = 0;
 
-    if (filter_var(!empty($_POST['fromTimestamp']), FILTER_SANITIZE_STRING) &&
-        filter_var(!empty($_POST['toTimestamp']), FILTER_SANITIZE_STRING) &&
-        validateSearchForm() === true) {
+    if (!empty($_POST['fromTimestamp']) && !empty($_POST['toTimestamp']) && validateSearchForm() === true) {
 
-        $from = $_POST['fromTimestamp'];
-        $to = $_POST['toTimestamp'];
+        $from = filter_var($_POST['fromTimestamp'], FILTER_SANITIZE_STRING);
+
+        $to = filter_var($_POST['toTimestamp'], FILTER_SANITIZE_STRING);
+
+        $fieldUpdated = filter_var($_POST['fieldsUpdated'], FILTER_SANITIZE_STRING);
 
         $eventsByFieldsUpdatedAccordingToCombinedSearch = showEventsByFieldsUpdated()[4];
 
         // Search events by a range of timestamps only.
-        if (filter_var(!empty($_POST['btnTimestamps']), FILTER_SANITIZE_STRING)) {
+        if (!empty($_POST['btnTimestamps'])) {
 
             foreach(getEventFile() as $event) {
 
@@ -219,8 +229,7 @@ function showEventsByRangeOfTimestamps()
 
                     } elseif ($from > $to) {
 
-                        $invalidRangeOfTimestampsError =
-                        '\'From\' cannot be greater than \'To\', you silly sausage!';
+                        $invalidRangeOfTimestampsError = '\'From\' cannot be greater than \'To\', you silly sausage!';
                     }
                 }
 
