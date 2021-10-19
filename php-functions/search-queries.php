@@ -31,7 +31,7 @@ function showEventsByType()
 
                     } else {
 
-                        $qtyOfEventsByTypeSummary = "{$qtyOfEventsByType} {$eventByType} events found";
+                        $qtyOfEventsByTypeSummary = "{$qtyOfEventsByType} {$eventByType} events found<br><br>";
                     }
 
                 } else {
@@ -102,12 +102,12 @@ function showEventsByFieldsUpdated()
                     } elseif ($fieldUpdated === 'null') {
 
                         $qtyOfEventsWithNoFieldsUpdatedSummary =
-                        "{$qtyOfEventsByFieldsUpdated} events found with no fields updated";
+                        "{$qtyOfEventsByFieldsUpdated} events found with no fields updated<br><br>";
 
                     } else {
 
                         $qtyOfEventsByFieldsUpdatedSummary =
-                        "{$qtyOfEventsByFieldsUpdated} events found with updated field '{$fieldUpdated}'";
+                        "{$qtyOfEventsByFieldsUpdated} events found with updated field '{$fieldUpdated}'<br><br>";
                     }
 
                 } else {
@@ -203,12 +203,12 @@ function showEventsByRangeOfTimestamps()
             } elseif ($qtyOfEventsByRangeOfTimestamps < 2) {
 
                 $oneEventByRangeOfTimestampsSummary =
-                    "{$qtyOfEventsByRangeOfTimestamps} event found between {$from} and {$to}";
+                    "{$qtyOfEventsByRangeOfTimestamps} event found between {$from} and {$to}<br><br>";
 
             } else {
 
                 $qtyOfEventsByRangeOfTimestampsSummary =
-                    "{$qtyOfEventsByRangeOfTimestamps} events found between {$from} and {$to}";
+                    "{$qtyOfEventsByRangeOfTimestamps} events found between {$from} and {$to}<br><br>";
             }
 
         } elseif (!empty($_POST['combinedQuery'])) {
