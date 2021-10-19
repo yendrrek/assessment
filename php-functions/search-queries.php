@@ -234,7 +234,6 @@ function showEventsByRangeOfTimestamps()
                 }
 
                 if (empty($eventsByRangeOfTimestampsAccordingToCombinedSearch) &&
-                    $fieldUpdated !== 'Fields updated' &&
                     $from <= $to &&
                     $from !== 'From timestamp' &&
                     $to !== 'To timestamp') {
