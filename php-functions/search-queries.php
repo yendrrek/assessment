@@ -91,11 +91,7 @@ function showEventsByFieldsUpdated()
 
                     $qtyOfEventsByFieldsUpdated = count($eventsByFieldsUpdated);
 
-                    if ($qtyOfEventsByFieldsUpdated < 1) {
-
-                        $infoAboutQtyOfEventsByFieldsUpdated = null;
-
-                    } elseif ($fieldUpdated === 'null') {
+                    if ($fieldUpdated === 'null') {
 
                         $qtyOfEventsWithNoFieldsUpdatedSummary =
                         "{$qtyOfEventsByFieldsUpdated} events found with no fields updated<br><br>";
