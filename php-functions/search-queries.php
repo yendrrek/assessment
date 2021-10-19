@@ -25,11 +25,7 @@ function showEventsByType()
 
                     $qtyOfEventsByType = count($eventsByType);
 
-                    if ($qtyOfEventsByType < 1) {
-
-                        $qtyOfEventsByTypeSummary = null;
-
-                    } else {
+                    if ($qtyOfEventsByType > 0) {
 
                         $qtyOfEventsByTypeSummary = "{$qtyOfEventsByType} {$eventByType} events found<br><br>";
                     }
