@@ -304,24 +304,7 @@ function showResultSummaryForCombinedSearch()
             $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED event found between {$from} and {$to}<br><br>";
         }
 
-        if ($qtyOfEventsUpdated < 1) {
-
-            $qtyOfEventsUpdatedMsg = null;
-
-        } elseif ($qtyOfEventsUpdated < 2) {
-
-            if ($fieldUpdated === 'Fields updated') {
-
-                $qtyOfEventsUpdatedMsg = "{$qtyOfEventsUpdated} UPDATED event found between {$from} and {$to}<br><br>";
-
-            } else {
-
-                $qtyOfEventsUpdatedMsg =
-                    "{$qtyOfEventsUpdated} UPDATED event found with updated field '{$fieldUpdated}' between {$from}
-                    and {$to}<br><br>";
-            }
-
-        } else {
+        if ($qtyOfEventsUpdated > 1) {
 
             if ($fieldUpdated === 'Fields updated') {
 
@@ -331,6 +314,19 @@ function showResultSummaryForCombinedSearch()
 
                 $qtyOfEventsUpdatedMsg =
                     "{$qtyOfEventsUpdated} UPDATED events found with updated field '{$fieldUpdated}' between {$from}
+                    and {$to}<br><br>";
+            }
+
+        } elseif ($qtyOfEventsUpdated > 0) {
+
+            if ($fieldUpdated === 'Fields updated') {
+
+                $qtyOfEventsUpdatedMsg = "{$qtyOfEventsUpdated} UPDATED event found between {$from} and {$to}<br><br>";
+
+            } else {
+
+                $qtyOfEventsUpdatedMsg =
+                    "{$qtyOfEventsUpdated} UPDATED event found with updated field '{$fieldUpdated}' between {$from}
                     and {$to}<br><br>";
             }
         }
