@@ -331,32 +331,7 @@ function showResultSummaryForCombinedSearch()
             }
         }
 
-        if ($qtyOfEventsDeleted < 1) {
-
-            $qtyOfEventsDeletedMsg = null;
-
-        } elseif ($qtyOfEventsDeleted < 2) {
-
-            if ($fieldUpdated === 'Fields updated') {
-
-                $qtyOfEventsDeletedMsg = "{$qtyOfEventsDeleted} DELETED event found between {$from} and {$to}<br><br>";
-
-            } else {
-
-                if ($fieldUpdated === 'null') {
-
-                    $qtyOfEventsDeletedMsg =
-                        "{$qtyOfEventsDeleted} DELETED event found between {$from} and {$to}<br><br>";
-
-                } else {
-
-                    $qtyOfEventsDeletedMsg =
-                        "{$qtyOfEventsDeleted} DELETED event found with updated field '{$fieldUpdated}' between {$from}
-                        and {$to}<br><br>";
-                }
-            }
-
-        } else {
+        if ($qtyOfEventsDeleted > 1) {
 
             if ($fieldUpdated === 'Fields updated') {
 
@@ -373,6 +348,27 @@ function showResultSummaryForCombinedSearch()
 
                     $qtyOfEventsDeletedMsg =
                         "{$qtyOfEventsDeleted} DELETED events found with updated field '{$fieldUpdated}' between {$from}
+                        and {$to}<br><br>";
+                }
+            }
+
+        } elseif ($qtyOfEventsDeleted > 0) {
+
+            if ($fieldUpdated === 'Fields updated') {
+
+                $qtyOfEventsDeletedMsg = "{$qtyOfEventsDeleted} DELETED event found between {$from} and {$to}<br><br>";
+
+            } else {
+
+                if ($fieldUpdated === 'null') {
+
+                    $qtyOfEventsDeletedMsg =
+                        "{$qtyOfEventsDeleted} DELETED event found between {$from} and {$to}<br><br>";
+
+                } else {
+
+                    $qtyOfEventsDeletedMsg =
+                        "{$qtyOfEventsDeleted} DELETED event found with updated field '{$fieldUpdated}' between {$from}
                         and {$to}<br><br>";
                 }
             }
