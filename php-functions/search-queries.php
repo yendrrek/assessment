@@ -299,7 +299,7 @@ function showResultSummaryForCombinedSearch()
 
             $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED events found between {$from} and {$to}<br><br>";
 
-        } else {
+        } elseif ($qtyOfEventsInserted > 0) {
 
             $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED event found between {$from} and {$to}<br><br>";
         }
