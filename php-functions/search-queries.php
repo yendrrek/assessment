@@ -1,4 +1,11 @@
 <?php
+function sanitiseUserInput($userInput)
+{
+    $sanitisedUserInput = filter_var($userInput, FILTER_SANITIZE_STRING);
+
+    return $sanitisedUserInput;
+}
+
 function showEventsByType()
 {
     $eventsByType = $eventsByTypeAccordingToCombinedSearch = $typesOfEvents = [];
@@ -11,7 +18,7 @@ function showEventsByType()
 
     if (!empty($_POST['eventType'])) {
 
-        $eventByType = filter_var($_POST['eventType'], FILTER_SANITIZE_STRING);
+        $eventByType = sanitiseUserInput($_POST['eventType']);
 
         // 'getEventFile()' returns the input 'event-file.txt'.
         foreach(getEventFile() as $event) {
@@ -76,7 +83,7 @@ function showEventsByFieldsUpdated()
 
     if (!empty($_POST['fieldsUpdated'])) {
 
-        $fieldUpdated = filter_var($_POST['fieldsUpdated'], FILTER_SANITIZE_STRING);
+        $fieldUpdated = sanitiseUserInput($_POST['fieldsUpdated']);
 
         $eventsByTypeAccordingToCombinedSearch = showEventsByType()[3];
 
@@ -155,11 +162,11 @@ function showEventsByRangeOfTimestamps()
 
     if (!empty($_POST['fromTimestamp']) && !empty($_POST['toTimestamp']) && validateSearchForm() === true) {
 
-        $from = filter_var($_POST['fromTimestamp'], FILTER_SANITIZE_STRING);
+        $from = sanitiseUserInput($_POST['fromTimestamp']);
 
-        $to = filter_var($_POST['toTimestamp'], FILTER_SANITIZE_STRING);
+        $to = sanitiseUserInput($_POST['toTimestamp']);
 
-        $fieldUpdated = filter_var($_POST['fieldsUpdated'], FILTER_SANITIZE_STRING);
+        $fieldUpdated = sanitiseUserInput($_POST['fieldsUpdated']);
 
         $eventsByFieldsUpdatedAccordingToCombinedSearch = showEventsByFieldsUpdated()[4];
 
