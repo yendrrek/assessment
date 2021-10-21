@@ -7,7 +7,7 @@ function dontResubmitFormWhenPageReloaded() {
 
 dontResubmitFormWhenPageReloaded();
 
-(function () {
+/*(function () {
 
   let btnEventTypeClicked, eventTypeSelected, btnFieldsUpdatedClicked, fieldUpdatedSelected, btnTimestampsClicked, fromTimestamp, toTimestamp, btnSearchCombinationClicked, btnGenerateEventFileClicked, tokenCsrf;
 
@@ -143,4 +143,4 @@ dontResubmitFormWhenPageReloaded();
       }
     });
   });
-})();
+})();*/

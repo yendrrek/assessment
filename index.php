@@ -6,7 +6,7 @@ include 'php-functions/form-validation.php';
 include 'php-functions/generate-event-file.php';
 include 'php-functions/get-event-file.php';
 include 'php-functions/all-timestamps.php';
-include 'php-functions/search-queries.php';
+include 'php-functions/search-queriess.php';
 
 $eventsByType = $eventsByFieldsUpdated = $eventsByRangeOfTimestamps = $eventsByCombinedSearch = [];
 $resultSummaryOfEventsByType = $resultSummaryOfEventsWithNoFieldsUpdated = $resultSummaryOfEventsByFieldsUpdated =
@@ -14,22 +14,22 @@ $resultSummaryOfEventsByType = $resultSummaryOfEventsWithNoFieldsUpdated = $resu
     $resultSummaryOfEventsByCombinedSearch = $noEventTypeSelectedError = $noFieldsUpdatedSelectedError =
     $noTimestampRangeSelectedError = $invalidRangeOfTimestampsError = '';
 
-$eventsByType = showEventsByType()[0];
-$eventsByFieldsUpdated = showEventsByFieldsUpdated()[0];
+$eventsByType = /*showEventsByType*/getSearchResults()[0];
+/*$eventsByFieldsUpdated = showEventsByFieldsUpdated()[0];
 $eventsByRangeOfTimestamps = showEventsByRangeOfTimestamps()[0];
-$eventsByCombinedSearch = showEventsByRangeOfTimestamps()[5];
+$eventsByCombinedSearch = showEventsByRangeOfTimestamps()[5];*/
 
-$resultSummaryOfEventsByType = showEventsByType()[1];
-$resultSummaryOfEventsWithNoFieldsUpdated = showEventsByFieldsUpdated()[1];
+$resultSummaryOfEventsByType = /*showEventsByType*/getSearchResults()[1];
+/*$resultSummaryOfEventsWithNoFieldsUpdated = showEventsByFieldsUpdated()[1];
 $resultSummaryOfEventsByFieldsUpdated = showEventsByFieldsUpdated()[2];
 $resultSummaryOfOneEventByRangeOfTimestamps = showEventsByRangeOfTimestamps()[1];
-$resultSummaryOfQtyOfEventsByRangeOfTimestamps = showEventsByRangeOfTimestamps()[2];
+$resultSummaryOfQtyOfEventsByRangeOfTimestamps = showEventsByRangeOfTimestamps()[2];*/
 
-$noEventTypeSelectedError = showEventsByType()[2];
-$noFieldsUpdatedSelectedError = showEventsByFieldsUpdated()[3];
+$noEventTypeSelectedError = /*showEventsByType*/getSearchResults()[2];
+/*$noFieldsUpdatedSelectedError = showEventsByFieldsUpdated()[3];
 $noTimestampRangeSelectedError = showEventsByRangeOfTimestamps()[3];
 $invalidRangeOfTimestampsError = showEventsByRangeOfTimestamps()[4];
-$noEntriesAccordingToCombinedSearch = showEventsByRangeOfTimestamps()[6];
+$noEntriesAccordingToCombinedSearch = showEventsByRangeOfTimestamps()[6];*/
 ?>
 
 <!DOCTYPE html>
@@ -149,7 +149,7 @@ $noEntriesAccordingToCombinedSearch = showEventsByRangeOfTimestamps()[6];
                 echo $resultSummaryOfEventsByFieldsUpdated;
                 echo $resultSummaryOfOneEventByRangeOfTimestamps;
                 echo $resultSummaryOfQtyOfEventsByRangeOfTimestamps;
-                showResultSummaryForCombinedSearch();
+                //showResultSummaryForCombinedSearch();
                 ?>
 
             </div>
@@ -173,7 +173,7 @@ $noEntriesAccordingToCombinedSearch = showEventsByRangeOfTimestamps()[6];
             echo $noEventTypeSelectedError;
         }
 
-        if (!empty($eventsByFieldsUpdated)) {
+       /* if (!empty($eventsByFieldsUpdated)) {
 
             foreach ($eventsByFieldsUpdated as $event) {
 
@@ -183,9 +183,9 @@ $noEntriesAccordingToCombinedSearch = showEventsByRangeOfTimestamps()[6];
         } else {
 
             echo $noFieldsUpdatedSelectedError;
-        }
+        }*/
 
-        if (!empty($eventsByRangeOfTimestamps)) {
+        /*if (!empty($eventsByRangeOfTimestamps)) {
 
             foreach ($eventsByRangeOfTimestamps as $event) {
 
@@ -196,7 +196,7 @@ $noEntriesAccordingToCombinedSearch = showEventsByRangeOfTimestamps()[6];
 
             echo $noTimestampRangeSelectedError;
             echo $invalidRangeOfTimestampsError;
-        }
+        }*/
 
         if (!empty($eventsByCombinedSearch)) {
 
