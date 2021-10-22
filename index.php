@@ -25,7 +25,7 @@ $resultSummaryOfEventsByFieldsUpdated = showEventsByFieldsUpdated()[2];
 $resultSummaryOfOneEventByRangeOfTimestamps = showEventsByRangeOfTimestamps()[1];
 $resultSummaryOfQtyOfEventsByRangeOfTimestamps = showEventsByRangeOfTimestamps()[2];*/
 
-$searchError = /*showEventsByType*/getSearchResults()[2];
+$searchError = /*showEventsByType*/ /*getSearchResults()[2]*/ displaySearchErrors($searchError);
 /*$noFieldsUpdatedSelectedError = showEventsByFieldsUpdated()[3];
 $noTimestampRangeSelectedError = showEventsByRangeOfTimestamps()[3];
 $invalidRangeOfTimestampsError = showEventsByRangeOfTimestamps()[4];

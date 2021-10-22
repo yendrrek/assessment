@@ -106,21 +106,9 @@ function getSearchResults()
                     }
                 }
 
-            } elseif ($_POST['btnEventType'] === 'btnEventType') {
+            } else {
 
-                $searchError = 'No \'Event type\' selected.';
-
-            } elseif ($_POST['btnFieldsUpdated'] === 'btnFieldsUpdated') {
-
-                $searchError = 'No \'Fields updated\' selected.';
-
-            } elseif ($from === 'From timestamp' || $to === 'To timestamp') {
-
-                $searchError = 'No timestamp range selected.';
-
-            } elseif ($from > $to) {
-
-                $searchError = '\'From\' cannot be greater than \'To\', you silly sausage!';
+                displaySearchErrors($searchError);
             }
         }
     }
@@ -128,6 +116,27 @@ function getSearchResults()
     return [
         $events,
         $searchResultSummary,
-        $searchError
     ];
+}
+
+function displaySearchErrors($searchError)
+{
+    if ($_POST['btnEventType'] === 'btnEventType') {
+
+        $searchError = 'No \'Event type\' selected.';
+
+    } elseif ($_POST['btnFieldsUpdated'] === 'btnFieldsUpdated') {
+
+        $searchError = 'No \'Fields updated\' selected.';
+
+    } elseif ($_POST['fromTimestamp'] === 'From timestamp' || $_POST['toTimestamp'] === 'To timestamp') {
+
+        $searchError = 'No timestamp range selected.';
+
+    } elseif ($_POST['fromTimestamp'] > $_POST['toTimestamp']) {
+
+        $searchError = '\'From\' cannot be greater than \'To\', you silly sausage!';
+    }
+
+    return $searchError;
 }
