@@ -41,7 +41,7 @@ function getSearchOption()
 
 function getSearchResults()
 {
-    $qtyOfEventsSummary = $noEventTypeSelectedError = $timestamp = $from = $to = '';
+    $searchResultSummary = $searchError = $timestamp = $from = $to = '';
 
     $qtyOfEvents = 0;
 
@@ -59,10 +59,10 @@ function getSearchResults()
 
                 $from = $searchOption[0];
                 $to = $searchOption[1];
-
-                // Timestamps are extracted from events and formatted.
-                $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
             }
+
+            // Timestamps are extracted from events and formatted.
+            $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
 
             if ((!is_array($searchOption) && strpos($event, $searchOption) !== false) ||
                 (($timestamp >= $from && $timestamp <= $to) &&
@@ -76,58 +76,58 @@ function getSearchResults()
 
                     if (!empty($_POST['btnEventType'])) {
 
-                        $qtyOfEventsSummary = "{$qtyOfEvents} '{$searchOption}' events found<br><br>";
+                        $searchResultSummary = "{$qtyOfEvents} '{$searchOption}' events found<br><br>";
 
                     } elseif (!empty($_POST['btnFieldsUpdated'])) {
 
                         if ($searchOption === 'null') {
 
-                            $qtyOfEventsSummary = "{$qtyOfEvents} events found with no fields updated<br><br>";
+                            $searchResultSummary = "{$qtyOfEvents} events found with no fields updated<br><br>";
 
                         } else {
 
-                            $qtyOfEventsSummary = "{$qtyOfEvents} events found with updated field '{$searchOption}'<br><br>";
+                            $searchResultSummary = "{$qtyOfEvents} events found with updated field '{$searchOption}'<br><br>";
                         }
 
                     } elseif (!empty($_POST['btnTimestamps'])) {
 
                         if ($qtyOfEvents < 1 || $from === 'From timestamp' || $to === 'To timestamp') {
 
-                            $qtyOfEventsSummary = null;
+                            $searchResultSummary = null;
 
                         } elseif ($qtyOfEvents < 2) {
 
-                            $qtyOfEventsSummary = "{$qtyOfEvents} event found between {$from} and {$to}<br><br>";
+                            $searchResultSummary = "{$qtyOfEvents} event found between {$from} and {$to}<br><br>";
 
                         } else {
 
-                            $qtyOfEventsSummary = "{$qtyOfEvents} events found between {$from} and {$to}<br><br>";
+                            $searchResultSummary = "{$qtyOfEvents} events found between {$from} and {$to}<br><br>";
                         }
                     }
                 }
 
             } elseif ($_POST['btnEventType'] === 'btnEventType') {
 
-                $noEventTypeSelectedError = 'No \'Event type\' selected.';
+                $searchError = 'No \'Event type\' selected.';
 
             } elseif ($_POST['btnFieldsUpdated'] === 'btnFieldsUpdated') {
 
-                $noEventTypeSelectedError = 'No \'Fields updated\' selected.';
+                $searchError = 'No \'Fields updated\' selected.';
 
             } elseif ($from === 'From timestamp' || $to === 'To timestamp') {
 
-                $noEventTypeSelectedError = 'No timestamp range selected.';
+                $searchError = 'No timestamp range selected.';
 
             } elseif ($from > $to) {
 
-                $noEventTypeSelectedError = '\'From\' cannot be greater than \'To\', you silly sausage!';
+                $searchError = '\'From\' cannot be greater than \'To\', you silly sausage!';
             }
         }
     }
 
     return [
         $events,
-        $qtyOfEventsSummary,
-        $noEventTypeSelectedError
+        $searchResultSummary,
+        $searchError
     ];
 }

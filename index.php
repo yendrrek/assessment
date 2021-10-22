@@ -8,24 +8,24 @@ include 'php-functions/get-event-file.php';
 include 'php-functions/all-timestamps.php';
 include 'php-functions/search-queriess.php';
 
-$eventsByType = $eventsByFieldsUpdated = $eventsByRangeOfTimestamps = $eventsByCombinedSearch = [];
-$resultSummaryOfEventsByType = $resultSummaryOfEventsWithNoFieldsUpdated = $resultSummaryOfEventsByFieldsUpdated =
+$events = $eventsByFieldsUpdated = $eventsByRangeOfTimestamps = $eventsByCombinedSearch = [];
+$searchResultSummary = $resultSummaryOfEventsWithNoFieldsUpdated = $resultSummaryOfEventsByFieldsUpdated =
     $resultSummaryOfOneEventByRangeOfTimestamps = $resultSummaryOfQtyOfEventsByRangeOfTimestamps =
-    $resultSummaryOfEventsByCombinedSearch = $noEventTypeSelectedError = $noFieldsUpdatedSelectedError =
+    $resultSummaryOfEventsByCombinedSearch = $searchError = $noFieldsUpdatedSelectedError =
     $noTimestampRangeSelectedError = $invalidRangeOfTimestampsError = '';
 
-$eventsByType = /*showEventsByType*/getSearchResults()[0];
+$events = /*showEventsByType*/getSearchResults()[0];
 /*$eventsByFieldsUpdated = showEventsByFieldsUpdated()[0];
 $eventsByRangeOfTimestamps = showEventsByRangeOfTimestamps()[0];
 $eventsByCombinedSearch = showEventsByRangeOfTimestamps()[5];*/
 
-$resultSummaryOfEventsByType = /*showEventsByType*/getSearchResults()[1];
+$searchResultSummary = /*showEventsByType*/getSearchResults()[1];
 /*$resultSummaryOfEventsWithNoFieldsUpdated = showEventsByFieldsUpdated()[1];
 $resultSummaryOfEventsByFieldsUpdated = showEventsByFieldsUpdated()[2];
 $resultSummaryOfOneEventByRangeOfTimestamps = showEventsByRangeOfTimestamps()[1];
 $resultSummaryOfQtyOfEventsByRangeOfTimestamps = showEventsByRangeOfTimestamps()[2];*/
 
-$noEventTypeSelectedError = /*showEventsByType*/getSearchResults()[2];
+$searchError = /*showEventsByType*/getSearchResults()[2];
 /*$noFieldsUpdatedSelectedError = showEventsByFieldsUpdated()[3];
 $noTimestampRangeSelectedError = showEventsByRangeOfTimestamps()[3];
 $invalidRangeOfTimestampsError = showEventsByRangeOfTimestamps()[4];
@@ -144,11 +144,11 @@ $noEntriesAccordingToCombinedSearch = showEventsByRangeOfTimestamps()[6];*/
             <div class="result-summary">
 
                 <?php
-                echo $resultSummaryOfEventsByType;
-                echo $resultSummaryOfEventsWithNoFieldsUpdated;
+                echo $searchResultSummary;
+                /*echo $resultSummaryOfEventsWithNoFieldsUpdated;
                 echo $resultSummaryOfEventsByFieldsUpdated;
                 echo $resultSummaryOfOneEventByRangeOfTimestamps;
-                echo $resultSummaryOfQtyOfEventsByRangeOfTimestamps;
+                echo $resultSummaryOfQtyOfEventsByRangeOfTimestamps;*/
                 //showResultSummaryForCombinedSearch();
                 ?>
 
@@ -161,16 +161,16 @@ $noEntriesAccordingToCombinedSearch = showEventsByRangeOfTimestamps()[6];*/
             <div class="event-file-generated-info">New event file has been generated.</div>
 
         <?php
-        if (!empty($eventsByType)) {
+        if (!empty($events)) {
 
-            foreach ($eventsByType as $event) {
+            foreach ($events as $event) {
 
                 echo $event . '<br><br>';
             }
 
         } else {
 
-            echo $noEventTypeSelectedError;
+            echo $searchError;
         }
 
        /* if (!empty($eventsByFieldsUpdated)) {
