@@ -19,7 +19,7 @@ function sanitiseUserInput($userInput)
 
 function getChosenSearchOption()
 {
-    $option = '';
+    // Variable '$option' can be either a string or array;
 
     if (!empty($_POST['btnEventType']) && !empty($_POST['eventType'])) {
 
@@ -31,9 +31,19 @@ function getChosenSearchOption()
 
     } elseif (!empty($_POST['btnTimestamps']) && !empty($_POST['fromTimestamp']) && !empty($_POST['toTimestamp'])) {
 
-        $option = [];
+        $option = [
+            $_POST['fromTimestamp'],
+            $_POST['toTimestamp']
+        ];
 
-        $option = [$_POST['fromTimestamp'], $_POST['toTimestamp']];
+    } elseif (!empty($_POST['combinedQuery'])) {
+
+        $option = [
+            $_POST['eventType'],
+            $_POST['fieldsUpdated'],
+            $_POST['fromTimestamp'],
+            $_POST['toTimestamp']
+        ];
     }
 
     return sanitiseUserInput($option);
@@ -155,4 +165,82 @@ function displaySearchErrors()
     }
 
     return $searchError;
+}
+
+function getEventsByTypeForCombinedSearch()
+{
+    $eventType = '';
+
+    $eventsByTypeForCombinedSearch = [];
+
+    if (validateSearchForm() === true) {
+
+        foreach (getEventFile() as $event) {
+
+            if (!empty(getChosenSearchOption()[0])) {
+
+                $eventType = getChosenSearchOption()[0];
+
+                if (strpos($event, $eventType) !== false) {
+
+                    array_push($eventsByTypeForCombinedSearch, $event);
+                }
+            }
+        }
+    }
+
+    return $eventsByTypeForCombinedSearch;
+}
+
+function getEventsByFieldsUpdatedForCombinedSearch()
+{
+    $fieldUpdated = '';
+
+    $eventsByFieldsUpdatedForCombinedSearch = [];
+
+    if (validateSearchForm() === true) {
+
+        foreach (getEventsByTypeForCombinedSearch() as $event) {
+
+            if (!empty(getChosenSearchOption()[1])) {
+
+                $fieldUpdated = getChosenSearchOption()[1];
+
+                if (strpos($event, $fieldUpdated) !== false) {
+
+                    array_push($eventsByFieldsUpdatedForCombinedSearch, $event);
+                }
+            }
+        }
+    }
+
+    return $eventsByFieldsUpdatedForCombinedSearch;
+}
+
+function getEventsByRaneOfTimestamps()
+{
+    $timestamp = $from = $to = '';
+
+    $eventsByRangeOfTimestampsForCombinedSearch = [];
+
+    if (validateSearchForm() === true) {
+
+        foreach (getEventsByFieldsUpdatedForCombinedSearch() as $event) {
+
+            if (!empty(getChosenSearchOption()[2]) && !empty(getChosenSearchOption()[3])) {
+
+                $from = getChosenSearchOption()[2];
+                $to = getChosenSearchOption()[3];
+
+                $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
+
+                if ($timestamp >= $from && $timestamp <= $to) {
+
+                    array_push($eventsByRangeOfTimestampsForCombinedSearch, $event);
+                }
+            }
+        }
+    }
+
+    return $eventsByRangeOfTimestampsForCombinedSearch;
 }

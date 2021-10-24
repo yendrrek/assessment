@@ -145,9 +145,9 @@ include 'php-functions/search-queriess.php';
             echo displaySearchErrors();
         }
 
-/*        if (!empty($eventsByCombinedSearch)) {
+        if (!empty(getEventsByRaneOfTimestamps())) {
 
-            foreach ($eventsByCombinedSearch as $event) {
+            foreach (getEventsByRaneOfTimestamps() as $event) {
 
                 echo $event . '<br><br>';
             }
@@ -155,7 +155,7 @@ include 'php-functions/search-queriess.php';
         } else {
 
             echo $noEntriesAccordingToCombinedSearch;
-        }*/
+        }
         ?>
 
         </div>
