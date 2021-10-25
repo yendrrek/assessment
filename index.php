@@ -145,16 +145,16 @@ include 'php-functions/search-queriess.php';
             echo displaySearchErrors();
         }
 
-        if (!empty(getEventsByRaneOfTimestamps())) {
+        if (!empty(getEventsByRangeOfTimestampsForCombinedSearch())) {
 
-            foreach (getEventsByRaneOfTimestamps() as $event) {
+            foreach (getEventsByRangeOfTimestampsForCombinedSearch() as $event) {
 
                 echo $event . '<br><br>';
             }
 
         } else {
 
-            echo $noEntriesAccordingToCombinedSearch;
+            echo displayCombinedSearchErrors();
         }
         ?>
 

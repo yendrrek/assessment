@@ -62,7 +62,7 @@ function getSearchedEvents()
 
             if (!empty(getChosenSearchOption())) {
 
-                if (is_array(getChosenSearchOption())) {
+                if (is_array(getChosenSearchOption()) && count(getChosenSearchOption()) === 2) {
 
                     $from = getChosenSearchOption()[0];
                     $to = getChosenSearchOption()[1];
@@ -155,13 +155,16 @@ function displaySearchErrors()
 
         $searchError = 'No \'Fields updated\' selected.';
 
-    } elseif ($_POST['fromTimestamp'] === 'From timestamp' || $_POST['toTimestamp'] === 'To timestamp') {
+    } elseif ($_POST['btnTimestamps'] === 'btnTimestamps') {
 
-        $searchError = 'No timestamp range selected.';
+        if ($_POST['fromTimestamp'] === 'From timestamp' || $_POST['toTimestamp'] === 'To timestamp') {
 
-    } elseif ($_POST['fromTimestamp'] > $_POST['toTimestamp']) {
+            $searchError = 'No timestamp range selected.';
 
-        $searchError = '\'From\' cannot be greater than \'To\', you silly sausage!';
+        } elseif ($_POST['fromTimestamp'] > $_POST['toTimestamp']) {
+
+            $searchError = '\'From\' cannot be greater than \'To\', you silly sausage!';
+        }
     }
 
     return $searchError;
@@ -217,9 +220,9 @@ function getEventsByFieldsUpdatedForCombinedSearch()
     return $eventsByFieldsUpdatedForCombinedSearch;
 }
 
-function getEventsByRaneOfTimestamps()
+function getEventsByRangeOfTimestampsForCombinedSearch()
 {
-    $timestamp = $from = $to = '';
+    $timestamp = $from = $to = $noEntriesAccordingToCombinedSearch = '';
 
     $eventsByRangeOfTimestampsForCombinedSearch = [];
 
@@ -243,4 +246,51 @@ function getEventsByRaneOfTimestamps()
     }
 
     return $eventsByRangeOfTimestampsForCombinedSearch;
+}
+
+function displayCombinedSearchErrors()
+{
+    $combinedSearchError = '';
+
+    if ($_POST['combinedQuery'] === 'combinedQuery') {
+
+        if (empty(getEventsByRangeOfTimestampsForCombinedSearch())) {
+
+            if ($_POST['eventType'] === 'Event type' &&
+                $_POST['fieldsUpdated'] === 'Fields updated' ||
+                !empty(getEventsByTypeForCombinedSearch()) &&
+                $_POST['fieldsUpdated'] === 'Fields updated' ||
+                $_POST['eventType'] === 'Event type' &&
+                !empty(getEventsByFieldsUpdatedForCombinedSearch()) ||
+                !empty(getEventsByTypeForCombinedSearch()) &&
+                !empty(getEventsByFieldsUpdatedForCombinedSearch())) {
+
+                $combinedSearchError = 'Nooooo timestamp range selected.';
+
+            }/* elseif () {
+
+                $combinedSearchError = 'No entries exist with chosen options.';
+            }*/
+        }
+
+        /*if (!empty(getEventsByTypeForCombinedSearch()) &&
+            empty(getEventsByFieldsUpdatedForCombinedSearch()) &&
+            $_POST['fieldsUpdated'] !== 'Fields updated') {
+
+            $combinedSearchError = 'No entries exist with chosen options.';
+
+        } elseif (!empty(getEventsByTypeForCombinedSearch()) &&
+            !empty(getEventsByFieldsUpdatedForCombinedSearch())) {
+
+            $combinedSearchError = 'No timestamp range selected.';
+
+        } elseif (!empty(getEventsByTypeForCombinedSearch()) &&
+          $_POST['fieldsUpdated'] === 'Fields updated' &&
+          empty(getEventsByRangeOfTimestampsForCombinedSearch())) {
+
+            $combinedSearchError = 'No timestamp range selected.';
+        }*/
+    }
+
+    return $combinedSearchError;
 }
