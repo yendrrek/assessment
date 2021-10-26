@@ -76,12 +76,12 @@ function getSearchedEvents()
                         ($from !== 'From timestamp' && $to !== 'To timestamp'))) {
 
                     array_push($events, $event);
+                }
             }
         }
-    }
 
-    return $events;
-}
+        return $events;
+    }
 }
 
 function getQtyOfFoundEvents()
@@ -126,21 +126,21 @@ function displayResultSummary()
 
             $searchResultSummary = null;
 
-    } elseif (getQtyOfFoundEvents() < 2) {
+        } elseif (getQtyOfFoundEvents() < 2) {
 
-        $searchResultSummary =
-        "".getQtyOfFoundEvents()." event found between {$_POST['fromTimestamp']} and {$_POST['toTimestamp']}
-        <br><br>";
+            $searchResultSummary =
+            "".getQtyOfFoundEvents()." event found between {$_POST['fromTimestamp']} and {$_POST['toTimestamp']}
+            <br><br>";
 
-    } else {
+        } else {
 
-        $searchResultSummary =
-        "".getQtyOfFoundEvents()." events found between {$_POST['fromTimestamp']} and {$_POST['toTimestamp']}
-        <br><br>";
+            $searchResultSummary =
+            "".getQtyOfFoundEvents()." events found between {$_POST['fromTimestamp']} and {$_POST['toTimestamp']}
+            <br><br>";
+        }
     }
-}
 
-return $searchResultSummary;
+    return $searchResultSummary;
 }
 
 function displaySearchErrors()
@@ -296,7 +296,8 @@ function displayCombinedSearchErrors()
 
         } else {
 
-            $combinedSearchError = "No entries exist with options '{$_POST['eventType']}' and '{$_POST['fieldsUpdated']}' .";
+            $combinedSearchError =
+            "No entries exist with options '{$_POST['eventType']}' and '{$_POST['fieldsUpdated']}'.";
         }
     }
 
