@@ -1,5 +1,7 @@
-event-file.txt
+event-file/event-file.txt
 cgi-bin/
 assessment.sublime-project
 assessment.sublime-workspace
 .htaccess
+style/reset.css
+
