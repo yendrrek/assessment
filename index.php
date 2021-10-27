@@ -178,7 +178,7 @@ include 'php-functions/search-queries.php';
 
     </div>
         
-    <script src="main.js"></script>
+    <script src="js/main.js"></script>
 
 </body>
 </html>
