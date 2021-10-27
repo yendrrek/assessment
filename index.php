@@ -19,6 +19,7 @@ include 'php-functions/search-queries.php';
     <meta name="format-detection" content="telephone=no">
     <meta name="robots" content="noindex">
     <title>Searching system</title>
+    <link rel="stylesheet" href="style/reset.css">
     <link rel="stylesheet" href="style/main.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
