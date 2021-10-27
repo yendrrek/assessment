@@ -38,7 +38,7 @@
   box-shadow: 8px 8px 20px -8px #333f48;
   color:  #2d1c44;
   cursor:  pointer;
-  font-size:  0.9em;
+  font-size:  0.9rem;
   font-weight:  bold;
   height:  27px;
   outline:  none;
@@ -55,7 +55,7 @@
   box-shadow: 8px 8px 20px -8px #333f48;
   color: #2d1c44;
   cursor:  pointer;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: bold;
   padding: 6px;
   max-width: 80px;
@@ -83,7 +83,7 @@
 .result-header,
 .result-summary {
   color: #2d1c44;
-  font-size: 0.97em;
+  font-size: 0.97rem;
   font-weight: bold;
   margin: 12px auto 10px auto;
   width: 900px;
@@ -99,7 +99,7 @@
   border-radius: 0.625rem;
   box-shadow: 8px 8px 20px -8px #333f48;
   color: #333f48;
-  font-size: 0.97em;
+  font-size: 0.97rem;
   font-weight: bold;
   height: 425px;
   margin: -12px auto auto auto; /* Minus value for margin-top as each line of the result summary contains a double <br> at the end, so the space between the last result summary line and the result-content box would be too big. */
@@ -117,7 +117,7 @@
   box-sizing: border-box;
   color: #f5f5f5;
   display: flex;
-  font-size: 1.125em;
+  font-size: 1.125rem;
   height: 50px;
   justify-content: center;
   left: 50%;
@@ -167,7 +167,7 @@
   .result-header,
   .result-summary,
   .result-content {
-    font-size: 0.9em;
+    font-size: 0.9rem;
   }
   .event-file-generated-info {
     margin-left: -160px;
@@ -194,18 +194,18 @@
   .result-header,
   .result-summary,
   .result-content {
-    font-size: 0.6em;
+    font-size: 0.6rem;
   }
   .select-box {
-    font-size: 0.6em;
+    font-size: 0.6rem;
     height: 22px;
   }
   .btn {
-    font-size: 0.7em;
+    font-size: 0.7rem;
     padding: 4px;
   }
   .event-file-generated-info {
-    font-size: 1.7em;
+    font-size: 1.7rem;
     height: 50px;
     margin: -25px 0 0 -170px;
     padding-top: 0.9em;
@@ -219,11 +219,11 @@
     width: 100%;
   }
   .select-box {
-    font-size:  0.5em;
+    font-size:  0.5rem;
     height: 20px;
   }
   .btn {
-    font-size: 0.6em;
+    font-size: 0.6rem;
     padding: 2px;
   }
   .event-file-generated-info {
