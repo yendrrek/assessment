@@ -6,7 +6,7 @@ include 'php-functions/form-validation.php';
 include 'php-functions/generate-event-file.php';
 include 'php-functions/get-event-file.php';
 include 'php-functions/all-timestamps.php';
-include 'php-functions/search-queriess.php';
+include 'php-functions/search-queries.php';
 ?>
 
 <!DOCTYPE html>
@@ -121,7 +121,23 @@ include 'php-functions/search-queriess.php';
             <div class="result-summary">
 
                 <?php
-                echo displayResultSummary();
+                if (!empty(showResultSummary())) {
+
+                    if (is_array(showResultSummary())) {
+
+                        foreach (showResultSummary() as $summary) {
+
+                            if (!empty($summary)) {
+
+                                echo "{$summary}<br><br>";
+                            }
+                        }
+
+                    } else {
+
+                        echo "".showResultSummary()."<br><br>";
+                    }
+                }
                 ?>
 
             </div>
@@ -142,7 +158,7 @@ include 'php-functions/search-queriess.php';
 
         } else {
 
-            echo displaySearchErrors();
+            echo showSearchErrors();
         }
 
         if (!empty(getEventsByRangeOfTimestampsForCombinedSearch())) {
@@ -154,7 +170,7 @@ include 'php-functions/search-queriess.php';
 
         } else {
 
-            echo displayCombinedSearchErrors();
+            echo showCombinedSearchErrors();
         }
         ?>
 
