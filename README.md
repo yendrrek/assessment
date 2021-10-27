@@ -107,11 +107,11 @@ which will overwrite previously generated event file for everyone.
 
 [x] Make 'UPDATE' event not contain any 'null' but only [fields updated].
 
+[x] Show summary of the result above the red box.
+
 [ ] Make the CSS work in other browsers like in Chrome. The site breaks, for example, in Firefox.
 
-[ ] Show summary of the result above the red box. (Work in progress, partially completed).
-
-[ ] Add option for sending result by email as an attachment.
+[ ] Add option for sending search results by email.
 
 [ ] Let users generate their own random file, to avoid situation when a user
 overwrites other user's event-file.
