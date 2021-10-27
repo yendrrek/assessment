@@ -88,6 +88,8 @@ Don't forget to make Apache listen to the new port:
 Listen 8082
 ```
 
+A separate css reset file is used, taken from https://meyerweb.com/eric/tools/css/reset/reset.css
+
 ### TESTING THE SYSTEM
 
 Click 'Generate event file' button to randomly create a file on your server with event entries.  
