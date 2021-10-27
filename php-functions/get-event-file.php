@@ -10,7 +10,7 @@ function getEventFile()
 
     } else {
 
-        $eventFile = file('../assessment/event-file.txt');
+        $eventFile = file('../assessment/event-file/event-file.txt');
 
         return $eventFile;
     }
