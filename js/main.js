@@ -105,6 +105,7 @@ dontResubmitFormWhenPageReloaded();
       success(response) {
         $('.result-header').replaceWith($('.result-header', response));
         $('.result-content').replaceWith($('.result-content', response));
+        fixFontSizeInSafari();
       }
     })
   });
@@ -144,3 +145,22 @@ dontResubmitFormWhenPageReloaded();
     });
   });
 })();
+
+function fixFontSizeInSafari() {
+  const isSafari = (
+    (
+      /Apple Computer/.test(navigator.vendor) &&
+      /Safari/.test(navigator.userAgent) || /Mobile/.test(navigator.userAgent)
+    )
+  );
+  const resultHeader = document.querySelector('.result-header');
+  const resultSummaryAndContent = document.querySelectorAll('.result-summary, .result-content');
+  if (isSafari) {
+    resultHeader.classList.add('result-header_safari-font-smaller');
+    for (const element of resultSummaryAndContent) {
+      element.classList.add('result-summary-and-content');
+    }
+  }
+}
+
+fixFontSizeInSafari();

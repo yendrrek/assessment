@@ -114,6 +114,15 @@
     font-size: 0.8rem;
   }
 }
+
+.result-header_safari-font-smaller {
+  font-size: 0.9rem;
+}
+
+.result-summary-and-content {
+  font-size: 0.78rem;
+}
+
 .event-file-generated-info {
   background-color: #00b398;
   border-radius: 0.625rem;
