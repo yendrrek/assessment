@@ -23,7 +23,7 @@
   display: flex;
   justify-content: center;
   margin: 1.5em auto;
-  width:  902px;
+  width:  906px;
 }
 
 .select-box {
@@ -61,7 +61,7 @@
   display: flex;
   justify-content: center;
   margin: auto;
-  width: 355px;
+  width: 360px;
 }
 
 .btn_combined-query-and-generate {
