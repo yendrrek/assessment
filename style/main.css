@@ -105,6 +105,15 @@
   width: 900px;
 }
 
+@-moz-document url-prefix() {
+  .result-header {
+    font-size: 0.93rem;
+  }
+  .result-summary,
+  .result-content {
+    font-size: 0.8rem;
+  }
+}
 .event-file-generated-info {
   background-color: #00b398;
   border-radius: 0.625rem;
