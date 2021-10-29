@@ -150,6 +150,12 @@ dontResubmitFormWhenPageReloaded();
         $('select[name="fromTimestamp"]').replaceWith($('select[name="fromTimestamp"]', response));
         $('select[name="toTimestamp"]').replaceWith($('select[name="toTimestamp"]', response));
       }
+          function loadNewTimestampOptionsExtractedFromFreshlyGeneratedEventFile() {
+
+            $('select[name="fromTimestamp"]').replaceWith($('select[name="fromTimestamp"]', response));
+            $('select[name="toTimestamp"]').replaceWith($('select[name="toTimestamp"]', response));
+          }
+          loadNewTimestampOptionsExtractedFromFreshlyGeneratedEventFile();
     });
   });
 })();
