@@ -115,6 +115,13 @@ dontResubmitFormWhenPageReloaded();
         $('.result-content').replaceWith($('.result-content', response));
         fixFontSizeInSafari();
       }
+          function loadResultAndSummaryFromServer() {
+
+            $('.result-header').replaceWith($('.result-header', response));
+            $('.result-content').replaceWith($('.result-content', response));
+            fixFontSizeInSafari();
+          }
+          loadResultAndSummaryFromServer();
     });
   });
 
