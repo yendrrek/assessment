@@ -155,6 +155,7 @@ dontResubmitFormWhenPageReloaded();
 })();
 
 function fixFontSizeInSafari() {
+
   const isSafari = (
     (
       /Apple Computer/.test(navigator.vendor) &&
@@ -163,8 +164,10 @@ function fixFontSizeInSafari() {
   );
   const resultHeader = document.querySelector('.result-header');
   const resultSummaryAndContent = document.querySelectorAll('.result-summary, .result-content');
+
   if (isSafari) {
     resultHeader.classList.add('result-header_safari-font-smaller');
+
     for (const element of resultSummaryAndContent) {
       element.classList.add('result-summary-and-content');
     }
