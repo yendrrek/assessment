@@ -31,15 +31,13 @@ function createRandomFieldsUpdated()
 
     // If there is only one element in the array, return it, as it is not an iterable data type.
     if (count($arrayWithRandomKeys) === 1) {
-
         $stringWithRandomFieldsUpdated = '[' . $staticArrayWithfieldsUpdated[$arrayWithRandomKeys] . ']';
 
         return $stringWithRandomFieldsUpdated;
 
     } else {
-        
-        foreach ($arrayWithRandomKeys as $randomKeys) {
 
+        foreach ($arrayWithRandomKeys as $randomKeys) {
           array_push($randomArrayWithFieldsUpdated, $staticArrayWithfieldsUpdated[$randomKeys]);
         }
     }
@@ -65,7 +63,6 @@ function createRandomFieldsUpdatedOrNull()
 
     // If there is only one element in the array, it must be 'null'.
     if ($arrayWithRandomKeys < 2) {
-
         $stringNull = 'null';
 
         return $stringNull;
@@ -73,7 +70,6 @@ function createRandomFieldsUpdatedOrNull()
     } else {
 
         foreach ($arrayWithRandomKeys as $randomKeys) {
-
             array_push($randomArrayWithFieldsUpdatedOrNull, $staticArrayWithFieldsUpdatedAndNull[$randomKeys]);
         }
     }
@@ -146,13 +142,10 @@ function createEventFileWithRandomEntries()
 {
 
     if (!empty($_POST['generateEventFile']) && validateSearchForm() === true) {
-
         $eventFile = fopen('../assessment/event-file/event-file.txt', 'w') or die("Unable to open file!");
 
         for ($i = 1; $i < rand(500, 1000); $i++) {
-
             fwrite($eventFile, createRandomEvents());
-
         }
 
         fclose($eventFile);
