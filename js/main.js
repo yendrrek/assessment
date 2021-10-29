@@ -115,6 +115,27 @@ dontResubmitFormWhenPageReloaded();
         $('.result-content').replaceWith($('.result-content', response));
         fixFontSizeInSafari();
       }
+  function submitSearchQueries() {
+
+    $('#form-search-options').on('submit', event => {
+      event.preventDefault();
+
+      $.ajax({
+        url: 'index.php',
+        method: 'post',
+        data: {
+          btnEventType: btnEventTypeClicked,
+          eventType: eventTypeSelected,
+          btnFieldsUpdated: btnFieldsUpdatedClicked,
+          fieldsUpdated: fieldUpdatedSelected,
+          btnTimestamps: btnTimestampsClicked,
+          fromTimestamp: fromTimestamp,
+          toTimestamp: toTimestamp,
+          combinedQuery: btnSearchCombinationClicked,
+          tokenCsrf: tokenCsrf
+        },
+        success(response) {
+
           function loadResultAndSummaryFromServer() {
 
             $('.result-header').replaceWith($('.result-header', response));
@@ -122,8 +143,11 @@ dontResubmitFormWhenPageReloaded();
             fixFontSizeInSafari();
           }
           loadResultAndSummaryFromServer();
+        }
+      });
     });
-  });
+  }
+  submitSearchQueries();
 
   $('button[name="generateEventFile"]').on('click', event => {
 
