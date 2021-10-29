@@ -129,23 +129,21 @@ dontResubmitFormWhenPageReloaded();
 
     event.preventDefault();
 
-    $.ajax({
-      url: 'index.php',
-      method: 'post',
-      data: {
-        generateEventFile: btnGenerateEventFileClicked,
-        tokenCsrf: tokenCsrf
-      },
-      success(response) {
-        $('.event-file-generated-info').addClass('event-file-generated-info_visible');
-        setTimeout(function () {
-          $('.event-file-generated-info').addClass('event-file-generated-info_hidden');
-          $('.event-file-generated-info').on('animationend', () => {
-            $('.event-file-generated-info').removeClass('event-file-generated-info_hidden');
-            $('.event-file-generated-info').removeClass('event-file-generated-info_visible');
-          });
-        }, 2500);
-        $('.event-file-generated-info').off('animationend');
+          function showNewEventFileGeneratedInfoWhichDisappearsAutomatically() {
+
+            $('.event-file-generated-info').addClass('event-file-generated-info_visible');
+
+            setTimeout(function () {
+              $('.event-file-generated-info').addClass('event-file-generated-info_hidden');
+              $('.event-file-generated-info').on('animationend', () => {
+                $('.event-file-generated-info').removeClass('event-file-generated-info_hidden');
+                $('.event-file-generated-info').removeClass('event-file-generated-info_visible');
+              });
+            }, 2500);
+
+            $('.event-file-generated-info').off('animationend');
+          }
+          showNewEventFileGeneratedInfoWhichDisappearsAutomatically();
 
           function loadNewTimestampOptionsExtractedFromFreshlyGeneratedEventFile() {
 
