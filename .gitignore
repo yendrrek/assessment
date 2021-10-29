@@ -4,4 +4,5 @@ assessment.sublime-project
 assessment.sublime-workspace
 .htaccess
 style/reset.css
+.jshintrc
 
