@@ -147,9 +147,6 @@ dontResubmitFormWhenPageReloaded();
         }, 2500);
         $('.event-file-generated-info').off('animationend');
 
-        $('select[name="fromTimestamp"]').replaceWith($('select[name="fromTimestamp"]', response));
-        $('select[name="toTimestamp"]').replaceWith($('select[name="toTimestamp"]', response));
-      }
           function loadNewTimestampOptionsExtractedFromFreshlyGeneratedEventFile() {
 
             $('select[name="fromTimestamp"]').replaceWith($('select[name="fromTimestamp"]', response));
