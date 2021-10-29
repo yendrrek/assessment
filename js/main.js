@@ -1,10 +1,8 @@
 "use strict";
 
 function dontResubmitFormWhenPageReloaded() {
-
   window.history.replaceState(null, null, window.location.href);
 }
-
 dontResubmitFormWhenPageReloaded();
 
 (function () {
@@ -23,27 +21,20 @@ dontResubmitFormWhenPageReloaded();
   $('.btn:not(button[name="generateEventFile"])').on('click', event => {
 
     tokenCsrf = $('#token-search-options').val();
-
     const btnClicked = $(event.currentTarget).val();
-
     const optionChosen = $(event.currentTarget).prev('.select-box').val();
 
     const eventTypes = ['Event type', 'INSERTED', 'UPDATED', 'DELETED'];
-
     const fieldsUpdated = ['Fields updated', 'status', 'companyUrl', 'hoursPerDay', 'overtimeRate', 'null'];
 
     function getEventTypeSentToServer() {
 
       if (btnClicked === 'btnEventType') {
-
         btnEventTypeClicked = btnClicked;
-
         btnFieldsUpdatedClicked = btnTimestampsClicked = btnSearchCombinationClicked = null;
 
         if (eventTypes.includes(optionChosen)) {
-
           eventTypeSelected = optionChosen;
-
           fieldUpdatedSelected = fromTimestamp = toTimestamp = null;
         }
       }
@@ -52,15 +43,11 @@ dontResubmitFormWhenPageReloaded();
     function getFieldUpdatedSentToServer() {
 
       if (btnClicked === 'btnFieldsUpdated') {
-
         btnFieldsUpdatedClicked = btnClicked;
-
         btnEventTypeClicked = btnTimestampsClicked = btnSearchCombinationClicked = null;
 
         if (fieldsUpdated.includes(optionChosen)) {
-
           fieldUpdatedSelected = optionChosen;
-
           eventTypeSelected = fromTimestamp = toTimestamp = null;
         }
       }
@@ -69,13 +56,9 @@ dontResubmitFormWhenPageReloaded();
     function getRangeOfTimestampsSentToServer() {
 
       if (btnClicked === 'btnTimestamps') {
-
         btnTimestampsClicked = btnClicked;
-
         btnEventTypeClicked = btnFieldsUpdatedClicked = btnSearchCombinationClicked = fieldUpdatedSelected = null;
-
         fromTimestamp = $('select[name="fromTimestamp"]').val();
-
         toTimestamp = $('select[name="toTimestamp"]').val();
       }
     }
@@ -83,38 +66,29 @@ dontResubmitFormWhenPageReloaded();
     function getCombinedSearchOptionsSentToServer() {
 
       if (btnClicked === 'combinedQuery') {
-
         const combinedOptionsChosen = $(event.currentTarget).parents('#form-search-options').find('.select-box');
-
         btnSearchCombinationClicked = btnClicked;
-
         btnEventTypeClicked = btnFieldsUpdatedClicked = btnTimestampsClicked = null;
 
         $(combinedOptionsChosen).each(function (index) {
 
           if (eventTypes.includes($(combinedOptionsChosen[index]).val())) {
-
             eventTypeSelected = $(combinedOptionsChosen[index]).val();
           }
 
           if (fieldsUpdated.includes($(combinedOptionsChosen[index]).val())) {
-
             fieldUpdatedSelected = $(combinedOptionsChosen[index]).val();
           }
         });
 
         fromTimestamp = $('select[name="fromTimestamp"]').val();
-
         toTimestamp = $('select[name="toTimestamp"]').val();
       }
     }
 
     getEventTypeSentToServer();
-
     getFieldUpdatedSentToServer();
-
     getRangeOfTimestampsSentToServer();
-
     getCombinedSearchOptionsSentToServer();
   });
 
