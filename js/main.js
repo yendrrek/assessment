@@ -9,79 +9,113 @@ dontResubmitFormWhenPageReloaded();
 
 (function () {
 
-  let btnEventTypeClicked, eventTypeSelected, btnFieldsUpdatedClicked, fieldUpdatedSelected, btnTimestampsClicked, fromTimestamp, toTimestamp, btnSearchCombinationClicked, btnGenerateEventFileClicked, tokenCsrf;
+  let btnEventTypeClicked,
+      eventTypeSelected,
+      btnFieldsUpdatedClicked,
+      fieldUpdatedSelected,
+      btnTimestampsClicked,
+      fromTimestamp,
+      toTimestamp,
+      btnSearchCombinationClicked,
+      btnGenerateEventFileClicked,
+      tokenCsrf;
 
   $('.btn:not(button[name="generateEventFile"])').on('click', event => {
 
+    tokenCsrf = $('#token-search-options').val();
+
     const btnClicked = $(event.currentTarget).val();
+
     const optionChosen = $(event.currentTarget).prev('.select-box').val();
 
     const eventTypes = ['Event type', 'INSERTED', 'UPDATED', 'DELETED'];
+
     const fieldsUpdated = ['Fields updated', 'status', 'companyUrl', 'hoursPerDay', 'overtimeRate', 'null'];
 
-    if (btnClicked === 'btnEventType') {
+    function getEventTypeSentToServer() {
 
-      btnEventTypeClicked = btnClicked;
-      btnFieldsUpdatedClicked = null;
-      btnTimestampsClicked = null;
-      btnSearchCombinationClicked = null;
+      if (btnClicked === 'btnEventType') {
 
-      if (eventTypes.includes(optionChosen)) {
+        btnEventTypeClicked = btnClicked;
 
-        eventTypeSelected = optionChosen;
-        fieldUpdatedSelected = null;
-        fromTimestamp = null;
-        toTimestamp = null;
-      }
+        btnFieldsUpdatedClicked = btnTimestampsClicked = btnSearchCombinationClicked = null;
 
-    } else if (btnClicked === 'btnFieldsUpdated') {
+        if (eventTypes.includes(optionChosen)) {
 
-      btnFieldsUpdatedClicked = btnClicked;
-      btnEventTypeClicked = null;
-      btnTimestampsClicked = null;
-      btnSearchCombinationClicked = null;
+          eventTypeSelected = optionChosen;
 
-      if (fieldsUpdated.includes(optionChosen)) {
-
-        fieldUpdatedSelected = optionChosen;
-        eventTypeSelected = null;
-        fromTimestamp = null;
-        toTimestamp = null;
-      }
-
-    } else if (btnClicked === 'btnTimestamps') {
-
-      btnTimestampsClicked = btnClicked;
-      btnEventTypeClicked = null;
-      btnFieldsUpdatedClicked = null;
-      btnSearchCombinationClicked = null;
-      fieldUpdatedSelected = null;
-      fromTimestamp = $('select[name="fromTimestamp"]').val();
-      toTimestamp = $('select[name="toTimestamp"]').val();
-
-    } else if (btnClicked === 'combinedQuery') {
-
-      const combinedOptionsChosen = $(event.currentTarget).parents('#form-search-options').find('.select-box');
-
-      btnSearchCombinationClicked = btnClicked;
-      btnEventTypeClicked = null;
-      btnFieldsUpdatedClicked = null;
-      btnTimestampsClicked = null;
-
-      $(combinedOptionsChosen).each(function (index) {
-        if (eventTypes.includes($(combinedOptionsChosen[index]).val())) {
-          eventTypeSelected = $(combinedOptionsChosen[index]).val();
+          fieldUpdatedSelected = fromTimestamp = toTimestamp = null;
         }
-        if (fieldsUpdated.includes($(combinedOptionsChosen[index]).val())) {
-          fieldUpdatedSelected = $(combinedOptionsChosen[index]).val();
-        }
-      });
-
-      fromTimestamp = $('select[name="fromTimestamp"]').val();
-      toTimestamp = $('select[name="toTimestamp"]').val();
+      }
     }
 
-    tokenCsrf = $('#token-search-options').val();
+    function getFieldUpdatedSentToServer() {
+
+      if (btnClicked === 'btnFieldsUpdated') {
+
+        btnFieldsUpdatedClicked = btnClicked;
+
+        btnEventTypeClicked = btnTimestampsClicked = btnSearchCombinationClicked = null;
+
+        if (fieldsUpdated.includes(optionChosen)) {
+
+          fieldUpdatedSelected = optionChosen;
+
+          eventTypeSelected = fromTimestamp = toTimestamp = null;
+        }
+      }
+    }
+
+    function getRangeOfTimestampsSentToServer() {
+
+      if (btnClicked === 'btnTimestamps') {
+
+        btnTimestampsClicked = btnClicked;
+
+        btnEventTypeClicked = btnFieldsUpdatedClicked = btnSearchCombinationClicked = fieldUpdatedSelected = null;
+
+        fromTimestamp = $('select[name="fromTimestamp"]').val();
+
+        toTimestamp = $('select[name="toTimestamp"]').val();
+      }
+    }
+
+    function getCombinedSearchOptionsSentToServer() {
+
+      if (btnClicked === 'combinedQuery') {
+
+        const combinedOptionsChosen = $(event.currentTarget).parents('#form-search-options').find('.select-box');
+
+        btnSearchCombinationClicked = btnClicked;
+
+        btnEventTypeClicked = btnFieldsUpdatedClicked = btnTimestampsClicked = null;
+
+        $(combinedOptionsChosen).each(function (index) {
+
+          if (eventTypes.includes($(combinedOptionsChosen[index]).val())) {
+
+            eventTypeSelected = $(combinedOptionsChosen[index]).val();
+          }
+
+          if (fieldsUpdated.includes($(combinedOptionsChosen[index]).val())) {
+
+            fieldUpdatedSelected = $(combinedOptionsChosen[index]).val();
+          }
+        });
+
+        fromTimestamp = $('select[name="fromTimestamp"]').val();
+
+        toTimestamp = $('select[name="toTimestamp"]').val();
+      }
+    }
+
+    getEventTypeSentToServer();
+
+    getFieldUpdatedSentToServer();
+
+    getRangeOfTimestampsSentToServer();
+
+    getCombinedSearchOptionsSentToServer();
   });
 
   $('#form-search-options').on('submit', event => {
@@ -107,7 +141,7 @@ dontResubmitFormWhenPageReloaded();
         $('.result-content').replaceWith($('.result-content', response));
         fixFontSizeInSafari();
       }
-    })
+    });
   });
 
   $('button[name="generateEventFile"]').on('click', event => {
