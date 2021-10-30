@@ -11,7 +11,6 @@ include 'php-functions/search-queries.php';
 
 <!DOCTYPE html>
 <html lang="en-gb">
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -24,11 +23,8 @@ include 'php-functions/search-queries.php';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
-
 <body class="body">
-
     <form id="form-search-options" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-
         <div class="search-options-container">
 
             <!-- All drop-down menus with respective search buttons are wrapped in a <div>,
@@ -40,7 +36,6 @@ include 'php-functions/search-queries.php';
                     <option value="UPDATED">UPDATED</option>
                     <option value="DELETED">DELETED</option>
                 </select>
-
                 <button class="btn" type="submit"
                         name="btnEventType" value="btnEventType">Search</button>
 
@@ -52,7 +47,6 @@ include 'php-functions/search-queries.php';
                     <option value="overtimeRate">overtimeRate</option>
                     <option value="null">not updated</option>
                 </select>
-
                 <button class="btn" type="submit"
                         name="btnFieldsUpdated" value="btnFieldsUpdated">Search</button>
             </div>
@@ -72,7 +66,6 @@ include 'php-functions/search-queries.php';
                     ?>
 
                 </select>
-
                 <select class="select-box" name="toTimestamp">
                     <option value="To timestamp">To timestamp</option>
 
@@ -87,18 +80,16 @@ include 'php-functions/search-queries.php';
                     ?>
 
                 </select>
-
                 <button class="btn" type="submit"
                         name="btnTimestamps" value="btnTimestamps">Search</button>
             </div>
 
         </div>
 
+        <!-- Closing DIV is contained in another FORM further down. -->
         <div class="combined-and-generate-btns-container">
-
             <button class="btn btn_combined-query-and-generate" type="submit"
                     name="combinedQuery" value="combinedQuery">Search combination</button>
-
             <input id="token-search-options" type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
 
     </form>
@@ -107,18 +98,14 @@ include 'php-functions/search-queries.php';
 
             <button class="btn btn_combined-query-and-generate" type="submit"
                     name="generateEventFile" value="generateEventFile">Generate event file</button>
-
             <input id="token-generate-event-file" type="hidden" name="tokenCsrf"
                    value="<?php echo createCsrfToken(); ?>">
-
         </div>
 
     </form>
 
     <div class="result-container">
-
         <span class="result-header">Result:
-
             <div class="result-summary">
 
                 <?php
@@ -129,57 +116,45 @@ include 'php-functions/search-queries.php';
                         foreach (showResultSummary() as $summary) {
 
                             if (!empty($summary)) {
-
                                 echo "{$summary}<br><br>";
                             }
                         }
 
                     } else {
-
                         echo "".showResultSummary()."<br><br>";
                     }
                 }
                 ?>
 
             </div>
-
         </span>
-
         <div class="result-content">
-
             <div class="event-file-generated-info">New event file has been generated.</div>
 
         <?php
         if (!empty(getSearchedEvents())) {
 
             foreach (getSearchedEvents() as $event) {
-
                 echo $event . '<br><br>';
             }
 
         } else {
-
             echo showSearchErrors();
         }
 
         if (!empty(getEventsByRangeOfTimestampsForCombinedSearch())) {
 
             foreach (getEventsByRangeOfTimestampsForCombinedSearch() as $event) {
-
                 echo $event . '<br><br>';
             }
 
         } else {
-
             echo showCombinedSearchErrors();
         }
         ?>
 
         </div>
-
     </div>
-        
     <script src="js/main.js"></script>
-
 </body>
 </html>
