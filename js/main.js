@@ -96,7 +96,7 @@ dontResubmitFormWhenPageReloaded();
   }
   getAllSearchOptionsWhichWillBeSentToServer();
 
-  function submitSearchQueries() {
+  function sendSearchQueriesToServer() {
 
     $('#form-search-options').on('submit', event => {
       event.preventDefault();
@@ -117,27 +117,27 @@ dontResubmitFormWhenPageReloaded();
         },
         success(response) {
 
-          function loadResultAndSummaryFromServer() {
+          function loadSearchResultAndSummaryFromServer() {
 
             $('.result-header').replaceWith($('.result-header', response));
             $('.result-content').replaceWith($('.result-content', response));
             fixFontSizeInSafari();
           }
-          loadResultAndSummaryFromServer();
+          loadSearchResultAndSummaryFromServer();
         }
       });
     });
   }
-  submitSearchQueries();
+  sendSearchQueriesToServer();
 
-  function getGenerateEventFileBtnDataSentToServer() {
+  function getGenerateEventFileFormDataWhichWillBeSentToServer() {
 
     $('button[name="generateEventFile"]').on('click', event => {
       btnGenerateEventFileClicked = $(event.currentTarget).val();
       tokenCsrf = $('#token-generate-event-file').val();
     });
   }
-  getGenerateEventFileBtnDataSentToServer();
+  getGenerateEventFileFormDataWhichWillBeSentToServer();
 
   function generateEventFile() {
 
@@ -169,12 +169,12 @@ dontResubmitFormWhenPageReloaded();
           }
           showNewEventFileGeneratedInfoWhichDisappearsAutomatically();
 
-          function loadNewTimestampOptionsExtractedFromFreshlyGeneratedEventFile() {
+          function loadNewTimestampOptionsExtractedFromRecentlyGeneratedEventFile() {
 
             $('select[name="fromTimestamp"]').replaceWith($('select[name="fromTimestamp"]', response));
             $('select[name="toTimestamp"]').replaceWith($('select[name="toTimestamp"]', response));
           }
-          loadNewTimestampOptionsExtractedFromFreshlyGeneratedEventFile();
+          loadNewTimestampOptionsExtractedFromRecentlyGeneratedEventFile();
         }
       });
     });
@@ -201,5 +201,4 @@ function fixFontSizeInSafari() {
     }
   }
 }
-
 fixFontSizeInSafari();
