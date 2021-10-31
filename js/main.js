@@ -5,7 +5,7 @@ function dontResubmitFormWhenPageReloaded() {
 }
 dontResubmitFormWhenPageReloaded();
 
-(function () {
+(function submitSearchQueries() {
 
   let btnEventTypeClicked,
       eventTypeSelected,
