@@ -129,58 +129,54 @@ dontResubmitFormWhenPageReloaded();
     });
   }
   sendSearchQueriesToServer();
-
-  function getGenerateEventFileFormDataWhichWillBeSentToServer() {
-
-    $('button[name="generateEventFile"]').on('click', event => {
-      btnGenerateEventFileClicked = $(event.currentTarget).val();
-      tokenCsrf = $('#token-generate-event-file').val();
-    });
-  }
-  getGenerateEventFileFormDataWhichWillBeSentToServer();
-
-  function generateEventFile() {
-
-    $('#form-generate-event-file').on('submit', event => {
-      event.preventDefault();
-
-      $.ajax({
-        url: 'index.php',
-        method: 'post',
-        data: {
-          generateEventFile: btnGenerateEventFileClicked,
-          tokenCsrf: tokenCsrf
-        },
-        success(response) {
-
-          function showNewEventFileGeneratedInfoWhichDisappearsAutomatically() {
-
-            $('.event-file-generated-info').addClass('event-file-generated-info_visible');
-
-            setTimeout(function () {
-              $('.event-file-generated-info').addClass('event-file-generated-info_hidden');
-              $('.event-file-generated-info').on('animationend', () => {
-                $('.event-file-generated-info').removeClass('event-file-generated-info_hidden');
-                $('.event-file-generated-info').removeClass('event-file-generated-info_visible');
-              });
-            }, 2500);
-
-            $('.event-file-generated-info').off('animationend');
-          }
-          showNewEventFileGeneratedInfoWhichDisappearsAutomatically();
-
-          function loadNewTimestampOptionsExtractedFromRecentlyGeneratedEventFile() {
-
-            $('select[name="fromTimestamp"]').replaceWith($('select[name="fromTimestamp"]', response));
-            $('select[name="toTimestamp"]').replaceWith($('select[name="toTimestamp"]', response));
-          }
-          loadNewTimestampOptionsExtractedFromRecentlyGeneratedEventFile();
-        }
-      });
-    });
-  }
-  generateEventFile();
 })();
+
+function generateEventFile() {
+
+  $('button[name="generateEventFile"]').on('click', event => {
+    btnGenerateEventFileClicked = $(event.currentTarget).val();
+    tokenCsrf = $('#token-generate-event-file').val();
+  });
+
+  $('#form-generate-event-file').on('submit', event => {
+    event.preventDefault();
+
+    $.ajax({
+      url: 'index.php',
+      method: 'post',
+      data: {
+        generateEventFile: btnGenerateEventFileClicked,
+        tokenCsrf: tokenCsrf
+      },
+      success(response) {
+
+        function showNewEventFileGeneratedInfoWhichDisappearsAutomatically() {
+
+          $('.event-file-generated-info').addClass('event-file-generated-info_visible');
+
+          setTimeout(function () {
+            $('.event-file-generated-info').addClass('event-file-generated-info_hidden');
+            $('.event-file-generated-info').on('animationend', () => {
+              $('.event-file-generated-info').removeClass('event-file-generated-info_hidden');
+              $('.event-file-generated-info').removeClass('event-file-generated-info_visible');
+            });
+          }, 2500);
+
+          $('.event-file-generated-info').off('animationend');
+        }
+        showNewEventFileGeneratedInfoWhichDisappearsAutomatically();
+
+        function loadNewTimestampOptionsExtractedFromRecentlyGeneratedEventFile() {
+
+          $('select[name="fromTimestamp"]').replaceWith($('select[name="fromTimestamp"]', response));
+          $('select[name="toTimestamp"]').replaceWith($('select[name="toTimestamp"]', response));
+        }
+        loadNewTimestampOptionsExtractedFromRecentlyGeneratedEventFile();
+      }
+    });
+  });
+}
+generateEventFile();
 
 function fixFontSizeInSafari() {
 
