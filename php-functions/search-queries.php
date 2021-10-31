@@ -190,10 +190,12 @@ function getEventsByRangeOfTimestampsForCombinedSearch()
 
 function showCombinedSearchErrors()
 {
-    $combinedSearchError = $from = $to = '';
+    $combinedSearchError = $from = $to = $eventType = $fieldUpdated = '';
 
     $from = getChosenSearchOption()[2];
     $to = getChosenSearchOption()[3];
+    $eventType = getChosenSearchOption()[0];
+    $fieldUpdated = getChosenSearchOption()[1];
 
     if (!empty($_POST['combinedQuery'])) {
 
@@ -215,8 +217,7 @@ function showCombinedSearchErrors()
             }
 
         } else {
-            $combinedSearchError =
-            "No entries exist with options '{$_POST['eventType']}' and '{$_POST['fieldsUpdated']}'.";
+            $combinedSearchError = "No entries exist with options '{$eventType}' and '{$fieldUpdated}'.";
         }
     }
 
