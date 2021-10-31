@@ -18,6 +18,13 @@ function getChosenSearchOption()
 {
     // Variable '$option' can be either a string or array;
 
+    $noOptionIsEmpty = (
+        !empty($_POST['eventType']) &&
+        !empty($_POST['fieldsUpdated']) &&
+        !empty($_POST['fromTimestamp']) &&
+        !empty($_POST['toTimestamp'])
+    );
+
     if (!empty($_POST['btnEventType']) && !empty($_POST['eventType'])) {
         $option = $_POST['eventType'];
 
@@ -31,7 +38,7 @@ function getChosenSearchOption()
             $_POST['toTimestamp']
         ];
 
-    } elseif (!empty($_POST['combinedQuery'])) {
+    } elseif (!empty($_POST['combinedQuery']) && $noOptionIsEmpty === true) {
         $option = [
             $_POST['eventType'],
             $_POST['fieldsUpdated'],
