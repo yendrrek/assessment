@@ -92,13 +92,13 @@ function showSearchErrors()
 {
     $searchError = '';
 
-    if ($_POST['btnEventType'] === 'btnEventType') {
+    if (!empty($_POST['btnEventType'])) {
         $searchError = 'No \'Event type\' selected.';
 
-    } elseif ($_POST['btnFieldsUpdated'] === 'btnFieldsUpdated') {
+    } elseif (!empty($_POST['btnFieldsUpdated'])) {
         $searchError = 'No \'Fields updated\' selected.';
 
-    } elseif ($_POST['btnTimestamps'] === 'btnTimestamps') {
+    } elseif (!empty($_POST['btnTimestamps'])) {
 
         if ($_POST['fromTimestamp'] === 'From timestamp' || $_POST['toTimestamp'] === 'To timestamp') {
             $searchError = 'No timestamp range selected.';
