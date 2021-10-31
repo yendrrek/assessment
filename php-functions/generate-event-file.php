@@ -5,6 +5,7 @@
 function createRandomEventType()
 {
     $typesOfEvents = [];
+
     $typesOfEvents = [
       'INSERTED',
       'UPDATED',
