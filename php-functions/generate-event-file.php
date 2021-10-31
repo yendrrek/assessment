@@ -4,6 +4,7 @@
 // The amount of entries can be a random number between 500 and 1000.
 function createRandomEventType()
 {
+    $typesOfEvents = [];
     $typesOfEvents = [
       'INSERTED',
       'UPDATED',
