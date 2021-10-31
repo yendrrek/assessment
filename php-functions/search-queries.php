@@ -90,7 +90,10 @@ function getQtyOfFoundEvents()
 
 function showSearchErrors()
 {
-    $searchError = '';
+    $searchError = $from = $to = '';
+
+    $from = getChosenSearchOption()[0];
+    $to = getChosenSearchOption()[1];
 
     if (!empty($_POST['btnEventType'])) {
         $searchError = 'No \'Event type\' selected.';
@@ -100,10 +103,10 @@ function showSearchErrors()
 
     } elseif (!empty($_POST['btnTimestamps'])) {
 
-        if ($_POST['fromTimestamp'] === 'From timestamp' || $_POST['toTimestamp'] === 'To timestamp') {
+        if ( $from === 'From timestamp' || $to === 'To timestamp') {
             $searchError = 'No timestamp range selected.';
 
-        } elseif ($_POST['fromTimestamp'] > $_POST['toTimestamp']) {
+        } elseif ($from > $to) {
             $searchError = '\'From\' cannot be greater than \'To\', you silly sausage!<br><br>
             Choose a valid range of timestamps.';
         }
@@ -165,14 +168,14 @@ function getEventsByRangeOfTimestampsForCombinedSearch()
     $timestamp = $from = $to = $noEntriesAccordingToCombinedSearch = '';
     $eventsByRangeOfTimestampsForCombinedSearch = [];
 
+    $from = getChosenSearchOption()[2];
+    $to = getChosenSearchOption()[3];
+
     if (validateSearchForm() === true) {
 
         foreach (getEventsByFieldsUpdatedForCombinedSearch() as $event) {
 
-            if (getChosenSearchOption()[2] !== 'From timestamp' &&
-                getChosenSearchOption()[3] !== 'To timestamp') {
-                $from = getChosenSearchOption()[2];
-                $to = getChosenSearchOption()[3];
+            if ($from !== 'From timestamp' && $to !== 'To timestamp') {
                 $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
 
                 if ($timestamp >= $from && $timestamp <= $to) {
@@ -278,21 +281,21 @@ function showResultSummaryWhenFieldsUpdatedSearched()
 
 function showResultSummaryWhenSearchingByRangeOfTimestamps()
 {
+    $from = $to = '';
+    $from = getChosenSearchOption()[0];
+    $to = getChosenSearchOption()[1];
+
     if (!empty($_POST['btnTimestamps'])) {
 
         if (getQtyOfFoundEvents() < 1 ||
-            $_POST['fromTimestamp'] === 'From timestamp' || $_POST['toTimestamp'] === 'To timestamp') {
+            $from === 'From timestamp' || $to === 'To timestamp') {
             $searchResultSummary = null;
 
         } elseif (getQtyOfFoundEvents() < 2) {
-            $searchResultSummary =
-            "".getQtyOfFoundEvents()." event found between {$_POST['fromTimestamp']} and
-            {$_POST['toTimestamp']}";
+            $searchResultSummary = "".getQtyOfFoundEvents()." event found between {$from} and {$to}";
 
         } else {
-            $searchResultSummary =
-            "".getQtyOfFoundEvents()." events found between {$_POST['fromTimestamp']} and
-            {$_POST['toTimestamp']}";
+            $searchResultSummary = "".getQtyOfFoundEvents()." events found between {$from} and {$to}";
         }
     }
 
