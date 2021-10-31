@@ -69,9 +69,10 @@ function getSearchedEvents()
             // Timestamps are extracted from events and formatted.
             $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
 
-            if ((!is_array(getChosenSearchOption()) && strpos($event, getChosenSearchOption()) !== false) ||
+            if ((!is_array(getChosenSearchOption()) &&
+                strpos($event, getChosenSearchOption()) !== false) ||
                 (($timestamp >= $from && $timestamp <= $to) &&
-                    ($from !== 'From timestamp' && $to !== 'To timestamp'))) {
+                ($from !== 'From timestamp' && $to !== 'To timestamp'))) {
                 array_push($events, $event);
             }
         }
@@ -83,6 +84,7 @@ function getSearchedEvents()
 function getQtyOfFoundEvents()
 {
     $qtyOfFoundEvents = 0;
+
     $qtyOfFoundEvents = count(getSearchedEvents());
 
     return $qtyOfFoundEvents;
@@ -192,10 +194,10 @@ function showCombinedSearchErrors()
 {
     $combinedSearchError = $from = $to = $eventType = $fieldUpdated = '';
 
-    $from = getChosenSearchOption()[2];
-    $to = getChosenSearchOption()[3];
     $eventType = getChosenSearchOption()[0];
     $fieldUpdated = getChosenSearchOption()[1];
+    $from = getChosenSearchOption()[2];
+    $to = getChosenSearchOption()[3];
 
     if (!empty($_POST['combinedQuery'])) {
 
@@ -283,6 +285,7 @@ function showResultSummaryWhenFieldsUpdatedSearched()
 function showResultSummaryWhenSearchingByRangeOfTimestamps()
 {
     $from = $to = '';
+
     $from = getChosenSearchOption()[0];
     $to = getChosenSearchOption()[1];
 
