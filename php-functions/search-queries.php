@@ -60,21 +60,18 @@ function getSearchedEvents()
 
         foreach (getEventFile() as $event) {
 
-            if (!empty(getChosenSearchOption())) {
+            if (is_array(getChosenSearchOption()) && count(getChosenSearchOption()) === 2) {
+                $from = getChosenSearchOption()[0];
+                $to = getChosenSearchOption()[1];
+            }
 
-                if (is_array(getChosenSearchOption()) && count(getChosenSearchOption()) === 2) {
-                    $from = getChosenSearchOption()[0];
-                    $to = getChosenSearchOption()[1];
-                }
+            // Timestamps are extracted from events and formatted.
+            $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
 
-                // Timestamps are extracted from events and formatted.
-                $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
-
-                if ((!is_array(getChosenSearchOption()) && strpos($event, getChosenSearchOption()) !== false) ||
-                    (($timestamp >= $from && $timestamp <= $to) &&
-                        ($from !== 'From timestamp' && $to !== 'To timestamp'))) {
-                    array_push($events, $event);
-                }
+            if ((!is_array(getChosenSearchOption()) && strpos($event, getChosenSearchOption()) !== false) ||
+                (($timestamp >= $from && $timestamp <= $to) &&
+                    ($from !== 'From timestamp' && $to !== 'To timestamp'))) {
+                array_push($events, $event);
             }
         }
 
@@ -123,18 +120,14 @@ function getEventsByTypeForCombinedSearch()
 
         foreach (getEventFile() as $event) {
 
-            if (!empty(getChosenSearchOption()[0])) {
+            if (getChosenSearchOption()[0] !== 'Event type') {
 
-                if (getChosenSearchOption()[0] !== 'Event type') {
-                    $eventType = getChosenSearchOption()[0];
-
-                    if (strpos($event, $eventType) !== false) {
-                        array_push($eventsByTypeForCombinedSearch, $event);
-                    }
-
-                } else {
+                if (strpos($event, getChosenSearchOption()[0]) !== false) {
                     array_push($eventsByTypeForCombinedSearch, $event);
                 }
+
+            } else {
+                array_push($eventsByTypeForCombinedSearch, $event);
             }
         }
     }
@@ -151,18 +144,14 @@ function getEventsByFieldsUpdatedForCombinedSearch()
 
         foreach (getEventsByTypeForCombinedSearch() as $event) {
 
-            if (!empty(getChosenSearchOption()[1])) {
+            if (getChosenSearchOption()[1] !== 'Fields updated') {
 
-                if (getChosenSearchOption()[1] !== 'Fields updated') {
-                    $fieldUpdated = getChosenSearchOption()[1];
-
-                    if (strpos($event, $fieldUpdated) !== false) {
-                        array_push($eventsByFieldsUpdatedForCombinedSearch, $event);
-                    }
-
-                } else {
+                if (strpos($event, getChosenSearchOption()[1]) !== false) {
                     array_push($eventsByFieldsUpdatedForCombinedSearch, $event);
                 }
+
+            } else {
+                array_push($eventsByFieldsUpdatedForCombinedSearch, $event);
             }
         }
     }
@@ -179,17 +168,14 @@ function getEventsByRangeOfTimestampsForCombinedSearch()
 
         foreach (getEventsByFieldsUpdatedForCombinedSearch() as $event) {
 
-            if (!empty(getChosenSearchOption()[2]) && !empty(getChosenSearchOption()[3])) {
+            if (getChosenSearchOption()[2] !== 'From timestamp' &&
+                getChosenSearchOption()[3] !== 'To timestamp') {
+                $from = getChosenSearchOption()[2];
+                $to = getChosenSearchOption()[3];
+                $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
 
-                if (getChosenSearchOption()[2] !== 'From timestamp' &&
-                    getChosenSearchOption()[3] !== 'To timestamp') {
-                    $from = getChosenSearchOption()[2];
-                    $to = getChosenSearchOption()[3];
-                    $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
-
-                    if ($timestamp >= $from && $timestamp <= $to) {
-                        array_push($eventsByRangeOfTimestampsForCombinedSearch, $event);
-                    }
+                if ($timestamp >= $from && $timestamp <= $to) {
+                    array_push($eventsByRangeOfTimestampsForCombinedSearch, $event);
                 }
             }
         }
