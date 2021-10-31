@@ -18,6 +18,7 @@ function getChosenSearchOption()
 {
     // Variable '$option' can be either a string or array;
 
+    $noOptionIsEmpty = false;
     $noOptionIsEmpty = (
         !empty($_POST['eventType']) &&
         !empty($_POST['fieldsUpdated']) &&
