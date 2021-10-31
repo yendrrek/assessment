@@ -1,8 +1,7 @@
 <?php
-// For testing purposes, all below code generates random entries in the 'event-file.txt'.
+// Every time 'Generate event file' button is used,
+// generate random entries in the 'event-file.txt' for testing purposes.
 // The amount of entries can be a random number between 500 and 1000.
-// Every time the 'Generate event file' button is pressed content of the
-// 'event-file.txt' is updated with new random data.
 function createRandomEventType()
 {
     $typesOfEvents = [

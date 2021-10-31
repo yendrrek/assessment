@@ -1,6 +1,6 @@
 <?php
-// On each HTTP request a token is randomly generated 
-// and used in each form to prevent Cross-Site Request Forgery attacks. 
+// Generate random token on each HTTP request for each
+// form to prevent Cross-Site Request Forgery.
 function createCsrfToken()
 {
     if (!isset($_SESSION['tokenCsrf'])) {

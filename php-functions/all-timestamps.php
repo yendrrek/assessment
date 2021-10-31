@@ -1,6 +1,6 @@
 <?php
-// This function provides options 'From' and 'To' for timestamp drop-down menu.
-// For optimal user experience typing is eliminated, and range of timestamps given 
+// This function provides values for 'From timestamp' and 'To timestamp'.
+// For optimal user experience typing is eliminated, range of timestamps given
 // represents the actual entries from the input event file, so the user will always
 // get a result, and will not be looking for timestamps which don't exist.
 function getAllTimestampsInAscendingOrder()
