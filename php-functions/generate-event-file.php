@@ -21,25 +21,25 @@ function createRandomFieldsUpdated()
 {
     $randomArrayWithFieldsUpdated = [];
 
-    $staticArrayWithfieldsUpdated = [
+    $staticArrayWithFieldsUpdated = [
       'status',
       'companyUrl',
       'hoursPerDay',
       'overtimeRate'
     ];
     
-    $arrayWithRandomKeys = array_rand($staticArrayWithfieldsUpdated, rand(1, count($staticArrayWithfieldsUpdated)));
+    $arrayWithRandomKeys = array_rand($staticArrayWithFieldsUpdated, rand(1, count($staticArrayWithFieldsUpdated)));
 
     // If there is only one element in the array, return it, as it is not an iterable data type.
     if (count($arrayWithRandomKeys) === 1) {
-        $stringWithRandomFieldsUpdated = '[' . $staticArrayWithfieldsUpdated[$arrayWithRandomKeys] . ']';
+        $stringWithRandomFieldsUpdated = '[' . $staticArrayWithFieldsUpdated[$arrayWithRandomKeys] . ']';
 
         return $stringWithRandomFieldsUpdated;
 
     } else {
 
         foreach ($arrayWithRandomKeys as $randomKeys) {
-          array_push($randomArrayWithFieldsUpdated, $staticArrayWithfieldsUpdated[$randomKeys]);
+          array_push($randomArrayWithFieldsUpdated, $staticArrayWithFieldsUpdated[$randomKeys]);
         }
     }
 
