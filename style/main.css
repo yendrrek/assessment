@@ -85,7 +85,7 @@
 }
 
 .result-summary {
-  width: 900px; /* Each result stays on one line. */
+  width: 1000px; /* Each result stays on one line. */
 }
 
 .result-content {
