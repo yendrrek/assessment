@@ -242,9 +242,8 @@ function showResultSummary()
     } elseif (!empty(showResultSummaryWhenSearchingByRangeOfTimestamps())) {
         $searchResultSummary = showResultSummaryWhenSearchingByRangeOfTimestamps();
 
-    } elseif (!empty(showResultSummaryForCombinedSearching())) {
-        $searchResultSummary = [];
-        $searchResultSummary = showResultSummaryForCombinedSearching();
+    } elseif (!empty(showCombinedSearchResultSummary())) {
+        $searchResultSummary = showCombinedSearchResultSummary();
     }
 
     return $searchResultSummary;
@@ -309,166 +308,115 @@ function showResultSummaryWhenSearchingByRangeOfTimestamps()
     return $searchResultSummary;
 }
 
-function showResultSummaryForCombinedSearching()
-{
-    $qtyOfEventsInsertedMsg = $qtyOfEventsUpdatedMsg = $qtyOfEventsDeletedMsg = '';
-    $searchResultSummary = [];
-
-    if (!empty(getEventsByRangeOfTimestampsForCombinedSearch())) {
-
-        if (!empty(showCombinedSearchResultSummaryForInsertedEventType())) {
-            $qtyOfEventsInsertedMsg = showCombinedSearchResultSummaryForInsertedEventType();
-        }
-
-        if (!empty(showCombinedSearchResultSummaryForUpdatedEventType())) {
-            $qtyOfEventsUpdatedMsg = showCombinedSearchResultSummaryForUpdatedEventType();
-        }
-
-        if (!empty(showCombinedSearchResultSummaryForDeletedEventType())) {
-            $qtyOfEventsDeletedMsg = showCombinedSearchResultSummaryForDeletedEventType();
-        }
-
-        $searchResultSummary = [
-            $qtyOfEventsInsertedMsg,
-            $qtyOfEventsUpdatedMsg,
-            $qtyOfEventsDeletedMsg
-        ];
-
-        return $searchResultSummary;
-    }
-}
-
 function getQtyOfEventsAccordingToCombinedSearch()
 {
-    $qtyOfEventsInserted = $qtyOfEventsUpdated = $qtyOfEventsDeleted = 0;
-    $qtyOfEvents = $qtyOfIndividualOccuranceOfInsertedEvent = $qtyOfIndividualOccuranceOfUpdatedEvent =
-    $qtyOfIndividualOccuranceOfDeletedEvent = [];
+    $qtyOfEvents = 0;
+    $qtyOfEvents = $qtyOfIndividualOccuranceOfEvent = [];
 
     foreach (getEventsByRangeOfTimestampsForCombinedSearch() as $event) {
 
-        if (strpos($event, 'INSERTED') !== false) {
-            array_push($qtyOfIndividualOccuranceOfInsertedEvent, substr_count($event, 'INSERTED'));
+        if (strpos($event, getChosenSearchOption()[0]) !== false) {
+            array_push($qtyOfIndividualOccuranceOfEvent, substr_count($event, getChosenSearchOption()[0]));
 
-        } elseif (strpos($event, 'UPDATED') !== false) {
-            array_push($qtyOfIndividualOccuranceOfUpdatedEvent, substr_count($event, 'UPDATED'));
-
-        } elseif (strpos($event, 'DELETED') !== false) {
-            array_push($qtyOfIndividualOccuranceOfDeletedEvent, substr_count($event, 'DELETED'));
+        } else {
+            array_push($qtyOfIndividualOccuranceOfEvent, substr_count($event, getChosenSearchOption()[1]));
         }
     }
 
-    $qtyOfEventsInserted = count($qtyOfIndividualOccuranceOfInsertedEvent);
-    $qtyOfEventsUpdated = count($qtyOfIndividualOccuranceOfUpdatedEvent);
-    $qtyOfEventsDeleted = count($qtyOfIndividualOccuranceOfDeletedEvent);
-
-    $qtyOfEvents = [
-        $qtyOfEventsInserted,
-        $qtyOfEventsUpdated,
-        $qtyOfEventsDeleted
-    ];
+    $qtyOfEvents = count($qtyOfIndividualOccuranceOfEvent);
 
     return $qtyOfEvents;
 }
 
-function showCombinedSearchResultSummaryForInsertedEventType()
+function replaceEventsWithEvent($msgWithManyEvents)
 {
-    $qtyOfEventsInsertedMsg = $from = $to = '';
-    $qtyOfEventsInserted = 0;
+    $msgWithOneEvent = '';
 
-    $from = getChosenSearchOption()[2];
-    $to = getChosenSearchOption()[3];
-    $qtyOfEventsInserted = getQtyOfEventsAccordingToCombinedSearch()[0];
+    $msgWithOneEvent = str_replace('events', 'event', $msgWithManyEvents);
 
-    if ($qtyOfEventsInserted > 1) {
-        $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED events found between {$from} and {$to}";
-
-    } elseif ($qtyOfEventsInserted > 0) {
-        $qtyOfEventsInsertedMsg = "{$qtyOfEventsInserted} INSERTED event found between {$from} and {$to}";
-    }
-
-    return $qtyOfEventsInsertedMsg;
+    return $msgWithOneEvent;
 }
 
-function showCombinedSearchResultSummaryForUpdatedEventType()
+function showCombinedSearchResultSummary()
 {
-    $fieldUpdated = $qtyOfEventsUpdatedMsg = $from = $to = '';
-    $qtyOfEventsUpdated = 0;
+    $eventType = $fieldUpdated = $qtyOfEventsMsg = $msg1 = $msg2 = $msg3 = $msg4 = $msg5 = $msg6 = $from = $to = '';
+    $qtyOfEvents = 0;
 
+    $eventType = getChosenSearchOption()[0];
     $fieldUpdated = getChosenSearchOption()[1];
     $from = getChosenSearchOption()[2];
     $to = getChosenSearchOption()[3];
-    $qtyOfEventsUpdated = getQtyOfEventsAccordingToCombinedSearch()[1];
+    $qtyOfEvents = getQtyOfEventsAccordingToCombinedSearch();
 
-    if ($qtyOfEventsUpdated > 1) {
+    $msg1 = "{$qtyOfEvents} ".$eventType." events found between {$from} and {$to}";
+    $msg2 = "{$qtyOfEvents} ".$eventType." events found with no fields updated between {$from} and {$to}";
+    $msg3 = "{$qtyOfEvents} ".$eventType." events found with updated field '{$fieldUpdated}' between {$from} and {$to}";
+    $msg4 = "{$qtyOfEvents} events found with no fields updated between {$from} and {$to}";
+    $msg5 = "{$qtyOfEvents} events found with updated field '{$fieldUpdated}' between {$from} and {$to}";
+    $msg6 = "{$qtyOfEvents} events found between {$from} and {$to}";
 
-        if ($fieldUpdated === 'Fields updated') {
-            $qtyOfEventsUpdatedMsg = "{$qtyOfEventsUpdated} UPDATED events found between {$from} and {$to}";
+    if (!empty(getEventsByRangeOfTimestampsForCombinedSearch())) {
 
-        } else {
-            $qtyOfEventsUpdatedMsg =
-            "{$qtyOfEventsUpdated} UPDATED events found with updated field '{$fieldUpdated}' between
-            {$from} and {$to}";
-        }
+        if ($qtyOfEvents > 1) {
 
-    } elseif ($qtyOfEventsUpdated > 0) {
+            if ($eventType !== 'Event type') {
 
-        if ($fieldUpdated === 'Fields updated') {
-            $qtyOfEventsUpdatedMsg = "{$qtyOfEventsUpdated} UPDATED event found between {$from} and {$to}";
+                if ($fieldUpdated === 'Fields updated' || $eventType === 'INSERTED') {
+                    $qtyOfEventsMsg = $msg1;
 
-        } else {
-            $qtyOfEventsUpdatedMsg =
-            "{$qtyOfEventsUpdated} UPDATED event found with updated field '{$fieldUpdated}' between
-            {$from} and {$to}";
-        }
-    }
+                } elseif ($eventType === 'DELETED' && $fieldUpdated === 'null') {
+                    $qtyOfEventsMsg = $msg2;
 
-    return $qtyOfEventsUpdatedMsg;
-}
+                } elseif ($eventType === 'UPDATED' || $eventType === 'DELETED') {
+                    $qtyOfEventsMsg = $msg3;
+                }
 
-function showCombinedSearchResultSummaryForDeletedEventType()
-{
-    $fieldUpdated = $qtyOfEventsDeletedMsg = $from = $to = '';
-    $qtyOfEventsDeleted = 0;
+            } elseif ($fieldUpdated !== 'Fields updated') {
 
-    $fieldUpdated = getChosenSearchOption()[1];
-    $from = getChosenSearchOption()[2];
-    $to = getChosenSearchOption()[3];
-    $qtyOfEventsDeleted = getQtyOfEventsAccordingToCombinedSearch()[2];
+                if ($fieldUpdated === 'null') {
+                    $qtyOfEventsMsg = $msg4;
 
-    if ($qtyOfEventsDeleted > 1) {
-
-        if ($fieldUpdated === 'Fields updated') {
-            $qtyOfEventsDeletedMsg = "{$qtyOfEventsDeleted} DELETED events found between {$from} and {$to}";
-
-        } else {
-
-            if ($fieldUpdated === 'null') {
-                $qtyOfEventsDeletedMsg = "{$qtyOfEventsDeleted} DELETED events found between {$from} and {$to}";
+                } else {
+                    $qtyOfEventsMsg = $msg5;
+                }
 
             } else {
-                $qtyOfEventsDeletedMsg =
-                "{$qtyOfEventsDeleted} DELETED events found with updated field '{$fieldUpdated}' between
-                {$from} and {$to}";
+                $qtyOfEventsMsg = $msg6;
+            }
+
+        } else {
+
+            if ($eventType !== 'Event type') {
+
+                if ($fieldUpdated === 'Fields updated' || $eventType === 'INSERTED') {
+                    $qtyOfEventsMsg = replaceEventsWithEvent($msg1);
+
+                } elseif ($eventType === 'DELETED' && $fieldUpdated === 'null') {
+                        $qtyOfEventsMsg = replaceEventsWithEvent($msg2);
+
+                } elseif ($eventType === 'UPDATED' || $eventType === 'DELETED') {
+                    $qtyOfEventsMsg = replaceEventsWithEvent($msg3);
+
+                }
+
+            } elseif ($fieldUpdated !== 'Fields updated') {
+
+                if ($fieldUpdated === 'null') {
+                    $qtyOfEventsMsg = replaceEventsWithEvent($msg4);
+
+                } else {
+                    $qtyOfEventsMsg = replaceEventsWithEvent($msg5);
+                }
+
+            } else {
+                $qtyOfEventsMsg = replaceEventsWithEvent($msg6);
             }
         }
 
-    } elseif ($qtyOfEventsDeleted > 0) {
+        return $qtyOfEventsMsg;
 
-        if ($fieldUpdated === 'Fields updated') {
-            $qtyOfEventsDeletedMsg = "{$qtyOfEventsDeleted} DELETED event found between {$from} and {$to}";
+    } else {
 
-        } else {
-
-            if ($fieldUpdated === 'null') {
-                $qtyOfEventsDeletedMsg = "{$qtyOfEventsDeleted} DELETED event found between {$from} and {$to}";
-
-            } else {
-                $qtyOfEventsDeletedMsg =
-                "{$qtyOfEventsDeleted} DELETED event found with updated field '{$fieldUpdated}' between
-                {$from} and {$to}";
-            }
-        }
+        return false;
     }
-
-    return $qtyOfEventsDeletedMsg;
 }
