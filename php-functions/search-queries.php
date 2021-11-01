@@ -19,6 +19,7 @@ function getChosenSearchOption()
     // Variable '$option' can be either a string or array;
 
     $noOptionIsEmpty = false;
+
     $noOptionIsEmpty = (
         !empty($_POST['eventType']) &&
         !empty($_POST['fieldsUpdated']) &&
@@ -27,19 +28,23 @@ function getChosenSearchOption()
     );
 
     if (!empty($_POST['btnEventType']) && !empty($_POST['eventType'])) {
+        $option = '';
         $option = $_POST['eventType'];
 
     } elseif (!empty($_POST['btnFieldsUpdated']) && !empty($_POST['fieldsUpdated'])) {
+        $option = '';
         $option = $_POST['fieldsUpdated'];
 
     } elseif (!empty($_POST['btnTimestamps']) &&
         !empty($_POST['fromTimestamp']) && !empty($_POST['toTimestamp'])) {
+        $option = [];
         $option = [
             $_POST['fromTimestamp'],
             $_POST['toTimestamp']
         ];
 
     } elseif (!empty($_POST['combinedQuery']) && $noOptionIsEmpty === true) {
+        $option = [];
         $option = [
             $_POST['eventType'],
             $_POST['fieldsUpdated'],
@@ -119,7 +124,6 @@ function showSearchErrors()
 
 function getEventsByTypeForCombinedSearch()
 {
-    $eventType = '';
     $eventsByTypeForCombinedSearch = [];
 
     if (validateSearchForm() === true) {
@@ -143,7 +147,6 @@ function getEventsByTypeForCombinedSearch()
 
 function getEventsByFieldsUpdatedForCombinedSearch()
 {
-    $fieldUpdated = '';
     $eventsByFieldsUpdatedForCombinedSearch = [];
 
     if (validateSearchForm() === true) {
@@ -167,7 +170,7 @@ function getEventsByFieldsUpdatedForCombinedSearch()
 
 function getEventsByRangeOfTimestampsForCombinedSearch()
 {
-    $timestamp = $from = $to = $noEntriesAccordingToCombinedSearch = '';
+    $timestamp = $from = $to = '';
     $eventsByRangeOfTimestampsForCombinedSearch = [];
 
     $from = getChosenSearchOption()[2];
@@ -284,7 +287,7 @@ function showResultSummaryWhenFieldsUpdatedSearched()
 
 function showResultSummaryWhenSearchingByRangeOfTimestamps()
 {
-    $from = $to = '';
+    $from = $to = $searchResultSummary = '';
 
     $from = getChosenSearchOption()[0];
     $to = getChosenSearchOption()[1];
@@ -308,8 +311,8 @@ function showResultSummaryWhenSearchingByRangeOfTimestamps()
 
 function showResultSummaryForCombinedSearching()
 {
-    $searchResultSummary = [];
     $qtyOfEventsInsertedMsg = $qtyOfEventsUpdatedMsg = $qtyOfEventsDeletedMsg = '';
+    $searchResultSummary = [];
 
     if (!empty(getEventsByRangeOfTimestampsForCombinedSearch())) {
 
@@ -337,9 +340,9 @@ function showResultSummaryForCombinedSearching()
 
 function getQtyOfEventsAccordingToCombinedSearch()
 {
-    $qtyOfEvents = $qtyOfIndividualOccuranceOfInsertedEvent = $qtyOfIndividualOccuranceOfUpdatedEvent =
-    $qtyOfIndividualOccuranceOfDeletedEvent =[];
     $qtyOfEventsInserted = $qtyOfEventsUpdated = $qtyOfEventsDeleted = 0;
+    $qtyOfEvents = $qtyOfIndividualOccuranceOfInsertedEvent = $qtyOfIndividualOccuranceOfUpdatedEvent =
+    $qtyOfIndividualOccuranceOfDeletedEvent = [];
 
     foreach (getEventsByRangeOfTimestampsForCombinedSearch() as $event) {
 
