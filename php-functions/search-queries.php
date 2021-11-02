@@ -283,16 +283,14 @@ function getQtyOfEventsAccordingToCombinedSearch()
 {
     $qtyOfIndividualOccuranceOfEvent = [];
 
-    foreach (getEventsByRangeOfTimestampsForCombinedSearch() as $event) {
     $eventType = getChosenSearchOption()[0];
     $fieldUpdated = getChosenSearchOption()[1];
 
-        if (strpos($event, getChosenSearchOption()[0]) !== false) {
-            array_push($qtyOfIndividualOccuranceOfEvent, substr_count($event, getChosenSearchOption()[0]));
+    foreach (getEventsByRangeOfTimestampsForCombinedSearch() as $event) {
 
-        } else {
-            array_push($qtyOfIndividualOccuranceOfEvent, substr_count($event, getChosenSearchOption()[1]));
-        }
+        strpos($event, $eventType) !== false ?
+        array_push($qtyOfIndividualOccuranceOfEvent, substr_count($event, $eventType)) :
+        array_push($qtyOfIndividualOccuranceOfEvent, substr_count($event, $fieldUpdated));
     }
 
     return count($qtyOfIndividualOccuranceOfEvent);
