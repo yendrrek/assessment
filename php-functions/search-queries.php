@@ -328,13 +328,9 @@ function getQtyOfEventsAccordingToCombinedSearch()
     return $qtyOfEvents;
 }
 
-function replaceEventsWithEvent($msgWithManyEvents)
+function setMsgForOneOrManyEvents($qtyOfEvents, $msg)
 {
-    $msgWithOneEvent = '';
-
-    $msgWithOneEvent = str_replace('events', 'event', $msgWithManyEvents);
-
-    return $msgWithOneEvent;
+    return $qtyOfEvents > 1 ? $msg : str_replace('events', 'event', $msg);
 }
 
 function showCombinedSearchResultSummary()
@@ -357,60 +353,29 @@ function showCombinedSearchResultSummary()
 
     if (!empty(getEventsByRangeOfTimestampsForCombinedSearch())) {
 
-        if ($qtyOfEvents > 1) {
+        if ($eventType !== 'Event type') {
 
-            if ($eventType !== 'Event type') {
+            if ($fieldUpdated === 'Fields updated' || $eventType === 'INSERTED') {
+                $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg1);
 
-                if ($fieldUpdated === 'Fields updated' || $eventType === 'INSERTED') {
-                    $qtyOfEventsMsg = $msg1;
+            } elseif ($eventType === 'DELETED' && $fieldUpdated === 'null') {
+                $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg2);
 
-                } elseif ($eventType === 'DELETED' && $fieldUpdated === 'null') {
-                    $qtyOfEventsMsg = $msg2;
+            } elseif ($eventType === 'UPDATED' || $eventType === 'DELETED') {
+                $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg3);
+            }
 
-                } elseif ($eventType === 'UPDATED' || $eventType === 'DELETED') {
-                    $qtyOfEventsMsg = $msg3;
-                }
+        } elseif ($fieldUpdated !== 'Fields updated') {
 
-            } elseif ($fieldUpdated !== 'Fields updated') {
-
-                if ($fieldUpdated === 'null') {
-                    $qtyOfEventsMsg = $msg4;
-
-                } else {
-                    $qtyOfEventsMsg = $msg5;
-                }
+            if ($fieldUpdated === 'null') {
+                $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg4);
 
             } else {
-                $qtyOfEventsMsg = $msg6;
+                $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg5);
             }
 
         } else {
-
-            if ($eventType !== 'Event type') {
-
-                if ($fieldUpdated === 'Fields updated' || $eventType === 'INSERTED') {
-                    $qtyOfEventsMsg = replaceEventsWithEvent($msg1);
-
-                } elseif ($eventType === 'DELETED' && $fieldUpdated === 'null') {
-                        $qtyOfEventsMsg = replaceEventsWithEvent($msg2);
-
-                } elseif ($eventType === 'UPDATED' || $eventType === 'DELETED') {
-                    $qtyOfEventsMsg = replaceEventsWithEvent($msg3);
-
-                }
-
-            } elseif ($fieldUpdated !== 'Fields updated') {
-
-                if ($fieldUpdated === 'null') {
-                    $qtyOfEventsMsg = replaceEventsWithEvent($msg4);
-
-                } else {
-                    $qtyOfEventsMsg = replaceEventsWithEvent($msg5);
-                }
-
-            } else {
-                $qtyOfEventsMsg = replaceEventsWithEvent($msg6);
-            }
+            $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg6);
         }
 
         return $qtyOfEventsMsg;
