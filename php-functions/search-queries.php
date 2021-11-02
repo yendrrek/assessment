@@ -344,9 +344,9 @@ function showCombinedSearchResultSummary()
     $to = getChosenSearchOption()[3];
     $qtyOfEvents = getQtyOfEventsAccordingToCombinedSearch();
 
-    $msg1 = "{$qtyOfEvents} ".$eventType." events found between {$from} and {$to}";
-    $msg2 = "{$qtyOfEvents} ".$eventType." events found with no fields updated between {$from} and {$to}";
-    $msg3 = "{$qtyOfEvents} ".$eventType." events found with updated field '{$fieldUpdated}' between {$from} and {$to}";
+    $msg1 = "{$qtyOfEvents} {$eventType} events found between {$from} and {$to}";
+    $msg2 = "{$qtyOfEvents} {$eventType} events found with no fields updated between {$from} and {$to}";
+    $msg3 = "{$qtyOfEvents} {$eventType} events found with updated field '{$fieldUpdated}' between {$from} and {$to}";
     $msg4 = "{$qtyOfEvents} events found with no fields updated between {$from} and {$to}";
     $msg5 = "{$qtyOfEvents} events found with updated field '{$fieldUpdated}' between {$from} and {$to}";
     $msg6 = "{$qtyOfEvents} events found between {$from} and {$to}";
