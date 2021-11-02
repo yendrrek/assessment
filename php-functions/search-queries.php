@@ -181,14 +181,13 @@ function showCombinedSearchErrors()
                 if ($from === 'From timestamp' || $to === 'To timestamp') {
                     return 'No timestamp range selected.';
 
+                } elseif ($from > $to && $from !== 'From timestamp') {
+                    return '\'From\' cannot be greater than \'To\', you nincompoop!<br><br>
+                    Choose a valid range of timestamps.';
+
                 } else {
                     return 'No entries exist with chosen options.';
                 }
-            }
-
-            if ($from > $to && $from !== 'From timestamp') {
-                return '\'From\' cannot be greater than \'To\', you nincompoop!<br><br>
-                Choose a valid range of timestamps.';
             }
 
         } else {
