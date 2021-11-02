@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-include 'php-functions/csrf-token.php';
 include 'php-functions/form-validation.php';
 include 'php-functions/generating-event-file.php';
 include 'php-functions/getting-event-file.php';
