@@ -113,15 +113,18 @@ function showSearchErrors()
 
 function getEventsByTypeForCombinedSearch()
 {
+    $eventType = '';
     $eventsByTypeForCombinedSearch = [];
+
+    $eventType = getChosenSearchOption()[0];
 
     if (validateSearchForm() === true) {
 
         foreach (getEventFile() as $event) {
 
-            if (getChosenSearchOption()[0] !== 'Event type') {
+            if ($eventType !== 'Event type') {
 
-                if (strpos($event, getChosenSearchOption()[0]) !== false) {
+                if (strpos($event, $eventType) !== false) {
                     array_push($eventsByTypeForCombinedSearch, $event);
                 }
 
@@ -136,15 +139,18 @@ function getEventsByTypeForCombinedSearch()
 
 function getEventsByFieldsUpdatedForCombinedSearch()
 {
+    $fieldUpdated = '';
     $eventsByFieldsUpdatedForCombinedSearch = [];
+
+    $fieldUpdated = getChosenSearchOption()[1];
 
     if (validateSearchForm() === true) {
 
         foreach (getEventsByTypeForCombinedSearch() as $event) {
 
-            if (getChosenSearchOption()[1] !== 'Fields updated') {
+            if ($fieldUpdated !== 'Fields updated') {
 
-                if (strpos($event, getChosenSearchOption()[1]) !== false) {
+                if (strpos($event, $fieldUpdated) !== false) {
                     array_push($eventsByFieldsUpdatedForCombinedSearch, $event);
                 }
 
@@ -278,6 +284,8 @@ function getQtyOfEventsAccordingToCombinedSearch()
     $qtyOfIndividualOccuranceOfEvent = [];
 
     foreach (getEventsByRangeOfTimestampsForCombinedSearch() as $event) {
+    $eventType = getChosenSearchOption()[0];
+    $fieldUpdated = getChosenSearchOption()[1];
 
         if (strpos($event, getChosenSearchOption()[0]) !== false) {
             array_push($qtyOfIndividualOccuranceOfEvent, substr_count($event, getChosenSearchOption()[0]));
