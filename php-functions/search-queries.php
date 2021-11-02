@@ -47,7 +47,6 @@ function getSearchedEvents()
 {
     $events = [];
 
-    // 'validateSearchForm()' and 'getEventFile()' below are included in separate files.
     if (validateSearchForm() === true) {
 
         foreach (getEventFile() as $event) {
