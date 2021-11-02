@@ -97,29 +97,27 @@ function getQtyOfFoundEvents()
 
 function showSearchErrors()
 {
-    $searchError = $from = $to = '';
+    $from = $to = '';
 
     $from = getChosenSearchOption()[0];
     $to = getChosenSearchOption()[1];
 
     if (!empty($_POST['btnEventType'])) {
-        $searchError = 'No \'Event type\' selected.';
+        return 'No \'Event type\' selected.';
 
     } elseif (!empty($_POST['btnFieldsUpdated'])) {
-        $searchError = 'No \'Fields updated\' selected.';
+        return 'No \'Fields updated\' selected.';
 
     } elseif (!empty($_POST['btnTimestamps'])) {
 
         if ( $from === 'From timestamp' || $to === 'To timestamp') {
-            $searchError = 'No timestamp range selected.';
+            return 'No timestamp range selected.';
 
         } elseif ($from > $to) {
-            $searchError = '\'From\' cannot be greater than \'To\', you silly sausage!<br><br>
+            return '\'From\' cannot be greater than \'To\', you silly sausage!<br><br>
             Choose a valid range of timestamps.';
         }
     }
-
-    return $searchError;
 }
 
 function getEventsByTypeForCombinedSearch()
@@ -195,7 +193,7 @@ function getEventsByRangeOfTimestampsForCombinedSearch()
 
 function showCombinedSearchErrors()
 {
-    $combinedSearchError = $from = $to = $eventType = $fieldUpdated = '';
+    $eventType = $fieldUpdated = $from = $to = '';
 
     $eventType = getChosenSearchOption()[0];
     $fieldUpdated = getChosenSearchOption()[1];
@@ -209,50 +207,42 @@ function showCombinedSearchErrors()
             if (empty(getEventsByRangeOfTimestampsForCombinedSearch())) {
 
                 if ($from === 'From timestamp' || $to === 'To timestamp') {
-                    $combinedSearchError = 'No timestamp range selected.';
+                    return 'No timestamp range selected.';
 
                 } else {
-                    $combinedSearchError = 'No entries exist with chosen options.';
+                    return 'No entries exist with chosen options.';
                 }
             }
 
             if ($from > $to && $from !== 'From timestamp') {
-                $combinedSearchError = '\'From\' cannot be greater than \'To\', you nincompoop!<br><br>
+                return '\'From\' cannot be greater than \'To\', you nincompoop!<br><br>
                 Choose a valid range of timestamps.';
             }
 
         } else {
-            $combinedSearchError = "No entries exist with options '{$eventType}' and '{$fieldUpdated}'.";
+            return "No entries exist with options '{$eventType}' and '{$fieldUpdated}'.";
         }
     }
-
-    return $combinedSearchError;
 }
 
 function showResultSummary()
 {
-    $searchResultSummary = '';
-
     if (!empty(showResultSummaryWhenEventTypeSearched())) {
-        $searchResultSummary = showResultSummaryWhenEventTypeSearched();
+        return showResultSummaryWhenEventTypeSearched();
 
     } elseif (!empty(showResultSummaryWhenFieldsUpdatedSearched())) {
-        $searchResultSummary = showResultSummaryWhenFieldsUpdatedSearched();
+        return showResultSummaryWhenFieldsUpdatedSearched();
 
     } elseif (!empty(showResultSummaryWhenSearchingByRangeOfTimestamps())) {
-        $searchResultSummary = showResultSummaryWhenSearchingByRangeOfTimestamps();
+        return showResultSummaryWhenSearchingByRangeOfTimestamps();
 
     } elseif (!empty(showCombinedSearchResultSummary())) {
-        $searchResultSummary = showCombinedSearchResultSummary();
+        return showCombinedSearchResultSummary();
     }
-
-    return $searchResultSummary;
 }
 
 function showResultSummaryWhenEventTypeSearched()
 {
-    $searchResultSummary = '';
-
     if (!empty($_POST['btnEventType'])) {
 
         if (getQtyOfFoundEvents() > 0) {
@@ -260,12 +250,10 @@ function showResultSummaryWhenEventTypeSearched()
         }
     }
 
-    return $searchResultSummary;
 }
 
 function showResultSummaryWhenFieldsUpdatedSearched()
 {
-    $searchResultSummary = '';
 
     if (!empty($_POST['btnFieldsUpdated'])) {
 
@@ -280,13 +268,11 @@ function showResultSummaryWhenFieldsUpdatedSearched()
             }
         }
     }
-
-    return $searchResultSummary;
 }
 
 function showResultSummaryWhenSearchingByRangeOfTimestamps()
 {
-    $from = $to = $searchResultSummary = '';
+    $from = $to = '';
 
     $from = getChosenSearchOption()[0];
     $to = getChosenSearchOption()[1];
@@ -304,14 +290,11 @@ function showResultSummaryWhenSearchingByRangeOfTimestamps()
             $searchResultSummary = "".getQtyOfFoundEvents()." events found between {$from} and {$to}";
         }
     }
-
-    return $searchResultSummary;
 }
 
 function getQtyOfEventsAccordingToCombinedSearch()
 {
-    $qtyOfEvents = 0;
-    $qtyOfEvents = $qtyOfIndividualOccuranceOfEvent = [];
+    $qtyOfIndividualOccuranceOfEvent = [];
 
     foreach (getEventsByRangeOfTimestampsForCombinedSearch() as $event) {
 
@@ -323,9 +306,7 @@ function getQtyOfEventsAccordingToCombinedSearch()
         }
     }
 
-    $qtyOfEvents = count($qtyOfIndividualOccuranceOfEvent);
-
-    return $qtyOfEvents;
+    return count($qtyOfIndividualOccuranceOfEvent);
 }
 
 function setMsgForOneOrManyEvents($qtyOfEvents, $msg)
@@ -335,7 +316,7 @@ function setMsgForOneOrManyEvents($qtyOfEvents, $msg)
 
 function showCombinedSearchResultSummary()
 {
-    $eventType = $fieldUpdated = $qtyOfEventsMsg = $msg1 = $msg2 = $msg3 = $msg4 = $msg5 = $msg6 = $from = $to = '';
+    $eventType = $fieldUpdated = $msg1 = $msg2 = $msg3 = $msg4 = $msg5 = $msg6 = $from = $to = '';
     $qtyOfEvents = 0;
 
     $eventType = getChosenSearchOption()[0];
@@ -355,33 +336,27 @@ function showCombinedSearchResultSummary()
 
         if ($eventType !== 'Event type') {
 
-            if ($fieldUpdated === 'Fields updated' || $eventType === 'INSERTED') {
-                $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg1);
+            if ($eventType === 'INSERTED' || $fieldUpdated === 'Fields updated') {
+                return setResultSummaryForOneOrManyEvents($qtyOfEvents, $msg1);
 
             } elseif ($eventType === 'DELETED' && $fieldUpdated === 'null') {
-                $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg2);
+                return setResultSummaryForOneOrManyEvents($qtyOfEvents, $msg2);
 
             } elseif ($eventType === 'UPDATED' || $eventType === 'DELETED') {
-                $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg3);
+                return setResultSummaryForOneOrManyEvents($qtyOfEvents, $msg3);
             }
 
         } elseif ($fieldUpdated !== 'Fields updated') {
 
             if ($fieldUpdated === 'null') {
-                $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg4);
+                return setResultSummaryForOneOrManyEvents($qtyOfEvents, $msg4);
 
             } else {
-                $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg5);
+                return setResultSummaryForOneOrManyEvents($qtyOfEvents, $msg5);
             }
 
         } else {
-            $qtyOfEventsMsg = setMsgForOneOrManyEvents($qtyOfEvents, $msg6);
+            return setResultSummaryForOneOrManyEvents($qtyOfEvents, $msg6);
         }
-
-        return $qtyOfEventsMsg;
-
-    } else {
-
-        return false;
     }
 }
