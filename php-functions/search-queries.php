@@ -86,15 +86,6 @@ function getSearchedEvents()
     }
 }
 
-function getQtyOfFoundEvents()
-{
-    $qtyOfFoundEvents = 0;
-
-    $qtyOfFoundEvents = count(getSearchedEvents());
-
-    return $qtyOfFoundEvents;
-}
-
 function showSearchErrors()
 {
     $from = $to = '';
@@ -245,27 +236,21 @@ function showResultSummaryWhenEventTypeSearched()
 {
     if (!empty($_POST['btnEventType'])) {
 
-        if (getQtyOfFoundEvents() > 0) {
-            $searchResultSummary = "".getQtyOfFoundEvents()." '".getChosenSearchOption()."' events found";
+        if (count(getSearchedEvents()) > 0) {
+            return "".count(getSearchedEvents())." '".getChosenSearchOption()."' events found";
         }
     }
-
 }
 
 function showResultSummaryWhenFieldsUpdatedSearched()
 {
-
     if (!empty($_POST['btnFieldsUpdated'])) {
 
-        if (getQtyOfFoundEvents() > 0) {
+        if (getChosenSearchOption() === 'null') {
+            return "".count(getSearchedEvents())." events found with no fields updated";
 
-            if (getChosenSearchOption() === 'null') {
-                $searchResultSummary = "".getQtyOfFoundEvents()." events found with no fields updated";
-
-            } else {
-                $searchResultSummary =
-                "".getQtyOfFoundEvents()." events found with updated field '".getChosenSearchOption()."' ";
-            }
+        } elseif (count(getSearchedEvents()) > 0) {
+            return "".count(getSearchedEvents())." events found with updated field '".getChosenSearchOption()."' ";
         }
     }
 }
@@ -279,15 +264,11 @@ function showResultSummaryWhenSearchingByRangeOfTimestamps()
 
     if (!empty($_POST['btnTimestamps'])) {
 
-        if (getQtyOfFoundEvents() < 1 ||
-            $from === 'From timestamp' || $to === 'To timestamp') {
-            $searchResultSummary = null;
+        if (count(getSearchedEvents()) > 1) {
+            return "".count(getSearchedEvents())." events found between {$from} and {$to}";
 
-        } elseif (getQtyOfFoundEvents() < 2) {
-            $searchResultSummary = "".getQtyOfFoundEvents()." event found between {$from} and {$to}";
-
-        } else {
-            $searchResultSummary = "".getQtyOfFoundEvents()." events found between {$from} and {$to}";
+        } elseif (count(getSearchedEvents()) > 0) {
+            return "".count(getSearchedEvents())." event found between {$from} and {$to}";
         }
     }
 }
