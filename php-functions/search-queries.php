@@ -1,20 +1,15 @@
 <?php
 function sanitiseUserInput($userInput)
 {
-    if (is_array($userInput)) {
-        $sanitisedUserInput = filter_var_array($userInput, FILTER_SANITIZE_STRING);
-
-    } else {
-
-        $sanitisedUserInput = filter_var($userInput, FILTER_SANITIZE_STRING);
-    }
+    is_array($userInput) ?
+    $sanitisedUserInput = filter_var_array($userInput, FILTER_SANITIZE_STRING) :
+    $sanitisedUserInput = filter_var($userInput, FILTER_SANITIZE_STRING);
 
     return $sanitisedUserInput;
 }
 
 function getChosenSearchOption()
 {
-
     $noOptionIsEmpty = false;
     $noOptionIsEmpty = (
         !empty($_POST['eventType']) &&
