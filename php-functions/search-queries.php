@@ -296,7 +296,7 @@ function getQtyOfEventsAccordingToCombinedSearch()
     return count($qtyOfIndividualOccuranceOfEvent);
 }
 
-function setMsgForOneOrManyEvents($qtyOfEvents, $msg)
+function setResultSummaryForOneOrManyEvents($qtyOfEvents, $msg)
 {
     return $qtyOfEvents > 1 ? $msg : str_replace('events', 'event', $msg);
 }
