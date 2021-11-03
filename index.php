@@ -89,7 +89,7 @@ include 'php-functions/search-queries.php';
         <div class="combined-and-generate-btns-container">
             <button class="btn btn_combined-query-and-generate" type="submit"
                     name="combinedQuery" value="combinedQuery">Search combination</button>
-            <input id="token-search-options" type="hidden" name="tokenCsrf" value="<?php echo createCsrfToken(); ?>">
+            <input id="token-search-options" type="hidden" name="tokenCsrf" value="<?php echo $_SESSION['tokenCsrf']; ?>">
 
     </form>
 
@@ -98,7 +98,7 @@ include 'php-functions/search-queries.php';
             <button class="btn btn_combined-query-and-generate" type="submit"
                     name="generateEventFile" value="generateEventFile">Generate event file</button>
             <input id="token-generate-event-file" type="hidden" name="tokenCsrf"
-                   value="<?php echo createCsrfToken(); ?>">
+                   value="<?php echo $_SESSION['tokenCsrf']; ?>">
         </div>
 
     </form>
