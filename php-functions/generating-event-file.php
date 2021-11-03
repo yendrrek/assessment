@@ -48,9 +48,8 @@ function createRandomFieldsUpdatedOrNull()
 
     // If there is only one element in the array, it must be 'null'.
     if ($arrayWithRandomKeys < 2) {
-        $stringNull = 'null';
 
-        return $stringNull;
+        return 'null';
 
     } else {
 
@@ -62,9 +61,7 @@ function createRandomFieldsUpdatedOrNull()
     // Get rid of 'null' to obtain only fields updated.
     $stringStillWithNull = implode(', ', $randomArrayWithFieldsUpdatedOrNull);
 
-    $stringAlreadyWithoutNull = substr($stringStillWithNull, 5);
-
-    return $stringAlreadyWithoutNull;
+    return $stringAlreadyWithoutNull = substr($stringStillWithNull, 5);
 }   
 
 function createRandomTimeStamp()
