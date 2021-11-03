@@ -4,8 +4,6 @@
 // The amount of entries can be a random number between 500 and 1000.
 function createRandomEventType()
 {
-    $typesOfEvents = [];
-
     $typesOfEvents = [
       'INSERTED',
       'UPDATED',
@@ -20,7 +18,6 @@ function createRandomEventType()
 function createRandomFieldsUpdated()
 {
     $randomArrayWithFieldsUpdated = [];
-
     $staticArrayWithFieldsUpdated = [
       'status',
       'companyUrl',
@@ -53,7 +50,6 @@ function createRandomFieldsUpdated()
 function createRandomFieldsUpdatedOrNull()
 {
     $randomArrayWithFieldsUpdatedOrNull = [];
-
     $staticArrayWithFieldsUpdatedAndNull = [
       'null',
       createRandomFieldsUpdated()
@@ -99,9 +95,6 @@ function createRandomTimeStamp()
 // hence they are not randomised.
 function createRandomEvents()
 {
-    $stringWithRandomEvents = '';
-    $events = [];
-
     if (createRandomEventType() === 'INSERTED') {
 
         $events = [
