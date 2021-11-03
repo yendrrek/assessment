@@ -37,7 +37,7 @@ function createRandomFieldsUpdated()
 }
 
 // Instead of fields updated some entries contain 'null'.
-// This function randomly populates event entries with either fields updated or 'null'. 
+// This function randomly populates event entries with either 'null' or fields updated.
 function createRandomFieldsUpdatedOrNull()
 {
     $randomArrayWithFieldsUpdatedOrNull = [];
@@ -46,7 +46,6 @@ function createRandomFieldsUpdatedOrNull()
     $arrayWithRandomKeys =
     array_rand($staticArrayWithFieldsUpdatedAndNull, rand(1, count($staticArrayWithFieldsUpdatedAndNull)));
 
-    // If there is only one element in the array, it must be 'null'.
     if ($arrayWithRandomKeys < 2) {
 
         return 'null';
@@ -56,12 +55,9 @@ function createRandomFieldsUpdatedOrNull()
         foreach ($arrayWithRandomKeys as $randomKeys) {
             array_push($randomArrayWithFieldsUpdatedOrNull, $staticArrayWithFieldsUpdatedAndNull[$randomKeys]);
         }
-    }
-    
-    // Get rid of 'null' to obtain only fields updated.
-    $stringStillWithNull = implode(', ', $randomArrayWithFieldsUpdatedOrNull);
 
-    return $stringAlreadyWithoutNull = substr($stringStillWithNull, 5);
+        return substr(implode(', ', $randomArrayWithFieldsUpdatedOrNull), 5);
+    }
 }   
 
 function createRandomTimeStamp()
