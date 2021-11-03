@@ -81,11 +81,12 @@ function createRandomFieldsUpdatedOrNull()
 
 function createRandomTimeStamp()
 {
-    $integer = rand(0000000001, time());
+    // Between 1970-01-01 and current date.
+    $unixTimestamp = rand(0000000001, time());
 
     $milliseconds = rand(100, 999);
 
-    return date("Y-m-d H:i:s.{$milliseconds}", $integer);
+    return date("Y-m-d H:i:s.{$milliseconds}", $unixTimestamp);
 }
 
 // This function creates strings with random event entries.
