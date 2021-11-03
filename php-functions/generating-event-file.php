@@ -94,40 +94,21 @@ function createRandomTimeStamp()
 // hence they are not randomised.
 function createRandomEvents()
 {
-    if (createRandomEventType() === 'INSERTED') {
+    switch (createRandomEventType()) {
+        case 'INSERTED':
+            $events = ['INSERTED', 'Placement', '123', 'null', createRandomTimeStamp()];
+            break;
 
-        $events = [
-          'INSERTED',
-          'Placement',
-          '123',
-          'null',
-          createRandomTimeStamp()
-        ];
+        case 'UPDATED':
+            $events = ['UPDATED', 'Placement', '123', createRandomFieldsUpdated(), createRandomTimeStamp()];
+            break;
 
-    } elseif (createRandomEventType() === 'UPDATED') {
-
-        $events = [
-          'UPDATED',
-          'Placement',
-          '123',
-          createRandomFieldsUpdated(),
-          createRandomTimeStamp()
-        ];
-
-    } elseif (createRandomEventType() === 'DELETED') {
-
-        $events = [
-          'DELETED',
-          'Placement',
-          '123',
-          createRandomFieldsUpdatedOrNull(),
-          createRandomTimeStamp()
-        ];
+        case 'DELETED':
+            $events = ['DELETED', 'Placement', '123', createRandomFieldsUpdatedOrNull(), createRandomTimeStamp()];
+            break;
     }
 
-    $stringWithRandomEvents = implode(', ', $events);
-
-    return  $stringWithRandomEvents . "\r\n";
+    return  implode(', ', $events) . "\r\n";
 }
 
 // Update 'event-file.txt' with new entries.
