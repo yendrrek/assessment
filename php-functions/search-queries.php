@@ -51,19 +51,22 @@ function getSearchedEvents()
 
         foreach (getEventFile() as $event) {
 
-            if (is_array(getChosenSearchOption()) && count(getChosenSearchOption()) === 2) {
-                $from = getChosenSearchOption()[0];
-                $to = getChosenSearchOption()[1];
-            }
+            if (!empty(getChosenSearchOption())) {
 
-            // Timestamps are extracted from events and formatted.
-            $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
+                if (is_array(getChosenSearchOption()) && count(getChosenSearchOption()) === 2) {
+                    $from = getChosenSearchOption()[0];
+                    $to = getChosenSearchOption()[1];
+                }
 
-            if ((!is_array(getChosenSearchOption()) &&
-                strpos($event, getChosenSearchOption()) !== false) ||
-                (($timestamp >= $from && $timestamp <= $to) &&
-                ($from !== 'From timestamp' && $to !== 'To timestamp'))) {
-                array_push($events, $event);
+                // Timestamps are extracted from events and formatted.
+                $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
+
+                if ((!is_array(getChosenSearchOption()) &&
+                    strpos($event, getChosenSearchOption()) !== false) ||
+                    (($timestamp >= $from && $timestamp <= $to) &&
+                    ($from !== 'From timestamp' && $to !== 'To timestamp'))) {
+                    array_push($events, $event);
+                }
             }
         }
 
@@ -103,7 +106,7 @@ function getEventsByTypeForCombinedSearch()
 
         foreach (getEventFile() as $event) {
 
-            if ($eventType !== 'Event type') {
+            if (!empty($eventType) && $eventType !== 'Event type') {
 
                 if (strpos($event, $eventType) !== false) {
                     array_push($eventsByTypeForCombinedSearch, $event);
@@ -129,7 +132,7 @@ function getEventsByFieldsUpdatedForCombinedSearch()
 
             if ($fieldUpdated !== 'Fields updated') {
 
-                if (strpos($event, $fieldUpdated) !== false) {
+                if (!empty($fieldUpdated) && strpos($event, $fieldUpdated) !== false) {
                     array_push($eventsByFieldsUpdatedForCombinedSearch, $event);
                 }
 
