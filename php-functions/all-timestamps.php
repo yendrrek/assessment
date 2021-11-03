@@ -9,7 +9,7 @@ function getAllTimestampsInAscendingOrder()
 
     foreach(getEventFile() as $event) {
 
-        // Timestamps are extracted from the events and formatted.
+        // Timestamp is extracted from an event and formatted.
         $timestamp = date_format(date_create(substr($event, -25)), 'Y-m-d H:i:s.v');
 
         array_push($timestampsInAscendingOrder, $timestamp);
