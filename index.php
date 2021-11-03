@@ -89,7 +89,8 @@ include 'php-functions/search-queries.php';
         <div class="combined-and-generate-btns-container">
             <button class="btn btn_combined-query-and-generate" type="submit"
                     name="combinedQuery" value="combinedQuery">Search combination</button>
-            <input id="token-search-options" type="hidden" name="tokenCsrf" value="<?php echo $_SESSION['tokenCsrf']; ?>">
+            <input id="token-search-options" type="hidden" name="tokenCsrf"
+                   value="<?php echo $_SESSION['tokenCsrf']; ?>">
 
     </form>
 
