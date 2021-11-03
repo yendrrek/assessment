@@ -15,7 +15,6 @@ dontResubmitFormWhenPageReloaded();
       fromTimestamp,
       toTimestamp,
       btnSearchCombinationClicked,
-      btnGenerateEventFileClicked,
       tokenCsrf;
 
   function getAllSearchOptionsWhichWillBeSentToServer() {
@@ -132,6 +131,8 @@ dontResubmitFormWhenPageReloaded();
 })();
 
 function generateEventFile() {
+
+  let btnGenerateEventFileClicked, tokenCsrf;
 
   $('button[name="generateEventFile"]').on('click', event => {
     btnGenerateEventFileClicked = $(event.currentTarget).val();
