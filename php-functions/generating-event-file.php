@@ -2,14 +2,7 @@
 // Every time 'Generate event file' button is used,
 // generate random entries in the 'event-file.txt' for testing purposes.
 // The amount of entries can be a random number between 500 and 1000.
-function createRandomEventType()
-{
-    $typesOfEvents = ['INSERTED', 'UPDATED', 'DELETED'];
-
-    $randomKeys = array_rand($typesOfEvents);
-
-    return $typesOfEvents[$randomKeys];
-}
+function createRandomEventType() { return ['INSERTED', 'UPDATED', 'DELETED'][array_rand([0, 1, 2])]; }
 
 function createRandomFieldsUpdated()
 {
