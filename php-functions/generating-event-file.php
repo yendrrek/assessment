@@ -1,8 +1,11 @@
 <?php
-// Every time 'Generate event file' button is used,
-// generate random entries in the 'event-file.txt' for testing purposes.
-// The amount of entries can be a random number between 500 and 1000.
+// Code below populates the input 'event-file.txt' on the server with random event entries
+// too see how the searching system works.
+// The number of entries can be between 500 and 1000, and they are
+// generated upon clicking the button 'Generate event file'.
 
+// This function is used to pupulate 'UPDATED' events.
+// They always contain fields updated.
 function createRandomFieldsUpdated()
 {
     $randomArrayWithFieldsUpdated = [];
@@ -24,8 +27,8 @@ function createRandomFieldsUpdated()
     }
 }
 
-// Instead of fields updated some entries contain 'null'.
-// This function randomly populates event entries with either 'null' or fields updated.
+// This function randomly populates 'DELETED' events.
+// They can contain either fields updated or 'null' instead.
 function createRandomFieldsUpdatedOrNull()
 {
     $randomArrayWithFieldsUpdatedOrNull = [];
@@ -48,9 +51,7 @@ function createRandomFieldsUpdatedOrNull()
     }
 }   
 
-// This function creates strings with random event entries.
-// 'Placement' and '123' are not a part of the requirement of the assessment scenario,
-// hence they are not randomised.
+// 'Placement' and '123' are not a part of the requirement of the assessment scenario, so they are not randomised.
 function createRandomEvents()
 {
     switch (['INSERTED', 'UPDATED', 'DELETED'][array_rand([0, 1, 2])]) {
@@ -88,7 +89,6 @@ function createRandomEvents()
     return  implode(', ', $events) . "\r\n";
 }
 
-// Update 'event-file.txt' with new entries.
 function createEventFileWithRandomEntries()
 {
 
