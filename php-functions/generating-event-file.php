@@ -2,7 +2,6 @@
 // Every time 'Generate event file' button is used,
 // generate random entries in the 'event-file.txt' for testing purposes.
 // The amount of entries can be a random number between 500 and 1000.
-function createRandomEventType() { return ['INSERTED', 'UPDATED', 'DELETED'][array_rand([0, 1, 2])]; }
 
 function createRandomFieldsUpdated()
 {
@@ -13,20 +12,16 @@ function createRandomFieldsUpdated()
 
     // If there is only one element in the array, return it, as it is not an iterable data type.
     if (count($arrayWithRandomKeys) === 1) {
-        $stringWithRandomFieldsUpdated = '[' . $staticArrayWithFieldsUpdated[$arrayWithRandomKeys] . ']';
-
-        return $stringWithRandomFieldsUpdated;
+        return "[{$staticArrayWithFieldsUpdated[$arrayWithRandomKeys]}]";
 
     } else {
 
         foreach ($arrayWithRandomKeys as $randomKeys) {
           array_push($randomArrayWithFieldsUpdated, $staticArrayWithFieldsUpdated[$randomKeys]);
         }
+
+        return "[".implode(', ', $randomArrayWithFieldsUpdated)."]";
     }
-
-    $stringWithRandomFieldsUpdated = '[' . implode(', ', $randomArrayWithFieldsUpdated) . ']';
-
-    return $stringWithRandomFieldsUpdated;
 }
 
 // Instead of fields updated some entries contain 'null'.
@@ -53,32 +48,40 @@ function createRandomFieldsUpdatedOrNull()
     }
 }   
 
-function createRandomTimeStamp()
-{
-    // Between 1970-01-01 and current date.
-    $unixTimestamp = rand(0000000001, time());
-
-    $milliseconds = rand(100, 999);
-
-    return date("Y-m-d H:i:s.{$milliseconds}", $unixTimestamp);
-}
-
 // This function creates strings with random event entries.
 // 'Placement' and '123' are not a part of the requirement of the assessment scenario,
 // hence they are not randomised.
 function createRandomEvents()
 {
-    switch (createRandomEventType()) {
+    switch (['INSERTED', 'UPDATED', 'DELETED'][array_rand([0, 1, 2])]) {
         case 'INSERTED':
-            $events = ['INSERTED', 'Placement', '123', 'null', createRandomTimeStamp()];
+            $events = [
+                'INSERTED',
+                'Placement',
+                '123',
+                'null',
+                date("Y-m-d H:i:s.".rand(100, 999)."", rand(0000000001, time()))
+            ];
             break;
 
         case 'UPDATED':
-            $events = ['UPDATED', 'Placement', '123', createRandomFieldsUpdated(), createRandomTimeStamp()];
+            $events = [
+                'UPDATED',
+                'Placement',
+                '123',
+                createRandomFieldsUpdated(),
+                date("Y-m-d H:i:s.".rand(100, 999)."", rand(0000000001, time()))
+            ];
             break;
 
         case 'DELETED':
-            $events = ['DELETED', 'Placement', '123', createRandomFieldsUpdatedOrNull(), createRandomTimeStamp()];
+            $events = [
+                'DELETED',
+                'Placement',
+                '123',
+                createRandomFieldsUpdatedOrNull(),
+                date("Y-m-d H:i:s.".rand(100, 999)."", rand(0000000001, time()))
+            ];
             break;
     }
 
