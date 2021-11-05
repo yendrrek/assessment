@@ -11,7 +11,7 @@ function createRandomFieldsUpdated()
     $arrayWithRandomKeys = array_rand($staticArrayWithFieldsUpdated, rand(1, count($staticArrayWithFieldsUpdated)));
 
     // If there is only one element in the array, return it, as it is not an iterable data type.
-    if (count($arrayWithRandomKeys) === 1) {
+    if (!is_array($arrayWithRandomKeys)) {
         return "[{$staticArrayWithFieldsUpdated[$arrayWithRandomKeys]}]";
 
     } else {
@@ -34,7 +34,7 @@ function createRandomFieldsUpdatedOrNull()
     $arrayWithRandomKeys =
     array_rand($staticArrayWithFieldsUpdatedAndNull, rand(1, count($staticArrayWithFieldsUpdatedAndNull)));
 
-    if ($arrayWithRandomKeys < 2) {
+    if (count($arrayWithRandomKeys) === 1) {
 
         return 'null';
 
