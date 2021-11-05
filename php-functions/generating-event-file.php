@@ -8,22 +8,22 @@
 // They always contain fields updated.
 function createRandomFieldsUpdated()
 {
-    $randomArrayWithFieldsUpdated = [];
-    $staticArrayWithFieldsUpdated = ['status', 'companyUrl', 'hoursPerDay', 'overtimeRate'];
+    $randomFieldsUpdated = [];
+    $fieldsUpdated = ['status', 'companyUrl', 'hoursPerDay', 'overtimeRate'];
     
-    $arrayWithRandomKeys = array_rand($staticArrayWithFieldsUpdated, rand(1, count($staticArrayWithFieldsUpdated)));
+    $randomKeys = array_rand($fieldsUpdated, rand(1, count($fieldsUpdated)));
 
-    // If there is only one element in the array, return it, as it is not an iterable data type.
-    if (!is_array($arrayWithRandomKeys)) {
-        return "[{$staticArrayWithFieldsUpdated[$arrayWithRandomKeys]}]";
+    if (!is_array($randomKeys)) {
+
+        return "[{$fieldsUpdated[$randomKeys]}]";
 
     } else {
 
-        foreach ($arrayWithRandomKeys as $randomKeys) {
-          array_push($randomArrayWithFieldsUpdated, $staticArrayWithFieldsUpdated[$randomKeys]);
+        foreach ($randomKeys as $keys) {
+          array_push($randomFieldsUpdated, $fieldsUpdated[$keys]);
         }
 
-        return "[".implode(', ', $randomArrayWithFieldsUpdated)."]";
+        return "[".implode(', ', $randomFieldsUpdated)."]";
     }
 }
 
@@ -31,23 +31,24 @@ function createRandomFieldsUpdated()
 // They can contain either fields updated or 'null' instead.
 function createRandomFieldsUpdatedOrNull()
 {
-    $randomArrayWithFieldsUpdatedOrNull = [];
-    $staticArrayWithFieldsUpdatedAndNull = ['null', createRandomFieldsUpdated()];
+    $randomFieldsUpdatedWithNull = [];
+    $fieldsUpdatedWithNull = ['null', createRandomFieldsUpdated()];
 
-    $arrayWithRandomKeys =
-    array_rand($staticArrayWithFieldsUpdatedAndNull, rand(1, count($staticArrayWithFieldsUpdatedAndNull)));
+    $randomKeys = array_rand($fieldsUpdatedWithNull, rand(1, count($fieldsUpdatedWithNull)));
 
-    if (count($arrayWithRandomKeys) === 1) {
+    if (!is_array($randomKeys)) {
 
         return 'null';
 
     } else {
 
-        foreach ($arrayWithRandomKeys as $randomKeys) {
-            array_push($randomArrayWithFieldsUpdatedOrNull, $staticArrayWithFieldsUpdatedAndNull[$randomKeys]);
+        foreach ($randomKeys as $key) {
+            array_push($randomFieldsUpdatedWithNull, $fieldsUpdatedWithNull[$key]);
         }
 
-        return substr(implode(', ', $randomArrayWithFieldsUpdatedOrNull), 5);
+        $randomFieldsUpdatedWithoutNull = substr(implode(', ', $randomFieldsUpdatedWithNull), 5);
+
+        return $randomFieldsUpdatedWithoutNull;
     }
 }   
 
@@ -89,11 +90,14 @@ function createRandomEvents()
     return  implode(', ', $events) . "\r\n";
 }
 
-function createEventFileWithRandomEntries()
+function populateEventFileWithRandomEntries()
 {
+    $pathToFile = '../assessment/event-file/event-file.txt';
+    $errorMsg = 'Unfortunately, the file into which generated data is written is not accissible at the moment.';
+    $msgIfJsDisabled = '<script>alert("New event file has been generated.")</script>';
 
     if (!empty($_POST['generateEventFile']) && validateSearchForm() === true) {
-        $eventFile = fopen('../assessment/event-file/event-file.txt', 'w') or die("Unable to open file!");
+        $eventFile = fopen($pathToFile, 'w') or die($errorMsg);
 
         for ($i = 1; $i < rand(500, 1000); $i++) {
             fwrite($eventFile, createRandomEvents());
@@ -101,10 +105,8 @@ function createEventFileWithRandomEntries()
 
         fclose($eventFile);
 
-        // For browsers with JavaScript disabled, otherwise there is a custom
-        // notification showing upon successful Ajax operation.
-        echo '<script>alert("New event file has been generated.")</script>';
+        echo $msgIfJsDisabled;
     }
 }
 
-createEventFileWithRandomEntries();
+populateEventFileWithRandomEntries();
