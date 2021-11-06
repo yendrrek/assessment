@@ -1,11 +1,14 @@
 <?php
 // Code below populates the input 'event-file.txt' on the server with random event entries
 // too see how the searching system works.
+//
+// 'INSERTED' events always contain 'null' instead of fields updated.
+// 'UPDATED' events always contain fields updated.
+// 'DELETED' events can contain either fields updated or 'null' instead.
+//
 // The number of entries can be between 500 and 1000, and they are
 // generated upon clicking the button 'Generate event file'.
 
-// This function is used to pupulate 'UPDATED' events.
-// They always contain fields updated.
 function createRandomFieldsUpdated()
 {
     $randomFieldsUpdated = [];
@@ -27,8 +30,6 @@ function createRandomFieldsUpdated()
     }
 }
 
-// This function randomly populates 'DELETED' events.
-// They can contain either fields updated or 'null' instead.
 function createRandomFieldsUpdatedOrNull()
 {
     $randomFieldsUpdatedWithNull = [];
@@ -52,14 +53,13 @@ function createRandomFieldsUpdatedOrNull()
     }
 }   
 
-// 'Placement' and '123' are not a part of the requirement of the assessment scenario, so they are not randomised.
 function createRandomEvents()
 {
     switch (['INSERTED', 'UPDATED', 'DELETED'][array_rand([0, 1, 2])]) {
         case 'INSERTED':
             $events = [
                 'INSERTED',
-                'Placement',
+                'Placement', // 'Placement' and '123' are fixed data.
                 '123',
                 'null',
                 date("Y-m-d H:i:s.".rand(100, 999)."", rand(0000000001, time()))
