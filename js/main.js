@@ -182,10 +182,8 @@ generateEventFile();
 function fixFontSizeInSafari() {
 
   const isSafari = (
-    (
-      /Apple Computer/.test(navigator.vendor) &&
-      /Safari/.test(navigator.userAgent) || /Mobile/.test(navigator.userAgent)
-    )
+    /Apple Computer/.test(navigator.vendor) &&
+    (/Safari/.test(navigator.userAgent) || /Mobile/.test(navigator.userAgent))
   );
   const resultHeader = document.querySelector('.result-header');
   const resultSummaryAndContent = document.querySelectorAll('.result-summary, .result-content');
