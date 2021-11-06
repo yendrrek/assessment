@@ -2,14 +2,10 @@
 // Make the input 'event-file.txt' available for searching.
 function getEventFile() 
 {
-    $pathToFile = '../assessment/event-file/event-file.txt';
-    $errorMsg = 'Unfortunately, the file containing searchable data is missing, no query is possible at the moment.';
+    file_exists('../assessment/event-file/event-file.txt') ?
+    $eventFile = file('../assessment/event-file/event-file.txt') :
+    die("<script>alert('File containing searchable data is missing.')</script>");
 
-    if (!file_exists($pathToFile)) {
-        die("<script>alert({$errorMsg})</script>");
-
-    } else {
-
-        return file($pathToFile);
-    }
+    return $eventFile;
 }
+
