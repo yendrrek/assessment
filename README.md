@@ -101,7 +101,7 @@ which will overwrite previously generated event file for everyone.
 
 ## FUTURE IMPROVEMENTS
 
-[x] Responsiveness of the layout.
+[x] Responsiveness of the layout (99% done).
 
 [x] Use Ajax for showing search results, and when generating random entries in 'event-file.txt'.
 
@@ -111,7 +111,7 @@ which will overwrite previously generated event file for everyone.
 
 [x] Show summary of the result above the red box.
 
-[ ] Make the CSS work in other browsers like in Chrome. The site breaks, for example, in Firefox.
+[ ] Make the CSS not break on same screen sizes.
 
 [ ] Add option for sending search results by email.
 
