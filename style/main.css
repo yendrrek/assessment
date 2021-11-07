@@ -23,7 +23,6 @@
   display: flex;
   justify-content: center;
   margin: 1.5em auto;
-  width:  1020px;
 }
 
 .select-box {
@@ -182,7 +181,6 @@
     align-items: center;
     flex-direction: column;
     gap: 20px;
-    width: 100%; /* Equal to 464px */
   }
   .result-header,
   .result-summary,
