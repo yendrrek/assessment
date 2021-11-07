@@ -79,7 +79,7 @@ include 'php-functions/search-queries.php';
                     ?>
 
                 </select>
-                <button class="btn" type="submit"
+                <button class="btn btn_timestamps" type="submit"
                         name="btnTimestamps" value="btnTimestamps">Search</button>
             </div>
 
