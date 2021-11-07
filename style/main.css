@@ -80,7 +80,8 @@
   font-size: 0.97rem;
   font-weight: bold;
   margin: 12px auto 10px auto;
-  width: 900px;
+  max-width: 900px;
+  width: 95.2278%;
 }
 
 .result-summary {
@@ -97,11 +98,12 @@
   font-weight: bold;
   height: 425px;
   margin: -12px auto auto auto; /* Minus value for margin-top as each line of the result summary contains a double <br> at the end, so the space between the last result summary line and the result-content box would be too big. */
+  max-width: 900px;
   overflow: auto;
   padding: 15px 0 0 15px;
   resize: vertical;
   scrollbar-color: #bda5d9 #ffcce0; /* Firefox. */
-  width: 900px;
+  width: 95.2278%;
 }
 
 @-moz-document url-prefix() {
@@ -202,14 +204,7 @@
 
 @media only screen and (max-width: 53.688em) {  /* 859px */
   .result-content {
-    width: 95.2278%; /* Equal to 818px */
     padding: 7px 0 0 7px;
-  }
-  .result-header {
-    width: 95.2278%;
-  }
-  .result-summary {
-    width: 100%;
   }
 }
 
