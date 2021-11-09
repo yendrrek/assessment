@@ -33,7 +33,8 @@ function createRandomFieldsUpdated()
 function createRandomFieldsUpdatedOrNull()
 {
     $randomFieldsUpdatedWithNull = [];
-    $fieldsUpdatedWithNull = ['null', createRandomFieldsUpdated()];
+    $randomFieldsUpdated = createRandomFieldsUpdated();
+    $fieldsUpdatedWithNull = ['null', $randomFieldsUpdated];
 
     $randomKeys = array_rand($fieldsUpdatedWithNull, rand(1, count($fieldsUpdatedWithNull)));
 
@@ -55,6 +56,9 @@ function createRandomFieldsUpdatedOrNull()
 
 function createRandomEvents()
 {
+    $randomFieldsUpdated = createRandomFieldsUpdated();
+    $randomFieldsUpdatedOrNull = createRandomFieldsUpdatedOrNull();
+
     switch (['INSERTED', 'UPDATED', 'DELETED'][array_rand([0, 1, 2])]) {
         case 'INSERTED':
             $events = [
@@ -71,7 +75,7 @@ function createRandomEvents()
                 'UPDATED',
                 'Placement',
                 '123',
-                createRandomFieldsUpdated(),
+                $randomFieldsUpdated,
                 date("Y-m-d H:i:s.".rand(100, 999)."", rand(0000000001, time()))
             ];
             break;
@@ -81,7 +85,7 @@ function createRandomEvents()
                 'DELETED',
                 'Placement',
                 '123',
-                createRandomFieldsUpdatedOrNull(),
+                $randomFieldsUpdatedOrNull,
                 date("Y-m-d H:i:s.".rand(100, 999)."", rand(0000000001, time()))
             ];
             break;
@@ -95,8 +99,9 @@ function populateEventFileWithRandomEntries()
     $pathToFile = '../assessment/event-file/event-file.txt';
     $errorMsg = 'Unfortunately, the file into which generated data is written is not accissible at the moment.';
     $msgIfJsDisabled = '<script>alert("New event file has been generated.")</script>';
+    $searchFormIsValidated = validateSearchForm();
 
-    if (!empty($_POST['generateEventFile']) && validateSearchForm() === true) {
+    if (!empty($_POST['generateEventFile']) &&  $searchFormIsValidated === true) {
         $eventFile = fopen($pathToFile, 'w') or die($errorMsg);
 
         for ($i = 1; $i < rand(500, 1000); $i++) {
