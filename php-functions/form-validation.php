@@ -5,6 +5,8 @@ function validateSearchForm()
 {
     if (!empty($_POST['tokenCsrf'])) {
 
-        return hash_equals($_SESSION['tokenCsrf'], $_POST['tokenCsrf']) ?? false;
+        $csrfTokenSentFromForm = filter_var($_POST['tokenCsrf'], FILTER_SANITIZE_STRING);
+
+        return hash_equals($_SESSION['tokenCsrf'], $csrfTokenSentFromForm) ?? false;
     }
 }
